@@ -1,6 +1,6 @@
 import Data from "../../dataFile";
 import "../../fonts.css";
-import resume from "../../Assets/Resume.pdf";
+import resume from "/Resume.pdf";
 import ScrollToTop from "../../Hooks/useTop";
 
 export default function About() {
