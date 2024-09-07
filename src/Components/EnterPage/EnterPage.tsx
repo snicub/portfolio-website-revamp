@@ -3,8 +3,6 @@ import "../../fonts.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useDevice from "../../Hooks/useDevice";
-import Data from "../../dataFile";
-import ReactDOM from "react-dom";
 
 interface EnterPageProps {
   images: ImageObject[] | undefined;
@@ -28,7 +26,8 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
     }, duration);
 
     return () => clearInterval(interval);
-  }, [images!.length, duration]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [images?.length ?? 0, duration]);
 
   // Simulate page load by using a timeout or loading images
   useEffect(() => {

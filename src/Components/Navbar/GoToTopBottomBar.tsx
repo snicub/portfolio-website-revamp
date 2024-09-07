@@ -6,7 +6,7 @@ interface GoToTopBottomBarProps {
 }
 
 export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile] = useDevice();
   const [show, setShow] = useState(false);
 
   const handleScroll = () => {

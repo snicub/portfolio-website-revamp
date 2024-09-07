@@ -1,11 +1,8 @@
 import Data from "../../dataFile";
-import Navbar2 from "../Navbar/NavBarv2";
 import "../../fonts.css";
-import useDevice from "../../Hooks/useDevice";
 import ScrollToTop from "../../Hooks/useTop";
 
 export default function About() {
-  const [isMobile, isTablet, isDesktop] = useDevice();
   return (
     <>
       <ScrollToTop />

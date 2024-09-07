@@ -3,7 +3,6 @@ import Gallery from "./Gallery";
 import Marquee from "react-fast-marquee";
 import Data from "../../dataFile";
 import ProgrammingTile from "../Programming/ProgrammingTile";
-import Navbar2 from "../Navbar/NavBarv2";
 import "../../fonts.css";
 
 function Home() {
