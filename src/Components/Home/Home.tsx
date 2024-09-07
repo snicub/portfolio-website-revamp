@@ -96,7 +96,7 @@ function Home() {
       className="home-main-wrapper"
       style={{
         display: "flex",
-        gap: "50px",
+        gap: "20px",
         flexDirection: "column",
         marginBottom: "50px",
         marginTop: "150px",
@@ -133,7 +133,16 @@ function Home() {
       >
         <Gallery />
       </div>
-      <div className="bottom-message">designed & developed by Daniel Han</div>
+      <div
+        style={{
+          fontFamily: "monospace",
+          display: "flex",
+          justifyContent: "center",
+        }}
+        className="bottom-message"
+      >
+        designed & developed by Daniel Han
+      </div>
     </div>
   );
 }
