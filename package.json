@@ -3,6 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@codaworks/react-glow": "^1.0.6",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@mui/icons-material": "^6.0.1",
+    "@mui/lab": "^6.0.0-beta.8",
+    "@mui/material": "^6.0.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -10,9 +16,17 @@
     "@types/node": "^16.18.105",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
+    "firebase": "^10.13.1",
     "react": "^18.3.1",
+    "react-animated-cursor": "^2.11.2",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.3.1",
+    "react-fast-marquee": "^1.6.5",
+    "react-loading-skeleton": "^3.4.0",
+    "react-photo-album": "^3.0.2",
+    "react-photo-collage": "^1.0.9",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
@@ -39,5 +53,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
+    "@types/react-slick": "^0.23.13",
+    "react-router-dom": "^6.26.1"
   }
 }

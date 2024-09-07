@@ -1,0 +1,104 @@
+import { useNavigate } from "react-router-dom";
+import useDevice from "../../Hooks/useDevice";
+import Data from "../../dataFile";
+
+interface BottombarProps {
+  index: number;
+}
+
+export default function Bottombar({ index }: BottombarProps) {
+  const navigate = useNavigate();
+  const handleDynamicClick = (targetIndex: number) => {
+    navigate("/learnmore", {
+      state: {
+        imageSrc: Data.galleryCardInfo[targetIndex].img,
+        altText: Data.galleryCardInfo[targetIndex].altText,
+        title: Data.galleryCardInfo[targetIndex].title,
+        index: targetIndex,
+        info: Data.galleryCardInfo[targetIndex].info,
+        plpImages: Data.galleryCardInfo[targetIndex].plpImages,
+      },
+    });
+  };
+
+  const [isMobile] = useDevice();
+
+  return (
+    <div className="entire-navbar">
+      <div
+        className="experience-wrapper"
+        style={{
+          position: "fixed",
+          bottom: "0",
+          left: "0",
+          margin: isMobile ? "10px" : "20px",
+          display: "flex",
+          textAlign: isMobile ? "right" : undefined,
+          flexDirection: isMobile ? "column" : "row",
+          gap: isMobile ? "1px" : "10px",
+          zIndex: 2,
+          fontFamily: "Helvetica, Arial, sans-serif",
+          fontWeight: "bold",
+        }}
+      >
+        <div
+          className="exit-wrapper"
+          onClick={() => navigate("/home")}
+          style={{
+            transition: "background-color 0.3s ease",
+            cursor: "pointer",
+            background: "rgb(255, 255, 255, 0.3)",
+          }}
+        >
+          [ Back ]
+        </div>
+      </div>
+      <div
+        className="experience-wrapper"
+        style={{
+          position: "fixed",
+          bottom: "0",
+          right: "0",
+          margin: isMobile ? "10px" : "20px",
+          display: "flex",
+          textAlign: "right",
+          flexDirection: "column",
+          gap: isMobile ? "3px" : "10px",
+          zIndex: 2,
+          fontFamily: "Helvetica, Arial, sans-serif",
+          fontWeight: "bold",
+        }}
+      >
+        <div
+          className="exit-wrapper"
+          onClick={() =>
+            handleDynamicClick((index + 1) % Data.galleryCardInfo.length)
+          }
+          style={{
+            transition: "background-color 0.3s ease",
+            cursor: "pointer",
+            background: "rgb(255, 255, 255, 0.3)",
+          }}
+        >
+          [ Next ]
+        </div>
+        <div
+          className="exit-wrapper"
+          onClick={() =>
+            handleDynamicClick(
+              (index + Data.galleryCardInfo.length - 1) %
+                Data.galleryCardInfo.length
+            )
+          }
+          style={{
+            transition: "background-color 0.3s ease",
+            cursor: "pointer",
+            background: "rgb(255, 255, 255, 0.3)",
+          }}
+        >
+          [ Previous ]
+        </div>
+      </div>
+    </div>
+  );
+}
