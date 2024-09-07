@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import Navbar2 from "../Navbar/NavBarv2";
+
 import Collage from "./Collage";
 import Bottombar from "../Navbar/Bottombar";
 import "../../fonts.css";
@@ -10,7 +10,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
 const PLP: React.FC = () => {
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile] = useDevice();
   const [loading, setLoading] = useState(true);
 
   const location = useLocation();

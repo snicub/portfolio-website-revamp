@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Clock from "../Clock/Clock";
 import DateComp from "../Date/DateComp";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,7 @@ function HomeCard() {
     navigate(page);
   };
 
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile] = useDevice();
 
   return (
     <div

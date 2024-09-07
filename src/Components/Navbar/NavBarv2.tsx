@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import HomeCard from "../Home/HomeCard";
 import { useNavigate } from "react-router-dom";
 import useDevice from "../../Hooks/useDevice";
@@ -9,7 +8,7 @@ export default function Navbar2() {
     navigate(page);
   };
 
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile] = useDevice();
 
   return (
     <div className="entire-navbar">

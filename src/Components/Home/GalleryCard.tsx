@@ -1,6 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-import Data from "../../dataFile";
-
 import { useNavigate } from "react-router-dom";
 import useDevice from "../../Hooks/useDevice";
 
@@ -24,7 +21,7 @@ function GalleryCard({
   info,
   plpImages,
 }: GalleryCardProps) {
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile, isTablet] = useDevice();
   const navigate = useNavigate();
 
   const handleClick = () => {
