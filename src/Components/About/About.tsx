@@ -2,11 +2,14 @@ import Data from "../../dataFile";
 import "../../fonts.css";
 
 import ScrollToTop from "../../Hooks/useTop";
+import AboutBottomBar from "../Navbar/AboutBottomBar";
 
 export default function About() {
   return (
     <>
       <ScrollToTop />
+      <AboutBottomBar />
+
       <div className="navbar-filler" style={{ height: "150px" }}></div>
       <div
         className="about-section"

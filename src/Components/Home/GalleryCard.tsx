@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useDevice from "../../Hooks/useDevice";
-
+import TextEffect from "../TextEffects/TextEffect";
 import "../../fonts.css";
 
 interface GalleryCardProps {
@@ -78,18 +78,7 @@ function GalleryCard({
         />
       </div>
       <div style={{ paddingTop: "10px", width: "100%" }}>
-        <p
-          style={{
-            margin: 0,
-            fontFamily: "favorit",
-            fontSize: "1rem",
-            fontStyle: "normal",
-            fontWeight: "bold",
-            textAlign: "left",
-          }}
-        >
-          {title}
-        </p>
+        <TextEffect text={title} />
       </div>
     </div>
   );

@@ -22,9 +22,8 @@ function App() {
           <Route element={<TopLayout />}>
             <Route path="/home" element={<Home />} />
             <Route path="/experience" element={<Experience />} />
-
-            <Route path="/about" element={<About />} />
           </Route>
+          <Route path="/about" element={<About />} />
           <Route path="/learnmore" element={<PLP />} />
         </Route>
       </Routes>
