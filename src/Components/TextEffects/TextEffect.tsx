@@ -28,6 +28,7 @@ const TextEffect = ({ text }: { text: string }) => {
 
     return () => {
       if (textRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(textRef.current);
       }
     };

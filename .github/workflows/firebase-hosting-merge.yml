@@ -3,6 +3,9 @@
 
 name: Deploy to Firebase Hosting
 
+env:
+  CI: false
+
 on:
   push:
     branches:
