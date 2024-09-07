@@ -104,7 +104,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           cursor: "pointer", // Change cursor to pointer to indicate it's clickable
         }}
       >
-        [ enter ]
+        [ enter etst ]
       </div>
 
       <div
