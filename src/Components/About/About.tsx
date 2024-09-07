@@ -1,6 +1,6 @@
 import Data from "../../dataFile";
 import "../../fonts.css";
-import resume from "/Resume.pdf";
+
 import ScrollToTop from "../../Hooks/useTop";
 
 export default function About() {
@@ -54,7 +54,7 @@ export default function About() {
           </p>
           <p style={{ display: "inline" }}>
             <a
-              href={resume}
+              href="/Resume.pdf"
               style={{ margin: "5px 0", fontSize: "1rem", color: "#555" }}
               download="Resume-Daniel Han.pdf"
             >
