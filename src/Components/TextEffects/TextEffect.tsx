@@ -6,7 +6,8 @@ const getRandomChar = () => {
   return chars[Math.floor(Math.random() * chars.length)];
 };
 
-const TextEffect = ({ text }: { text: string }) => {
+const TextEffect = ({ text = "" }: { text?: string }) => {
+  // Set default empty string
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
   const [isInView, setIsInView] = useState(false); // To track if the component is in view
@@ -14,7 +15,6 @@ const TextEffect = ({ text }: { text: string }) => {
   const hasRun = useRef(false); // Ref to track if the effect has already run
 
   useEffect(() => {
-    // Intersection Observer to detect if the component is in the viewport
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
@@ -41,12 +41,10 @@ const TextEffect = ({ text }: { text: string }) => {
     const interval = setInterval(() => {
       if (index < text.length) {
         setDisplayedText((prev) => {
-          // Generate random characters for the current length
           const randomChars = Array.from({ length: index })
             .map(() => getRandomChar())
             .join("");
-          // Ensure the displayedText length matches the text length
-          const updatedText = randomChars + text[index];
+          const updatedText = randomChars + (text[index] || ""); // Ensure no undefined character
           return updatedText;
         });
         index++;
@@ -56,7 +54,7 @@ const TextEffect = ({ text }: { text: string }) => {
         setIsComplete(true);
         hasRun.current = true; // Mark the effect as complete
       }
-    }, 150); // Speed of the effect
+    }, 125); // Speed of the effect
 
     return () => clearInterval(interval);
   }, [isInView, text]);
