@@ -91,7 +91,7 @@ const Data = {
       ],
       altText: "nespresso internship",
       title: "nespresso",
-      info: "I interned at Nespresso as a front end developer. My time here polished my React skills, helping me to make this website and I think my work there was significant enough to be mentioned here lol. I created two main compoennets for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy limits here. And yes, I drank a lot of free coffee.",
+      info: "I interned at Nespresso as a front end developer. My time here polished my React skills, helping me to make this website and I think my work there was significant enough to be mentioned here lol. I created two main components for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy limits here. And yes, I drank a lot of free coffee.",
     },
     {
       img: require("./Assets/gallery/RAdorm.webp"),
