@@ -65,7 +65,7 @@ const Data = {
 
       altText: "frisbee",
       title: "ice cream",
-      info: "I love ice cream. I got a test done and I produce little to no lactase. I will give up my intolerance for ice creammmm.",
+      info: "I like ice cream",
     },
     {
       img: require("./Assets/gallery/cooking.webp"),
@@ -77,7 +77,7 @@ const Data = {
       ],
       altText: "dan han cooking",
       title: "cooking",
-      info: "In my free time, I enjoy cooking and exploring new recipes and techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for others.",
+      info: "In my free time, I enjoy cooking and exploring new recipes and techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
     },
     {
       img: require("./Assets/gallery/nestle.webp"),
@@ -130,7 +130,7 @@ const Data = {
       ],
       altText: "hanging out with friends ",
       title: "kickback",
-      info: "I love spending quality time with my close circle. We've been through a lot together and I'm grateful for them. Never forget your roots.",
+      info: "I love spending quality time with my close circle. We've been through a lot together and I'm grateful for them. Getting gaang out the mud. Never forget your roots.",
     },
 
     {
@@ -146,7 +146,7 @@ const Data = {
       ],
       altText: "working at tbell",
       title: "humble beginnings",
-      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place in my heart as the Taco Bell Foundation has funded my college education as well, and working there taught my valuable skills. Live mas.",
+      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation has funded my college education as well, and working there taught my valuable skills. Live mas.",
     },
     {
       img: require("./Assets/gallery/dough.webp"),
@@ -175,7 +175,7 @@ const Data = {
       ],
       altText: "fresh coffee",
       title: "coffee",
-      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into sourcing my coffee beans, grinding them fresh, and preparing my cup of joe in various ways. Right now I'm using a timemore c2 grinder, aeropresso, and have a pourover. Down the line, I definetely want to get an espresso machine, moka pot, and french press. Don't judge my obsession.",
+      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into sourcing my coffee beans, grinding them fresh, and preparing my cup of joe in various ways. Right now I'm using a timemore c2 grinder, aeropresso, and have a pourover. Down the line, I definitely want to get an espresso machine, moka pot, and french press. Don't judge my obsession.",
     },
     {
       img: require("./Assets/plp/golf/dantee.webp"),
@@ -187,7 +187,7 @@ const Data = {
       ],
       altText: "dan like golf",
       title: "golf",
-      info: "In my free time, I also like to play golf. I really got into it becuase my dad loves playing, and I just wanted to spend more quality time with him. I still suck and shank most of my tee offs.",
+      info: "In my free time, I also like to play golf. I really got into it because my dad loves playing, and I just wanted to spend more quality time with him. I still suck and shank most of my tee offs.",
     },
     {
       img: require("./Assets/plp/korea/korea13.webp"),
@@ -213,7 +213,7 @@ const Data = {
       ],
       altText: "dan loves korea",
       title: "korea",
-      info: "I've traveled to Korea two times!! First being a study abroad program at Ewha womans university in Seoul, where I participated in a summer co-ed program. I worked on a personal research project, interned at a think tank, and took a Korean elective course on neoliberalism. The following summer, I went to Korea again, this time with my sister to travel. We went to Daegu, Busan, Gyeonju, and Jeju. We also spent quality time with our relatives in Seoul. I think it goes without saying that their food is amazing and super affordable. Really missing that.  ",
+      info: "I've traveled to Korea two times!! First being a study abroad program at Ewha womans university in Seoul, where I participated in a summer co-ed program. I worked on a personal research project, interned at a think tank, and took a Korean elective course on neoliberalism. The following summer, I went to Korea again, this time with my sister to travel. We went to Daegu, Busan, Gyeongju, Jeonju, and Jeju. We also spent quality time with our relatives in Seoul. I think it goes without saying that their food is amazing and super affordable. Really missing that.  ",
     },
   ],
 

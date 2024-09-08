@@ -49,6 +49,18 @@ export default function About() {
           </p>
           <p style={{ display: "inline" }}>
             <a
+              href="https://www.youtube.com/@danhantbell"
+              style={{
+                margin: "5px 0",
+                fontSize: "1rem",
+                color: "#555",
+              }}
+            >
+              YouTube
+            </a>
+          </p>
+          <p style={{ display: "inline" }}>
+            <a
               href="mailto:daniel.hangb@gmail.com"
               style={{
                 margin: "5px 0",
