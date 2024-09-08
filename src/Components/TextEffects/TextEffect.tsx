@@ -54,7 +54,7 @@ const TextEffect = ({ text = "" }: { text?: string }) => {
         setIsComplete(true);
         hasRun.current = true; // Mark the effect as complete
       }
-    }, 125); // Speed of the effect
+    }, 100); // Speed of the effect
 
     return () => clearInterval(interval);
   }, [isInView, text]);
