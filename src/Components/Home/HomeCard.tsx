@@ -17,7 +17,6 @@ function HomeCard() {
         fontFamily: "Helvetica, Arial, sans-serif",
         fontWeight: "bold",
         margin: "10px",
-        background: "rgb(255, 255, 255, 0.3)",
       }}
     >
       <div

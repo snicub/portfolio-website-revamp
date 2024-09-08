@@ -3,6 +3,7 @@ import "../../fonts.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import useDevice from "../../Hooks/useDevice";
+import useScrollToTop from "../../Hooks/useTop";
 
 interface EnterPageProps {
   images: ImageObject[] | undefined;
@@ -15,6 +16,7 @@ interface ImageObject {
 }
 
 function EnterPage({ images, duration = 3500 }: EnterPageProps) {
+  useScrollToTop();
   const [isMobile] = useDevice();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -117,6 +119,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
       >
         {images!.map((image, index) => (
           <img
+            onClick={() => navigate("/home")}
             key={index}
             src={isMobile || !image.desktopSrc ? image.src : image.desktopSrc}
             alt="need no alt"
@@ -129,6 +132,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
               objectFit: "cover",
               opacity: currentIndex === index ? 1 : 0,
               transition: "opacity 1s ease-in-out",
+              cursor: "pointer",
             }}
           />
         ))}

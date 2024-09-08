@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 
 const getRandomChar = () => {
-  const chars =
-    "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
   return chars[Math.floor(Math.random() * chars.length)];
 };
 
