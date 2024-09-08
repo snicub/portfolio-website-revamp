@@ -238,7 +238,7 @@ const Data = {
   ],
   aboutMeSection: {
     contact: {
-      location: "New Jersey, New York",
+      location: "NJ, NY",
       email: "daniel.hangb@gmail.com",
     },
     experience: [
@@ -247,7 +247,7 @@ const Data = {
         position: "Front End Developer Intern",
         date: "June 2024 - August 2024",
         description:
-          "Worked on the redesign of the Nespresso website, creating two main components for the new site. Developed in React using TypeScript, emotionCSS, and HTML. Used Storybook for viewing individual components and react testing library for writing custom test cases. Implemented an component that autoplays through multiple videos, and displayed different text content for each video. Also implemented a component that showcases 3 different Nespresso machines, represented by a button to route to a different product.",
+          "Worked on the redesign of the Nespresso website, creating two main components for the new site. Developed in React using TypeScript, CSS, and HTML. Used Storybook for viewing individual components and react testing library for writing custom test cases. Implemented a component that autoplays through multiple videos, and displays different text content for each video. Also implemented a component that showcases 3 different Nespresso machines, represented by a button to route to a different product.",
       },
       {
         title: "Colgate-Palmolive",

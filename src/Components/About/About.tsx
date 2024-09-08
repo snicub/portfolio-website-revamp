@@ -1,16 +1,20 @@
 import Data from "../../dataFile";
 import "../../fonts.css";
-
-import ScrollToTop from "../../Hooks/useTop";
 import AboutBottomBar from "../Navbar/AboutBottomBar";
+import useScrollToTop from "../../Hooks/useTop";
+import useDevice from "../../Hooks/useDevice";
 
 export default function About() {
+  const [isMobile, isTablet, isDesktop] = useDevice();
+  useScrollToTop();
   return (
     <>
-      <ScrollToTop />
       <AboutBottomBar />
 
-      <div className="navbar-filler" style={{ height: "150px" }}></div>
+      <div
+        className="navbar-filler"
+        style={{ height: isMobile ? "100px" : "150px" }}
+      ></div>
       <div
         className="about-section"
         style={{

@@ -44,7 +44,6 @@ export default function Navbar2() {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: "rgb(255, 255, 255, 0.3)",
           }}
         >
           [ About ]
@@ -55,7 +54,6 @@ export default function Navbar2() {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: "rgb(255, 255, 255, 0.3)",
           }}
         >
           [ Exit ]

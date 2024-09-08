@@ -47,7 +47,6 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
-            background: "rgb(255, 255, 255, 0.3)",
           }}
         >
           [ Back ]
@@ -77,7 +76,6 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
-            background: "rgb(255, 255, 255, 0.3)",
           }}
         >
           [ Next ]
@@ -93,7 +91,6 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
-            background: "rgb(255, 255, 255, 0.3)",
           }}
         >
           [ Previous ]
