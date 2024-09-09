@@ -29,6 +29,7 @@ export default function About() {
           fontFamily: "favorit",
           fontSize: "1rem",
           fontStyle: "normal",
+          marginBottom: "50px",
         }}
       >
         <div

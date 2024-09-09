@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 
@@ -12,13 +12,10 @@ const CollageImage: React.FC<{ src: string; index: number }> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setIsLoaded(true);
-    }, 5000); // Set timeout (e.g., 5 seconds)
-
-    return () => clearTimeout(timeout);
-  }, []);
+  // Image load handler
+  const handleImageLoad = () => {
+    setIsLoaded(true);
+  };
 
   return (
     <div
@@ -48,13 +45,13 @@ const CollageImage: React.FC<{ src: string; index: number }> = ({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          display: isLoaded ? "block" : "none", // Hide image until loaded
-          transition: "opacity 1s ease-in-out", // Add a fade-in effect
+          opacity: isLoaded ? 1 : 0, // Opacity transition
+          transition: "opacity 1s ease-in-out", // Smooth fade-in effect
         }}
         src={src}
-        alt={`Collage  ${index}`}
-        onLoad={() => setIsLoaded(true)} // Update state when image loads
-        onError={() => setIsLoaded(true)} // Handle load failure
+        alt={`Collage ${index}`}
+        onLoad={handleImageLoad} // Update state when the image loads
+        onError={() => setIsLoaded(true)} // Handle errors gracefully
       />
     </div>
   );

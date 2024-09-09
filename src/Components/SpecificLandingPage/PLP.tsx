@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-
 import Collage from "./Collage";
 import Bottombar from "../Navbar/Bottombar";
 import "../../fonts.css";
@@ -21,13 +20,19 @@ const PLP: React.FC = () => {
 
   // Image loading handler
   const handleImageLoaded = useCallback(() => {
+    // Set imageLoaded to true when the image finishes loading
     setImageLoaded(true);
   }, []);
 
-  // Update loading status based on image load
+  // Update loading state based on image load, but add a delay for the skeleton
   useEffect(() => {
     if (imageLoaded) {
-      setLoading(false);
+      // Delay removing the skeleton by 2 seconds (adjust time as needed)
+      const timer = setTimeout(() => {
+        setLoading(false);
+      }, 500);
+
+      return () => clearTimeout(timer); // Cleanup the timer if component unmounts or re-renders
     }
   }, [imageLoaded]);
 

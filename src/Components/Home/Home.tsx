@@ -86,7 +86,7 @@ function Home() {
           }
         `}
         </style>
-        [ Please wait<span className="dots"></span> ]
+        {/* [ Please wait<span className="dots"></span> ] */}
       </div>
     );
   }
