@@ -90,6 +90,7 @@ const PLP: React.FC = () => {
             }}
           >
             <img
+              loading="eager"
               className="mainImage"
               style={{
                 maxWidth: !isMobile ? "50%" : undefined,
