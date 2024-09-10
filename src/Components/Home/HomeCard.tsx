@@ -28,7 +28,8 @@ function HomeCard() {
           transition: "background-color 0.3s ease",
           fontSize: isMobile ? "1.25rem" : "3rem",
           cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-          background: isHoverName ? "#E6E6FA" : "transparent", // Change color on hover
+          background: isDesktop && isHoverName ? "#E6E6FA" : undefined, // Change color on hover
+          width: "fit-content",
         }}
         onClick={() => handleExperienceClick("/home")}
       >

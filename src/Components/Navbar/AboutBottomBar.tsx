@@ -8,7 +8,7 @@ export default function AboutBottomBar() {
     navigate(page);
   };
 
-  const [isMobile] = useDevice();
+  const [isMobile, isTablet, isDesktop] = useDevice();
 
   const [isHoverBack, setIsHoverBack] = useState(false);
   return (
@@ -35,7 +35,7 @@ export default function AboutBottomBar() {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: isHoverBack ? "#E6E6FA" : "transparent", // Change color on hover
+            background: isDesktop && isHoverBack ? "#E6E6FA" : undefined, // Change color on hover
           }}
           onMouseEnter={() => setIsHoverBack(true)} // Handle hover in
           onMouseLeave={() => setIsHoverBack(false)} // Handle hover out
