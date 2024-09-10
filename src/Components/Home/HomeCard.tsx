@@ -1,17 +1,27 @@
 import Clock from "../Clock/Clock";
 import DateComp from "../Date/DateComp";
 import { useNavigate } from "react-router-dom";
-import useDevice from "../../Hooks/useDevice";
-import { useState } from "react";
+import { useDevice } from "../../Context/DeviceContext";
+
+import { useEffect, useState } from "react";
 
 function HomeCard() {
+  const { isMobile, isTablet, isDesktop } = useDevice();
+  const [isReady, setIsReady] = useState(false);
+
+  const [isHoverName, setIsHoverName] = useState(false);
   const navigate = useNavigate();
   const handleExperienceClick = (page: string) => {
     navigate(page);
   };
 
-  const [isHoverName, setIsHoverName] = useState(false);
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  useEffect(() => {
+    if (isMobile !== undefined) {
+      setIsReady(true); // Set ready to true once device detection is complete
+    }
+  }, [isMobile]);
+
+  if (!isReady) return null; // Don't render until the device type is detected
 
   return (
     <div
