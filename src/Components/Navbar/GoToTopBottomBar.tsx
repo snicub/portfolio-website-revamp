@@ -6,7 +6,7 @@ interface GoToTopBottomBarProps {
 }
 
 export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
-  const [isMobile] = useDevice();
+  const [isMobile, isTablet, isDesktop] = useDevice();
   const [show, setShow] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
@@ -57,7 +57,7 @@ export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
               style={{
                 transition: "background-color 0.3s ease",
                 cursor: "pointer",
-                background: isHover ? "#E6E6FA" : "transparent",
+                background: isDesktop && isHover ? "#E6E6FA" : "transparent",
               }}
             >
               [ Go to Top ]
