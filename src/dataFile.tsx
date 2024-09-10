@@ -57,7 +57,7 @@ const Data = {
       ],
       altText: "frisbee",
       title: "ultimate frisbee",
-      info: "I play ultimate frisbee for the Rutgers club team as a handler and it's been super fun so far. I've played since high school. I guess all those backhands at the family cookout paid off.",
+      info: "I play ultimate frisbee for the Rutgers club team as a handler and it's been super fun so far. I've played since high school and on club teams. I guess all those backhands at the family cookout paid off.",
     },
     {
       img: require("./Assets/gallery/icecream.webp"),
@@ -82,7 +82,7 @@ const Data = {
       ],
       altText: "dan han cooking",
       title: "cooking",
-      info: "In my free time, I enjoy cooking and exploring new recipes and techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
+      info: "In my free time, I enjoy cooking new recipes and learning techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
     },
     {
       img: require("./Assets/gallery/nestle.webp"),
@@ -96,7 +96,7 @@ const Data = {
       ],
       altText: "nespresso internship",
       title: "nespresso",
-      info: "I interned at Nespresso as a front end developer. My time here polished my React skills, helping me to make this website and I think my work there was significant enough to be mentioned here lol. I created two main components for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy limits here. And yes, I drank a lot of free coffee.",
+      info: "The past Summer I interned at Nespresso as a front end developer. During my time here, I was able to polish my React skills which helped me make this website. I created two main components for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy the limits here. And yes, I drank a lotttt of free coffee!!",
     },
     {
       img: require("./Assets/gallery/RAdorm.webp"),
@@ -120,7 +120,7 @@ const Data = {
       ],
       altText: "family values",
       title: "big family guy",
-      info: "I love spending time with my family, whether it's going on trips, celebrating holidays, or just hanging out at home. Yes, I'm the youngest, the favorite, and have two older sister",
+      info: "I love spending time with my family, whether it's going on trips, celebrating holidays, or just hanging out at home. Yes, I'm the youngest, the favorite, and have two older sisters!",
     },
     {
       img: require("./Assets/gallery/twon.webp"),
@@ -135,7 +135,7 @@ const Data = {
       ],
       altText: "hanging out with friends ",
       title: "kickback",
-      info: "I love spending quality time with my close circle. We've been through a lot together and I'm grateful for them. Getting gaang out the mud. Never forget your roots.",
+      info: "I love spending quality time with my close circle. Never forget your roots.",
     },
 
     {
@@ -151,7 +151,7 @@ const Data = {
       ],
       altText: "working at tbell",
       title: "humble beginnings",
-      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation has funded my college education as well, and working there taught my valuable skills. Live mas.",
+      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation has funded my college education as well and working there taught me valuable skills. Live mas.",
     },
     {
       img: require("./Assets/gallery/dough.webp"),
@@ -167,7 +167,7 @@ const Data = {
       ],
       altText: "sourdough  baking",
       title: "sourdough",
-      info: "I got into sourdough baking recently!!! I love the process of making a loaf from start to finish. I haven't named my starter yet.. lol. Sourdough bread making is a fun and rewarding process that results in delicious bread.",
+      info: "I got into sourdough baking recently!!! I love the process of making a loaf from start to finish. I haven't named my starter yet.. lol. Sourdough bread making is sooo fun and such a rewarding process. I'm trying to make homemade croissants next!!",
     },
     {
       img: require("./Assets/gallery/coffee.webp"),
@@ -180,7 +180,7 @@ const Data = {
       ],
       altText: "fresh coffee",
       title: "coffee",
-      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into sourcing my coffee beans, grinding them fresh, and preparing my cup of joe in various ways. Right now I'm using a timemore c2 grinder, aeropresso, and have a pourover. Down the line, I definitely want to get an espresso machine, moka pot, and french press. Don't judge my obsession.",
+      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into picking my coffee beans, grinding them fresh, and preparing my coffee in various ways. Right now I'm using a timemore c2 grinder, and aeropress. I have a pourover set but I don't use it too often. Right now I've been into making iced dirty matcha lattes. Down the line, I definitely want to get an espresso machine, moka pot, and french press. I know I have an obsession",
     },
     {
       img: require("./Assets/plp/golf/dantee.webp"),
@@ -192,7 +192,7 @@ const Data = {
       ],
       altText: "dan like golf",
       title: "golf",
-      info: "In my free time, I also like to play golf. I really got into it because my dad loves playing, and I just wanted to spend more quality time with him. I still suck and shank most of my tee offs.",
+      info: "In my free time, I also like to play golf. I got into it because my dad loves playing, and I just wanted to spend more quality time with him. I still suck and shank most of my tee offs.",
     },
     {
       img: require("./Assets/plp/korea/korea13.webp"),
@@ -218,7 +218,7 @@ const Data = {
       ],
       altText: "dan loves korea",
       title: "korea",
-      info: "I've traveled to Korea two times!! First being a study abroad program at Ewha womans university in Seoul, where I participated in a summer co-ed program. I worked on a personal research project, interned at a think tank, and took a Korean elective course on neoliberalism. The following summer, I went to Korea again, this time with my sister to travel. We went to Daegu, Busan, Gyeongju, Jeonju, and Jeju. We also spent quality time with our relatives in Seoul. I think it goes without saying that their food is amazing and super affordable. Really missing that.  ",
+      info: "I've traveled to Korea two times!! First being a study abroad program at Ewha womans university in Seoul, where I participated in their summer co-ed program. I worked on a personal research project, interned at a think tank, and took a Korean elective course on neoliberalism. The following summer, I went to Korea again, this time with my sister to travel. We went to Daegu, Busan, Gyeongju, Jeonju, and Jeju. We also spent quality time with our relatives in Seoul. I think it goes without saying that their food is amazing and super affordable. Really missing that!!  ",
     },
   ],
 
@@ -292,7 +292,6 @@ const Data = {
               "Advanced Korean 301",
               "Advanced Korean 302",
               "Advanced Readings in Korean 401",
-              "Advanced Readings in Korean 402",
               "Intro to Korean Culture 210",
               "Intro to Korean Literature in Translation 220",
               "Korean Translation 320",
