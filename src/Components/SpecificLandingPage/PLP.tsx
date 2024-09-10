@@ -106,7 +106,7 @@ const PLP: React.FC = () => {
                   display: "block",
                   width: "100%",
                 }}
-                src={`${imageSrc}?${new Date().getTime()}`} // Force reload to avoid cache issue
+                src={imageSrc}
                 alt={altText}
               />
               <div

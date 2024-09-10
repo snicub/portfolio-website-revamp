@@ -38,7 +38,6 @@ const CollageImage: React.FC<{ src: string; index: number }> = ({
         />
       )}
       <img
-        loading="eager"
         style={{
           position: "absolute",
           top: 0,
