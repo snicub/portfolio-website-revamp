@@ -49,7 +49,7 @@ export default function Navbar2() {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: isHoverAbout ? "#E6E6FA" : "transparent", // Change color on hover
+            background: isDesktop && isHoverAbout ? "#E6E6FA" : undefined, // Change color on hover
           }}
         >
           [ About ]
@@ -62,7 +62,7 @@ export default function Navbar2() {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: isHoverExit ? "#E6E6FA" : "transparent", // Change color on hover
+            background: isDesktop && isHoverExit ? "#E6E6FA" : undefined, // Change color on hover
           }}
         >
           [ Exit ]
