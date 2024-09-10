@@ -33,7 +33,7 @@ export default function Navbar2() {
           right: "0",
           margin: isMobile ? "10px" : "20px",
           display: "flex",
-          textAlign: isMobile ? "right" : undefined,
+          alignItems: isMobile ? "flex-end" : undefined,
           flexDirection: isMobile ? "column" : "row",
           gap: isMobile ? "1px" : "10px",
           zIndex: 2,
@@ -63,6 +63,7 @@ export default function Navbar2() {
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
             background: isDesktop && isHoverExit ? "#E6E6FA" : undefined, // Change color on hover
+            width: "fit-content",
           }}
         >
           [ Exit ]
