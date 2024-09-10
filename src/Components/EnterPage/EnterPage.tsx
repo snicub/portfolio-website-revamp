@@ -77,7 +77,6 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           zIndex: 2,
           cursor: "pointer", // Change cursor to pointer to indicate it's clickable
         }}
-        pauseOnHover={true}
         autoFill={true}
       >
         <p>
@@ -93,8 +92,8 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           top: "50%",
           left: "50%", // Center horizontally
           transform: "translate(-50%, -50%)", // Center both horizontally and vertically
-          color: "rgba(0,0,0,1)", // Optional: Adjust text color for visibility
-          fontSize: "2rem", // Optional: Adjust font size as needed
+          color: "rgba(0,0,0,1)", // Adjust text color for visibility
+          fontSize: "2rem", // Adjust font size as needed
           alignItems: "center",
           fontFamily:
             '"Helvetica Neue", Helvetica, sans-serif, "Helvetica Neue Regular", Icons',
@@ -115,6 +114,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           width: "100%",
           height: "100%",
           overflow: "hidden", // Ensures that the image doesn't overflow the wrapper
+          cursor: "pointer", // Change cursor to pointer to indicate it's clickable
         }}
       >
         {images!.map((image, index) => (
@@ -132,7 +132,6 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
               objectFit: "cover",
               opacity: currentIndex === index ? 1 : 0,
               transition: "opacity 1s ease-in-out",
-              cursor: "pointer",
             }}
           />
         ))}

@@ -46,10 +46,11 @@ function GalleryCard({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "flex-start",
-        width: "100%", // Adjust card width to be responsive
+        width: "100%",
         cursor: "pointer",
         boxSizing: "border-box",
-        margin: "40px 0", // Adjust margins to control spacing between cards
+        margin: "40px 0",
+        overflow: "hidden", // Important for controlling the hover zoom
       }}
       onClick={handleClick}
     >
@@ -62,6 +63,7 @@ function GalleryCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          transition: "transform 0.3s ease-in-out", // Smooth transition for zoom
         }}
       >
         <img
@@ -73,6 +75,7 @@ function GalleryCard({
             width: "100%",
             height: "100%",
             objectFit: "cover",
+            transition: "transform 0.3s ease-in-out", // Smooth transition for zoom
             aspectRatio: "1/1",
           }}
         />
@@ -80,6 +83,15 @@ function GalleryCard({
       <div style={{ paddingTop: "10px", width: "100%" }}>
         <TextEffect text={title} />
       </div>
+
+      {/* Adding hover effect */}
+      <style>
+        {`
+          .gallery-card-image-container:hover .gallery-card-image {
+            transform: scale(1.1); /* Zoom effect */
+          }
+        `}
+      </style>
     </div>
   );
 }
