@@ -1,49 +1,57 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Collage from "./Collage";
 import Bottombar from "../Navbar/Bottombar";
 import "../../fonts.css";
 import useScrollToTop from "../../Hooks/useTop";
 import useDevice from "../../Hooks/useDevice";
-import Skeleton from "react-loading-skeleton";
-import "react-loading-skeleton/dist/skeleton.css";
 
 const PLP: React.FC = () => {
   useScrollToTop();
-  const [isMobile, isTablet, isDesktop] = useDevice(); // Assuming this hook adjusts for tablet/desktop too
-  const [loading, setLoading] = useState(true);
-  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [fadeOut, setFadeOut] = useState(true); // Set initial state to true for fade-in on refresh
+  const [content, setContent] = useState<any>(null); // Stores content for rendering
 
   const location = useLocation();
-  const { imageSrc, altText, title, index, info, plpImages } =
-    location.state || {};
+  const newContent = location.state || {};
 
-  // Image loading handler
-  const handleImageLoaded = useCallback(() => {
-    // Set imageLoaded to true when the image finishes loading
-    setImageLoaded(true);
-  }, []);
-
-  // Update loading state based on image load, but add a delay for the skeleton
+  // Handle fade-in on component mount (for initial navigation)
   useEffect(() => {
-    if (imageLoaded) {
-      // Delay removing the skeleton by 2 seconds (adjust time as needed)
-      const timer = setTimeout(() => {
-        setLoading(false);
-      }, 500);
+    setContent(newContent); // Set initial content on mount
+    setFadeOut(false); // Set fadeState to false (fade-in)
 
-      return () => clearTimeout(timer); // Cleanup the timer if component unmounts or re-renders
-    }
-  }, [imageLoaded]);
+    const fadeTimeout = setTimeout(() => {
+      setFadeOut(true); // Trigger fade-in
+    }, 100); // Small delay for fade-in
 
+    return () => clearTimeout(fadeTimeout); // Clean up the timer
+  }, []); // Empty dependency ensures this runs only on mount (for page refresh)
+
+  // Handle fade effect when location.state changes (for navigation)
   useEffect(() => {
-    // Reset states on location change
-    setLoading(true);
-    setImageLoaded(false);
-  }, [location.state]);
+    setFadeOut(true); // Start fade-out effect
+
+    const fadeTimeout = setTimeout(() => {
+      setContent(newContent); // Update the content after fade-out completes
+      setFadeOut(false); // Start the fade-in effect
+    }, 750); // Adjust the timing for the fade-out effect duration
+
+    return () => clearTimeout(fadeTimeout); // Clean up the timer on unmount
+  }, [location.state, newContent]);
+
+  if (!content) return null; // Ensure content is defined before rendering
+
+  const { imageSrc, altText, title, index, info, plpImages } = content;
 
   return (
-    <div className="entire-plp" style={{ marginTop: "50px" }}>
+    <div
+      className="entire-plp"
+      style={{
+        marginTop: "50px",
+        opacity: fadeOut ? 0 : 1, // Fades out before content change, then fades in
+        transition: "opacity .75s ease-in-out", // Smooth fade effect with ease-in timing
+      }}
+    >
       <div className="bottom-navbar-wrapper">
         <Bottombar index={index} />
       </div>
@@ -57,51 +65,30 @@ const PLP: React.FC = () => {
           padding: "30px",
         }}
       >
-        {loading ? (
-          <div
-            className="skeleton-wrapper"
-            style={{
-              display: "flex",
-              textAlign: "center",
-              justifyContent: "center",
-            }}
-          >
-            <span style={{ width: "100%" }}>
-              <Skeleton
-                height={40}
-                style={{ width: isMobile ? "55%" : isTablet ? "45%" : "40%" }}
-              />
-              <div style={{ height: "30px" }} />
-              <Skeleton height={400} width="100%" />
-            </span>
-          </div>
-        ) : (
-          <div
-            className="title-wrapper"
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              fontFamily: "favorit",
-              fontSize: "2rem",
-              fontStyle: "normal",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            {title}
-          </div>
-        )}
+        <div
+          className="title-wrapper"
+          style={{
+            justifyContent: "center",
+            display: "flex",
+            fontFamily: "favorit",
+            fontSize: "2rem",
+            fontStyle: "normal",
+            fontWeight: "bold",
+            textAlign: "center",
+          }}
+        >
+          {title}
+        </div>
         <div className="content-wrapper">
           <div
             className="image-and-info-wrapper"
             style={{
-              display: loading ? "none" : "flex",
-              flexDirection: isMobile ? "column" : "row", // Adjusts based on device
+              display: "flex",
+              flexDirection: isMobile ? "column" : "row",
               alignItems: "center",
               gap: "10px",
             }}
           >
-            {" "}
             <img
               className="mainImage"
               style={{
@@ -112,7 +99,6 @@ const PLP: React.FC = () => {
               }}
               src={`${imageSrc}?${new Date().getTime()}`} // Force reload to avoid cache issue
               alt={altText}
-              onLoad={handleImageLoaded}
             />
             <div
               className="info-wrapper"
@@ -126,7 +112,7 @@ const PLP: React.FC = () => {
             </div>
           </div>
         </div>
-        {!loading && <Collage plpImages={plpImages} />}
+        <Collage plpImages={plpImages} />
       </div>
     </div>
   );
