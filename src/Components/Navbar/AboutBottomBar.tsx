@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import useDevice from "../../Hooks/useDevice";
+import { useState } from "react";
 
 export default function AboutBottomBar() {
   const navigate = useNavigate();
@@ -9,6 +10,7 @@ export default function AboutBottomBar() {
 
   const [isMobile] = useDevice();
 
+  const [isHoverBack, setIsHoverBack] = useState(false);
   return (
     <div className="entire-bottom-back-about-navbar">
       <div
@@ -33,8 +35,10 @@ export default function AboutBottomBar() {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: "rgb(255, 255, 255, 0.3)",
+            background: isHoverBack ? "#E6E6FA" : "transparent", // Change color on hover
           }}
+          onMouseEnter={() => setIsHoverBack(true)} // Handle hover in
+          onMouseLeave={() => setIsHoverBack(false)} // Handle hover out
         >
           [ Back ]
         </div>

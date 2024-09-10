@@ -8,6 +8,7 @@ interface GoToTopBottomBarProps {
 export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
   const [isMobile] = useDevice();
   const [show, setShow] = useState(false);
+  const [isHover, setIsHover] = useState(false);
 
   const handleScroll = () => {
     if (window.scrollY > showBelow) {
@@ -49,12 +50,14 @@ export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
             }}
           >
             <div
+              onMouseEnter={() => setIsHover(true)} // Handle hover in
+              onMouseLeave={() => setIsHover(false)} // Handle hover out
               className="go-to-top-wrapper"
               onClick={handleClick}
               style={{
                 transition: "background-color 0.3s ease",
                 cursor: "pointer",
-                background: "rgb(255, 255, 255, 0.3)",
+                background: isHover ? "#E6E6FA" : "transparent",
               }}
             >
               [ Go to Top ]

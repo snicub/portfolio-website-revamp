@@ -7,10 +7,7 @@ const Data = {
       src: require("./Assets/enterpage/babydan.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/babyDanDesktop.webp"),
     },
-    {
-      src: require("./Assets/enterpage/korean.webp"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/danKoreanDesktop.webp"),
-    },
+
     {
       src: require("./Assets/enterpage/sheis.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sheistyDanDesktop.webp"),
@@ -28,8 +25,16 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danMomShopDesktop.webp"),
     },
     {
+      src: require("./Assets/enterpage/korean.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/danKoreanDesktop.webp"),
+    },
+    {
       src: require("./Assets/enterpage/danMomSubway.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danTrainDesktop.webp"),
+    },
+    {
+      src: require("./Assets/enterpage/danAsher.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/danAsherDesktop.webp"),
     },
   ],
 

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import useDevice from "../../Hooks/useDevice";
 import Data from "../../dataFile";
+import { useState } from "react";
 
 interface BottombarProps {
   index: number;
@@ -22,6 +23,9 @@ export default function Bottombar({ index }: BottombarProps) {
   };
 
   const [isMobile] = useDevice();
+  const [isHoverBack, setIsHoverBack] = useState(false);
+  const [isHoverNext, setIsHoverNext] = useState(false);
+  const [isHoverPrev, setIsHoverPrev] = useState(false);
 
   return (
     <div className="entire-navbar">
@@ -47,7 +51,10 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
+            background: isHoverBack ? "#E6E6FA" : "transparent",
           }}
+          onMouseEnter={() => setIsHoverBack(true)}
+          onMouseLeave={() => setIsHoverBack(false)}
         >
           [ Back ]
         </div>
@@ -60,12 +67,12 @@ export default function Bottombar({ index }: BottombarProps) {
           right: "0",
           margin: isMobile ? "10px" : "20px",
           display: "flex",
-          textAlign: "right",
           flexDirection: "column",
           gap: isMobile ? "3px" : "10px",
           zIndex: 2,
           fontFamily: "Helvetica, Arial, sans-serif",
           fontWeight: "bold",
+          alignItems: "flex-end",
         }}
       >
         <div
@@ -76,7 +83,11 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
+            backgroundColor: isHoverNext ? "#E6E6FA" : "transparent",
+            width: "fit-content",
           }}
+          onMouseEnter={() => setIsHoverNext(true)}
+          onMouseLeave={() => setIsHoverNext(false)}
         >
           [ Next ]
         </div>
@@ -91,7 +102,10 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
+            background: isHoverPrev ? "#E6E6FA" : "transparent",
           }}
+          onMouseEnter={() => setIsHoverPrev(true)}
+          onMouseLeave={() => setIsHoverPrev(false)}
         >
           [ Previous ]
         </div>
