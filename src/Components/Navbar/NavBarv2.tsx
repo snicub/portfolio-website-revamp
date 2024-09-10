@@ -1,6 +1,6 @@
 import HomeCard from "../Home/HomeCard";
 import { useNavigate } from "react-router-dom";
-import useDevice from "../../Hooks/useDevice";
+import { useDevice } from "../../Context/DeviceContext";
 import { useEffect, useState } from "react";
 
 export default function Navbar2() {
@@ -9,16 +9,23 @@ export default function Navbar2() {
     navigate(page);
   };
 
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const { isMobile, isTablet, isDesktop } = useDevice();
   const [isHoverAbout, setIsHoverAbout] = useState(false);
   const [isHoverExit, setIsHoverExit] = useState(false);
 
   const [isReady, setIsReady] = useState(false);
+  // Only render when the device type is detected
   useEffect(() => {
-    if (isMobile !== undefined) {
+    if (
+      isMobile !== undefined ||
+      isTablet !== undefined ||
+      isDesktop !== undefined
+    ) {
       setIsReady(true); // Set ready to true once device detection is complete
     }
-  }, [isMobile]);
+  }, [isMobile, isTablet, isDesktop]);
+
+  // Don't render anything until the device type is detected
   if (!isReady) return null;
 
   return (
