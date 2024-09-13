@@ -4,9 +4,11 @@ import Marquee from "react-fast-marquee";
 import Data from "../../dataFile";
 import ProgrammingTile from "../Programming/ProgrammingTile";
 import "../../fonts.css";
+import useDevice from "../../Hooks/useDevice";
 
 function Home() {
   const [loading, setLoading] = useState(true);
+  const [isMobile, isTablet, isDesktop] = useDevice();
 
   useEffect(() => {
     const loadAssets = async () => {
@@ -99,13 +101,13 @@ function Home() {
         gap: "20px",
         flexDirection: "column",
         marginBottom: "50px",
-        marginTop: "150px",
+        marginTop: isMobile ? "100px" : "150px",
       }}
     >
       <div className="stick-bar-and-marquee-close-gap">
         <div
           className="navbar-wrapper-and-name-sticky-filler"
-          style={{ height: "100px" }}
+          style={{ height: isMobile ? "40px" : "100px" }}
         >
           <Marquee
             className="marquee"
