@@ -60,17 +60,17 @@ const Data = {
       info: "I play ultimate frisbee for the Rutgers club team as a handler and it's been super fun so far. I've played since high school and on club teams. I guess all those backhands at the family cookout paid off.",
     },
     {
-      img: require("./Assets/gallery/icecream.webp"),
+      img: require("./Assets/gallery/eliv.webp"),
       plpImages: [
-        { src: require("./Assets/plp/icecream/brook.webp") },
-        { src: require("./Assets/plp/icecream/sundae.webp") },
+        { src: require("./Assets/plp/volunteer/tacov.webp") },
+        { src: require("./Assets/plp/volunteer/nesv.webp") },
 
         // Add more images as needed
       ],
 
-      altText: "frisbee",
-      title: "ice cream",
-      info: "I like ice cream",
+      altText: "volunteering",
+      title: "volunteering",
+      info: "In my free time, I love to volunteer!! Right now I'm volunteering at Elijah's Promise in New Brunswick, preparing food and serving meals to the community. I really like anything to do with food, especially cooking and serving others. It's been such an amazing blessing and time at Elijah's kitchen, not only knowing that I'm doing it for a great purpose, but also meeting other volunteers has been so humbling and rewarding. The past summer, while living in NYC, I volunteered at God's Love packing lentil soup and also preparing and serving food bags at St. Paul's food pantry. Let me know if you'd ever want to volunteer together!! ",
     },
     {
       img: require("./Assets/gallery/cooking.webp"),
