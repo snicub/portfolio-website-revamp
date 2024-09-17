@@ -31,40 +31,43 @@ export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
 
   return (
     <div>
-      {show && (
-        <div className="entire-navbar">
+      <div
+        className="entire-navbar"
+        style={{
+          opacity: show ? 1 : 0,
+          transition: "opacity 0.3s ease-in-out",
+        }}
+      >
+        <div
+          className="experience-wrapper"
+          style={{
+            position: "fixed",
+            bottom: "0",
+            left: "0",
+            margin: isMobile ? "10px" : "20px",
+            display: "flex",
+            textAlign: isMobile ? "right" : undefined,
+            flexDirection: isMobile ? "column" : "row",
+            gap: isMobile ? "1px" : "10px",
+            zIndex: 2,
+            fontFamily: "Helvetica, Arial, sans-serif",
+            fontWeight: "bold",
+          }}
+        >
           <div
-            className="experience-wrapper"
+            onMouseEnter={() => setIsHover(true)} // Handle hover in
+            onMouseLeave={() => setIsHover(false)} // Handle hover out
+            className="go-to-top-wrapper"
+            onClick={handleClick}
             style={{
-              position: "fixed",
-              bottom: "0",
-              left: "0",
-              margin: isMobile ? "10px" : "20px",
-              display: "flex",
-              textAlign: isMobile ? "right" : undefined,
-              flexDirection: isMobile ? "column" : "row",
-              gap: isMobile ? "1px" : "10px",
-              zIndex: 2,
-              fontFamily: "Helvetica, Arial, sans-serif",
-              fontWeight: "bold",
+              cursor: "pointer",
+              background: isDesktop && isHover ? "#E6E6FA" : "transparent",
             }}
           >
-            <div
-              onMouseEnter={() => setIsHover(true)} // Handle hover in
-              onMouseLeave={() => setIsHover(false)} // Handle hover out
-              className="go-to-top-wrapper"
-              onClick={handleClick}
-              style={{
-                transition: "background-color 0.3s ease",
-                cursor: "pointer",
-                background: isDesktop && isHover ? "#E6E6FA" : "transparent",
-              }}
-            >
-              [ Go to Top ]
-            </div>
+            [ Go to Top ]
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 }
