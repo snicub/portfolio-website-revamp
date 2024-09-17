@@ -30,7 +30,6 @@ const DateComp: React.FC = () => {
     .toLocaleDateString("en-US", options)
     .replace(/,/g, "");
 
-  if (!isMobile) return null;
   return (
     <div style={{ fontSize: isMobile ? ".75rem" : undefined }}>
       {formattedDate}

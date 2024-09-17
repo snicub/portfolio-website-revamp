@@ -33,7 +33,6 @@ const Clock = () => {
     return () => clearInterval(timerId);
   }, []);
 
-  if (!isMobile) return null;
   return (
     <div style={{ fontSize: isMobile ? ".75rem" : undefined }}>{ctime}</div>
   );
