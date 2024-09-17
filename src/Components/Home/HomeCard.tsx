@@ -13,8 +13,6 @@ function HomeCard() {
   const [isHoverName, setIsHoverName] = useState(false);
   const [isMobile, isTablet, isDesktop] = useDevice();
 
-  if (!isMobile) return null;
-
   return (
     <div
       style={{
