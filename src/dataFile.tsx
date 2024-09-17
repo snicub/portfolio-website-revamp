@@ -82,7 +82,7 @@ const Data = {
       ],
       altText: "dan han cooking",
       title: "cooking",
-      info: "In my free time, I enjoy cooking new recipes and learning techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
+      info: "In my free time, I enjoy cooking different recipes and learning new techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
     },
     {
       img: require("./Assets/gallery/nestle.webp"),
@@ -108,7 +108,7 @@ const Data = {
       ],
       altText: "resident assistant",
       title: "RA Han",
-      info: "I'm an RA at here at Rutgers. Last year I RA'd for freshman housing, but this year I got a nice upgrade to an apartment. Call me super RA.",
+      info: "Last year I RA'd for freshman housing, but this year I got a nice upgrade to an apartment. Call me super RA.",
     },
     {
       img: require("./Assets/gallery/danfam.webp"),
@@ -120,7 +120,7 @@ const Data = {
       ],
       altText: "family values",
       title: "big family guy",
-      info: "I love spending time with my family, whether it's going on trips, celebrating holidays, or just hanging out at home. Yes, I'm the youngest, the favorite, and have two older sisters!",
+      info: "I love spending quality time with my family, whether it's going on trips, celebrating holidays, or just hanging out at home. Yes, I'm the youngest, the favorite, and have two older sisters!",
     },
     {
       img: require("./Assets/gallery/twon.webp"),
@@ -135,7 +135,7 @@ const Data = {
       ],
       altText: "hanging out with friends ",
       title: "kickback",
-      info: "I love spending quality time with my close circle. Never forget your roots.",
+      info: "Never forget your roots.",
     },
 
     {
@@ -151,7 +151,7 @@ const Data = {
       ],
       altText: "working at tbell",
       title: "humble beginnings",
-      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation has funded my college education as well and working there taught me valuable skills. Live mas.",
+      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation has funded my college education as well and working there taught me valuable skills. Don't forget to live mas.",
     },
     {
       img: require("./Assets/gallery/dough.webp"),
@@ -167,7 +167,7 @@ const Data = {
       ],
       altText: "sourdough  baking",
       title: "sourdough",
-      info: "I got into sourdough baking recently!!! I love the process of making a loaf from start to finish. I haven't named my starter yet.. lol. Sourdough bread making is sooo fun and such a rewarding process. I'm trying to make homemade croissants next!!",
+      info: "I got into sourdough baking this past summer! I love the process of making a loaf from start to finish. And no, I haven't named my starter yet.. lol. Sourdough bread making is super appealing to me and such a rewarding process. I'm trying to make homemade croissants next!!",
     },
     {
       img: require("./Assets/gallery/coffee.webp"),
