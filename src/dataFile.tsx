@@ -180,7 +180,7 @@ const Data = {
       ],
       altText: "fresh coffee",
       title: "coffee",
-      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into picking my coffee beans, grinding them fresh, and preparing my coffee in various ways. Right now I'm using a timemore c2 grinder, and aeropress. I have a pourover set but I don't use it too often. Right now I've been into making iced dirty matcha lattes. Down the line, I definitely want to get an espresso machine, moka pot, and french press. I know I have an obsession",
+      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into selecting my coffee beans, grinding them fresh, and preparing my coffee in various ways. Right now I'm using a timemore c2 grinder and aeropress. I have a pourover set but I don't use it too often. I've also been super into making iced dirty matcha lattes. Down the line, I definitely want to get an espresso machine, moka pot, and french press. I know I have an obsession",
     },
     {
       img: require("./Assets/plp/golf/dantee.webp"),
