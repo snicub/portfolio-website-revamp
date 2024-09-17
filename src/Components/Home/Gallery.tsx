@@ -33,7 +33,8 @@ const Gallery: React.FC = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 480) {
+      if (window.innerWidth < 482) {
+        //iphone 14 pro max is 481px wide
         setColumns("1fr"); // 1 column on small screens (mobile)
       } else if (window.innerWidth < 1024) {
         setColumns("repeat(2, 1fr)"); // 3 columns on tablet
