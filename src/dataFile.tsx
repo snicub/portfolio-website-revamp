@@ -116,6 +116,11 @@ const Data = {
         { src: require("./Assets/plp/fam/lucas.webp") },
         { src: require("./Assets/plp/fam/danFamEat.webp") },
         { src: require("./Assets/plp/fam/DanGrampFam.webp") },
+        { src: require("./Assets/plp/fam/fam3.webp") },
+        { src: require("./Assets/plp/fam/fam4.webp") },
+        { src: require("./Assets/plp/fam/fam5.webp") },
+        { src: require("./Assets/plp/fam/fam6.webp") },
+        { src: require("./Assets/plp/fam/fam7.webp") },
         // Add more images as needed
       ],
       altText: "family values",
