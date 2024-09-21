@@ -7,6 +7,10 @@ const Data = {
       src: require("./Assets/enterpage/babydan.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/babyDanDesktop.webp"),
     },
+    {
+      src: require("./Assets/enterpage/glasses.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/glassesDesktop.webp"),
+    },
 
     {
       src: require("./Assets/enterpage/sheis.webp"),
@@ -103,6 +107,9 @@ const Data = {
       plpImages: [
         { src: require("./Assets/plp/RA/RA1.webp") },
         { src: require("./Assets/plp/RA/RA2.webp") },
+        { src: require("./Assets/plp/RA/RA3.webp") },
+        { src: require("./Assets/plp/RA/RA4.webp") },
+        { src: require("./Assets/plp/RA/RA5.webp") },
 
         // Add more images as needed
       ],
@@ -121,6 +128,7 @@ const Data = {
         { src: require("./Assets/plp/fam/fam5.webp") },
         { src: require("./Assets/plp/fam/fam6.webp") },
         { src: require("./Assets/plp/fam/fam7.webp") },
+        { src: require("./Assets/plp/fam/fam8.webp") },
         // Add more images as needed
       ],
       altText: "family values",
@@ -136,6 +144,8 @@ const Data = {
         { src: require("./Assets/plp/friends/pointban.webp") },
         { src: require("./Assets/plp/friends/vish.webp") },
         { src: require("./Assets/plp/friends/danAlanPack.webp") },
+        { src: require("./Assets/plp/friends/friend1.jpeg") },
+        { src: require("./Assets/plp/friends/friend2.jpeg") },
         // Add more images as needed
       ],
       altText: "hanging out with friends ",
@@ -189,7 +199,7 @@ const Data = {
         // Add more images as needed
       ],
       altText: "fresh coffee",
-      title: "coffee",
+      title: "morning cup",
       info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into selecting my coffee beans, grinding them fresh, and preparing my coffee in various ways. Right now I'm using a timemore c2 grinder and aeropress. I have a pourover set but I don't use it too often. I've also been super into making iced dirty matcha lattes. Down the line, I definitely want to get an espresso machine, moka pot, and french press. I know I have an obsession",
     },
     {
@@ -197,6 +207,7 @@ const Data = {
       plpImages: [
         { src: require("./Assets/plp/golf/danGolf.webp") },
         { src: require("./Assets/plp/golf/danGolfFam.webp") },
+        { src: require("./Assets/plp/golf/golf1.webp") },
 
         // Add more images as needed
       ],
