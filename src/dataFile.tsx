@@ -85,7 +85,7 @@ const Data = {
         // Add more images as needed
       ],
       altText: "dan han cooking",
-      title: "cooking",
+      title: "in the lab",
       info: "In my free time, I enjoy cooking different recipes and learning new techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
     },
     {
