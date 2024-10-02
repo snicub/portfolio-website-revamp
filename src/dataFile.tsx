@@ -129,6 +129,7 @@ const Data = {
         { src: require("./Assets/plp/fam/fam6.webp") },
         { src: require("./Assets/plp/fam/fam7.webp") },
         { src: require("./Assets/plp/fam/fam8.webp") },
+        { src: require("./Assets/plp/fam/fam9.webp") },
         // Add more images as needed
       ],
       altText: "family values",
