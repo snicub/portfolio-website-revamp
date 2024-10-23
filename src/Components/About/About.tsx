@@ -3,6 +3,8 @@ import "../../fonts.css";
 import AboutBottomBar from "../Navbar/AboutBottomBar";
 import useScrollToTop from "../../Hooks/useTop";
 import useDevice from "../../Hooks/useDevice";
+import ProgrammingTile from "../Programming/ProgrammingTile";
+import Marquee from "react-fast-marquee";
 
 export default function About() {
   const [isMobile, isTablet, isDesktop] = useDevice();
@@ -10,10 +12,28 @@ export default function About() {
   return (
     <>
       <AboutBottomBar />
-
+      <div
+        className="navbar-wrapper-and-name-sticky-filler"
+        style={{ paddingTop: isDesktop ? "150px" : "100px" }}
+      >
+        <Marquee
+          className="marquee"
+          style={{
+            padding: 0,
+            margin: 0,
+            fontSize: "1rem",
+            backgroundColor: "white",
+          }}
+          autoFill={true}
+        >
+          {Data.programmingSection.map((tile, index) => (
+            <ProgrammingTile key={index} img={tile.img} />
+          ))}
+        </Marquee>
+      </div>
       <div
         className="navbar-filler"
-        style={{ height: isMobile ? "100px" : "150px" }}
+        style={{ height: isMobile ? "40px" : "100px" }}
       ></div>
       <div
         className="about-section"
