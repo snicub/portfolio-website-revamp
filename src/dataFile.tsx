@@ -82,6 +82,7 @@ const Data = {
         { src: require("./Assets/plp/cooking/noodle.webp") },
         { src: require("./Assets/plp/cooking/soup.webp") },
         { src: require("./Assets/plp/cooking/sushi.webp") },
+        { src: require("./Assets/plp/cooking/food4.webp") },
         // Add more images as needed
       ],
       altText: "dan han cooking",
@@ -183,6 +184,9 @@ const Data = {
         { src: require("./Assets/plp/sourdough/sour9.webp") },
         { src: require("./Assets/plp/sourdough/sour10.webp") },
         { src: require("./Assets/plp/sourdough/sour11.webp") },
+        { src: require("./Assets/plp/sourdough/sour12.webp") },
+        { src: require("./Assets/plp/sourdough/sour13.webp") },
+        { src: require("./Assets/plp/sourdough/sour14.webp") },
 
         // Add more images as needed
       ],

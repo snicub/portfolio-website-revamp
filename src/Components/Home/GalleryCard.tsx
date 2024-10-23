@@ -21,7 +21,7 @@ function GalleryCard({
   info,
   plpImages,
 }: GalleryCardProps) {
-  const [isMobile, isTablet] = useDevice();
+  const [isMobile, isTablet, isDesktop] = useDevice();
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -85,13 +85,15 @@ function GalleryCard({
       </div>
 
       {/* Adding hover effect */}
-      <style>
-        {`
+      {isDesktop && (
+        <style>
+          {`
           .gallery-card-image-container:hover .gallery-card-image {
             transform: scale(1.1); /* Zoom effect */
           }
         `}
-      </style>
+        </style>
+      )}
     </div>
   );
 }
