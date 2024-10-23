@@ -101,31 +101,9 @@ function Home() {
         gap: "20px",
         flexDirection: "column",
         marginBottom: "50px",
-        marginTop: isMobile ? "100px" : "150px",
+        marginTop: isMobile ? "100px" : "120px",
       }}
     >
-      <div className="stick-bar-and-marquee-close-gap">
-        <div
-          className="navbar-wrapper-and-name-sticky-filler"
-          style={{ height: isMobile ? "40px" : "100px" }}
-        >
-          <Marquee
-            className="marquee"
-            style={{
-              padding: 0,
-              margin: 0,
-              fontSize: "1rem",
-              backgroundColor: "white",
-            }}
-            autoFill={true}
-          >
-            {Data.programmingSection.map((tile, index) => (
-              <ProgrammingTile key={index} img={tile.img} />
-            ))}
-          </Marquee>
-        </div>
-      </div>
-
       <div
         className="gallery-wrapper"
         style={{
