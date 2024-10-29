@@ -187,6 +187,8 @@ const Data = {
         { src: require("./Assets/plp/sourdough/sour12.webp") },
         { src: require("./Assets/plp/sourdough/sour13.webp") },
         { src: require("./Assets/plp/sourdough/sour14.webp") },
+        { src: require("./Assets/plp/sourdough/sour15.webp") },
+        { src: require("./Assets/plp/sourdough/sour16.webp") },
 
         // Add more images as needed
       ],
