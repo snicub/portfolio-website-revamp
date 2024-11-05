@@ -4,6 +4,9 @@ const Data = {
       src: require("./Assets/enterpage/danandmom.webp"),
     },
     {
+      src: require("./Assets/enterpage/jcdan.webp"),
+    },
+    {
       src: require("./Assets/enterpage/babydan.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/babyDanDesktop.webp"),
     },
@@ -122,6 +125,7 @@ const Data = {
       img: require("./Assets/gallery/danfam.webp"),
       plpImages: [
         { src: require("./Assets/plp/fam/lucas.webp") },
+        { src: require("./Assets/plp/fam/lucas2.webp") },
         { src: require("./Assets/plp/fam/danFamEat.webp") },
         { src: require("./Assets/plp/fam/DanGrampFam.webp") },
         { src: require("./Assets/plp/fam/fam3.webp") },
@@ -148,6 +152,7 @@ const Data = {
         { src: require("./Assets/plp/friends/danAlanPack.webp") },
         { src: require("./Assets/plp/friends/friend1.jpeg") },
         { src: require("./Assets/plp/friends/friend2.jpeg") },
+        { src: require("./Assets/plp/friends/dhan.webp") },
         // Add more images as needed
       ],
       altText: "hanging out with friends ",
