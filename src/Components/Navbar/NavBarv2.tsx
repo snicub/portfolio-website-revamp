@@ -12,21 +12,6 @@ export default function Navbar2() {
   const [isMobile, isTablet, isDesktop] = useDevice();
   const [isHoverAbout, setIsHoverAbout] = useState(false);
   const [isHoverExit, setIsHoverExit] = useState(false);
-  const [loading, setLoading] = useState(true); // New state for loading
-
-  useEffect(() => {
-    // Use a small delay to simulate waiting for the device detection
-    const timeout = setTimeout(() => {
-      setLoading(false); // Set loading to false after a small delay
-    }, 50); // Adjust delay as needed (100ms in this case)
-
-    return () => clearTimeout(timeout); // Cleanup timeout if the component unmounts
-  }, [isMobile, isTablet, isDesktop]);
-
-  // If still loading, you can return a placeholder or null to avoid early render
-  if (loading) {
-    return null; // Or you can add a loader/spinner here
-  }
 
   return (
     <div className="entire-navbar">

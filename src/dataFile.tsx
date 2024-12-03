@@ -4,6 +4,9 @@ const Data = {
       src: require("./Assets/enterpage/danandmom.webp"),
     },
     {
+      src: require("./Assets/enterpage/cake.webp"),
+    },
+    {
       src: require("./Assets/enterpage/jcdan.webp"),
     },
     {
@@ -86,6 +89,8 @@ const Data = {
         { src: require("./Assets/plp/cooking/soup.webp") },
         { src: require("./Assets/plp/cooking/sushi.webp") },
         { src: require("./Assets/plp/cooking/food4.webp") },
+        { src: require("./Assets/plp/cooking/rolls.webp") },
+        { src: require("./Assets/plp/cooking/spread.webp") },
         // Add more images as needed
       ],
       altText: "dan han cooking",
@@ -135,6 +140,7 @@ const Data = {
         { src: require("./Assets/plp/fam/fam7.webp") },
         { src: require("./Assets/plp/fam/fam8.webp") },
         { src: require("./Assets/plp/fam/fam9.webp") },
+        { src: require("./Assets/plp/fam/jonny.webp") },
         // Add more images as needed
       ],
       altText: "family values",
@@ -207,6 +213,7 @@ const Data = {
         { src: require("./Assets/plp/coffee/matcha.webp") },
         { src: require("./Assets/plp/coffee/coffee.webp") },
         { src: require("./Assets/plp/coffee/esp.webp") },
+        { src: require("./Assets/plp/coffee/stump.webp") },
 
         // Add more images as needed
       ],
