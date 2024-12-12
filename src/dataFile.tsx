@@ -4,10 +4,18 @@ const Data = {
       src: require("./Assets/enterpage/danandmom.webp"),
     },
     {
+      src: require("./Assets/enterpage/orna.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/ornaDesktop.webp"),
+    },
+    {
       src: require("./Assets/enterpage/cake.webp"),
     },
     {
       src: require("./Assets/enterpage/jcdan.webp"),
+    },
+    {
+      src: require("./Assets/enterpage/RA.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/RA.png"),
     },
     {
       src: require("./Assets/enterpage/babydan.webp"),
@@ -119,6 +127,8 @@ const Data = {
         { src: require("./Assets/plp/RA/RA3.webp") },
         { src: require("./Assets/plp/RA/RA4.webp") },
         { src: require("./Assets/plp/RA/RA5.webp") },
+        { src: require("./Assets/plp/RA/RA6.webp") },
+        { src: require("./Assets/plp/RA/RA7.webp") },
 
         // Add more images as needed
       ],
