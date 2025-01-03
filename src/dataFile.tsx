@@ -14,10 +14,6 @@ const Data = {
       src: require("./Assets/enterpage/jcdan.webp"),
     },
     {
-      src: require("./Assets/enterpage/RA.webp"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/RA.png"),
-    },
-    {
       src: require("./Assets/enterpage/babydan.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/babyDanDesktop.webp"),
     },
