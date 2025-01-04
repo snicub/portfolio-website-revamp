@@ -118,10 +118,13 @@ function Home() {
           fontFamily: "monospace",
           display: "flex",
           justifyContent: "center",
+          textAlign: "center",
         }}
         className="bottom-message"
       >
         designed & developed by Daniel Han
+        <br />
+        made in TypeScript React
       </div>
     </div>
   );
