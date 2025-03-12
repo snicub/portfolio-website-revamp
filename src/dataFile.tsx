@@ -326,6 +326,8 @@ const Data = {
               "Data Science",
               "Database Management",
               "Internet Technology",
+              "Numerical Analysis & Computing",
+              "Minds, Machines, and Persons",
             ],
           },
           major2: {
@@ -341,6 +343,7 @@ const Data = {
               "Intro to Korean Culture 210",
               "Intro to Korean Literature in Translation 220",
               "Korean Translation 320",
+              "Korean Politics @UMich 390",
               "Everyday Life in the Neoliberal City 392",
             ],
           },
