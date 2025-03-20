@@ -4,6 +4,9 @@ const Data = {
       src: require("./Assets/enterpage/danandmom.webp"),
     },
     {
+      src: require("./Assets/enterpage/montreal.webp"),
+    },
+    {
       src: require("./Assets/enterpage/orna.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/ornaDesktop.webp"),
     },
@@ -165,6 +168,10 @@ const Data = {
         { src: require("./Assets/plp/friends/friend1.jpeg") },
         { src: require("./Assets/plp/friends/friend2.jpeg") },
         { src: require("./Assets/plp/friends/dhan.webp") },
+        { src: require("./Assets/plp/friends/montreal1.webp") },
+        { src: require("./Assets/plp/friends/montreal2.webp") },
+        { src: require("./Assets/plp/friends/montreal3.webp") },
+        { src: require("./Assets/plp/friends/montreal4.webp") },
         // Add more images as needed
       ],
       altText: "hanging out with friends ",
