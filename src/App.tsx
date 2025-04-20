@@ -8,10 +8,13 @@ import Data from "./dataFile";
 import About from "./Components/About/About";
 import NavbarLayout from "./Components/Navbar/NavbarLayout";
 import TopLayout from "./Components/Navbar/TopLayout";
+import AnalyticsTracker from "./AnalyticsTracker";
+import "./firebase";
 
 function App() {
   return (
     <BrowserRouter>
+      <AnalyticsTracker />
       <Routes>
         <Route
           path="/"
