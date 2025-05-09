@@ -20,18 +20,10 @@ const Data = {
       src: require("./Assets/enterpage/babydan.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/babyDanDesktop.webp"),
     },
-    {
-      src: require("./Assets/enterpage/glasses.webp"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/glassesDesktop.webp"),
-    },
 
     {
       src: require("./Assets/enterpage/sheis.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sheistyDanDesktop.webp"),
-    },
-    {
-      src: require("./Assets/enterpage/tim.webp"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/danTimDesktop.webp"),
     },
     {
       src: require("./Assets/enterpage/danMomLiz.webp"),
@@ -70,6 +62,9 @@ const Data = {
         { src: require("./Assets/plp/frisbee/frisbee9.webp") },
 
         { src: require("./Assets/plp/frisbee/frisbee11.webp") },
+        { src: require("./Assets/plp/frisbee/frisbee12.JPG") },
+        { src: require("./Assets/plp/frisbee/frisbee13.JPG") },
+        { src: require("./Assets/plp/frisbee/frisbee14.JPG") },
         // Add more images as needed
       ],
       altText: "frisbee",
@@ -172,6 +167,9 @@ const Data = {
         { src: require("./Assets/plp/friends/montreal2.webp") },
         { src: require("./Assets/plp/friends/montreal3.webp") },
         { src: require("./Assets/plp/friends/montreal4.webp") },
+        { src: require("./Assets/plp/friends/phili_friends.JPG") },
+        { src: require("./Assets/plp/friends/bid.jpg") },
+
         // Add more images as needed
       ],
       altText: "hanging out with friends ",
