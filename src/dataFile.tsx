@@ -4,7 +4,19 @@ const Data = {
       src: require("./Assets/enterpage/danandmom.webp"),
     },
     {
+      src: require("./Assets/enterpage/rock.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/rockDesktop.png"),
+    },
+    {
       src: require("./Assets/enterpage/montreal.webp"),
+    },
+    {
+      src: require("./Assets/enterpage/bid.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/bidDesktop.png"),
+    },
+    {
+      src: require("./Assets/enterpage/hand.webp"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/handDesktop.png"),
     },
     {
       src: require("./Assets/enterpage/orna.webp"),
