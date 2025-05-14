@@ -42,10 +42,6 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/momChristDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/danMomShop.webp"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/danMomShopDesktop.webp"),
-    },
-    {
       src: require("./Assets/enterpage/korean.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danKoreanDesktop.webp"),
     },
