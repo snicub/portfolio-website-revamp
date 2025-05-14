@@ -80,8 +80,9 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
         autoFill={true}
       >
         <p>
-          Daniel Han is a software engineer based in New Jersey. He is currently
-          studying CS and Korean at Rutgers University.&nbsp;
+          Daniel Han is a passionate software engineer based in New Jersey. He
+          focuses on web development and front-end work, looking to make the
+          best user experience.&nbsp;
         </p>
       </Marquee>
       <div
