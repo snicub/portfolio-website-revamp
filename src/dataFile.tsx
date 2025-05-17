@@ -77,21 +77,9 @@ const Data = {
       ],
       altText: "frisbee",
       title: "ultimate frisbee",
-      info: "I play ultimate frisbee for the Rutgers club team as a handler and it's been super fun so far. I've played since high school and on club teams. I guess all those backhands at the family cookout paid off.",
+      info: "In college, I played ultimate frisbee for the Rutgers club team as a handler and it was super fun. I've played since high school and on club teams. I guess all those backhands at the family cookout paid off.",
     },
-    {
-      img: require("./Assets/gallery/eliv.webp"),
-      plpImages: [
-        { src: require("./Assets/plp/volunteer/tacov.webp") },
-        { src: require("./Assets/plp/volunteer/nesv.webp") },
 
-        // Add more images as needed
-      ],
-
-      altText: "volunteering",
-      title: "volunteering",
-      info: "In my free time, I love to volunteer!! Right now I'm volunteering at Elijah's Promise in New Brunswick, preparing food and serving meals to the community. I really like anything to do with food, especially cooking and serving others. It's been such an amazing blessing and time at Elijah's kitchen, not only knowing that I'm doing it for a great purpose, but also meeting other volunteers has been so humbling and rewarding. The past summer, while living in NYC, I volunteered at God's Love packing lentil soup and also preparing and serving food bags at St. Paul's food pantry. Let me know if you'd ever want to volunteer together!! ",
-    },
     {
       img: require("./Assets/gallery/cooking.webp"),
       plpImages: [
@@ -107,37 +95,20 @@ const Data = {
       title: "in the lab",
       info: "In my free time, I enjoy cooking different recipes and learning new techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
     },
-    {
-      img: require("./Assets/gallery/nestle.webp"),
-      plpImages: [
-        { src: require("./Assets/plp/nespresso/nes1.webp") },
-        { src: require("./Assets/plp/nespresso/nes2.webp") },
-        { src: require("./Assets/plp/nespresso/nes3.webp") },
-        { src: require("./Assets/plp/nespresso/nes4.webp") },
-        { src: require("./Assets/plp/nespresso/nes5.webp") },
-        // Add more images as needed
-      ],
-      altText: "nespresso internship",
-      title: "nespresso",
-      info: "The past Summer I interned at Nespresso as a front end developer. During my time here, I was able to polish my React skills which helped me make this website. I created two main components for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy the limits here. And yes, I drank a lotttt of free coffee!!",
-    },
-    {
-      img: require("./Assets/gallery/RAdorm.webp"),
-      plpImages: [
-        { src: require("./Assets/plp/RA/RA1.webp") },
-        { src: require("./Assets/plp/RA/RA2.webp") },
-        { src: require("./Assets/plp/RA/RA3.webp") },
-        { src: require("./Assets/plp/RA/RA4.webp") },
-        { src: require("./Assets/plp/RA/RA5.webp") },
-        { src: require("./Assets/plp/RA/RA6.webp") },
-        { src: require("./Assets/plp/RA/RA7.webp") },
-
-        // Add more images as needed
-      ],
-      altText: "resident assistant",
-      title: "RA Han",
-      info: "Last year I RA'd for freshman housing, but this year I got a nice upgrade to an apartment. Call me super RA.",
-    },
+    // {
+    //   img: require("./Assets/gallery/nestle.webp"),
+    //   plpImages: [
+    //     { src: require("./Assets/plp/nespresso/nes1.webp") },
+    //     { src: require("./Assets/plp/nespresso/nes2.webp") },
+    //     { src: require("./Assets/plp/nespresso/nes3.webp") },
+    //     { src: require("./Assets/plp/nespresso/nes4.webp") },
+    //     { src: require("./Assets/plp/nespresso/nes5.webp") },
+    //     // Add more images as needed
+    //   ],
+    //   altText: "nespresso internship",
+    //   title: "nespresso",
+    //   info: "The past Summer I interned at Nespresso as a front end developer. During my time here, I was able to polish my React skills which helped me make this website. I created two main components for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy the limits here. And yes, I drank a lotttt of free coffee!!",
+    // },
     {
       img: require("./Assets/gallery/danfam.webp"),
       plpImages: [
@@ -152,7 +123,7 @@ const Data = {
         { src: require("./Assets/plp/fam/fam7.webp") },
         { src: require("./Assets/plp/fam/fam8.webp") },
         { src: require("./Assets/plp/fam/fam9.webp") },
-        { src: require("./Assets/plp/fam/jonny.webp") },
+
         // Add more images as needed
       ],
       altText: "family values",
@@ -238,7 +209,7 @@ const Data = {
       ],
       altText: "fresh coffee",
       title: "morning cup",
-      info: "I love coffee and enjoy trying new roasts and brewing methods. I'm into selecting my coffee beans, grinding them fresh, and preparing my coffee in various ways. Right now I'm using a timemore c2 grinder and aeropress. I have a pourover set but I don't use it too often. I've also been super into making iced dirty matcha lattes. Down the line, I definitely want to get an espresso machine, moka pot, and french press. I know I have an obsession",
+      info: "I love coffee and enjoy trying new roasts and brewing methods. Right now I'm using a timemore c2 grinder and aeropress. I have a pourover set but I don't use it too often. I've also been super into making iced dirty matcha lattes.",
     },
     {
       img: require("./Assets/plp/golf/dantee.webp"),
@@ -251,7 +222,7 @@ const Data = {
       ],
       altText: "dan like golf",
       title: "golf",
-      info: "In my free time, I also like to play golf. I got into it because my dad loves playing, and I just wanted to spend more quality time with him. I still suck and shank most of my tee offs.",
+      info: "In my free time, I also like to play golf. I got into it because my dad loves playing, and I just wanted to spend more quality time with him. I still suck and top most of my tee offs.",
     },
     {
       img: require("./Assets/plp/korea/korea13.webp"),
@@ -308,7 +279,13 @@ const Data = {
     experience: [
       {
         title: "Nestle Nespresso",
-        position: "Front End Developer Intern",
+        position: "Associate Web Developer",
+        date: "June 2025 - Present",
+        description: "Making the Nespresso website fast, functional, and cool.",
+      },
+      {
+        title: "Nestle Nespresso",
+        position: "Front-End Developer Intern",
         date: "June 2024 - August 2024",
         description:
           "Worked on the redesign of the Nespresso website, creating two main components for the new site. Developed in React using TypeScript, CSS, and HTML. Used Storybook for viewing individual components and react testing library for writing custom test cases. Implemented a component that autoplays through multiple videos, and displays different text content for each video. Also implemented a component that showcases 3 different Nespresso machines, represented by a button to route to a different product.",

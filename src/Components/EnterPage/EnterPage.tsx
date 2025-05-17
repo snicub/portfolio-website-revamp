@@ -81,8 +81,8 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
       >
         <p>
           Daniel Han is a passionate software engineer based in New Jersey. He
-          focuses on web development and front-end work, looking to make the
-          best user experience.&nbsp;
+          currently is a web developer at Nespresso focusing on making the best
+          user experience.&nbsp;
         </p>
       </Marquee>
       <div
