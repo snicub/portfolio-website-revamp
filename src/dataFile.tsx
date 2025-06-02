@@ -12,6 +12,10 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/rockDesktop.png"),
     },
     {
+      src: require("./Assets/enterpage/cross.JPG"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
+    },
+    {
       src: require("./Assets/enterpage/montreal.webp"),
     },
     {
@@ -25,6 +29,10 @@ const Data = {
     {
       src: require("./Assets/enterpage/orna.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/ornaDesktop.webp"),
+    },
+    {
+      src: require("./Assets/enterpage/bookstore.JPG"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
     },
     {
       src: require("./Assets/enterpage/cake.webp"),
@@ -42,6 +50,10 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sheistyDanDesktop.webp"),
     },
     {
+      src: require("./Assets/enterpage/waterfall.JPG"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
+    },
+    {
       src: require("./Assets/enterpage/danMomLiz.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/momChristDesktop.webp"),
     },
@@ -56,6 +68,10 @@ const Data = {
     {
       src: require("./Assets/enterpage/danAsher.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danAsherDesktop.webp"),
+    },
+    {
+      src: require("./Assets/enterpage/withMom.JPG"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
     },
   ],
 
@@ -92,7 +108,9 @@ const Data = {
         { src: require("./Assets/plp/cooking/sushi.webp") },
         { src: require("./Assets/plp/cooking/food4.webp") },
         { src: require("./Assets/plp/cooking/rolls.webp") },
-        { src: require("./Assets/plp/cooking/spread.webp") },
+        { src: require("./Assets/plp/cooking/bak1.jpg") },
+        { src: require("./Assets/plp/cooking/bak2.jpg") },
+
         // Add more images as needed
       ],
       altText: "dan han cooking",
@@ -114,7 +132,8 @@ const Data = {
     //   info: "The past Summer I interned at Nespresso as a front end developer. During my time here, I was able to polish my React skills which helped me make this website. I created two main components for their website redesign that I'm super proud of. I didn't think I would be able to make such an impact as an intern, but we defy the limits here. And yes, I drank a lotttt of free coffee!!",
     // },
     {
-      img: require("./Assets/gallery/danfam.webp"),
+      img: require("./Assets/plp/fam/fam11.JPG"),
+      //img: require("./Assets/gallery/danfam.webp"),
       plpImages: [
         { src: require("./Assets/plp/fam/lucas.webp") },
         { src: require("./Assets/plp/fam/lucas2.webp") },
@@ -123,10 +142,13 @@ const Data = {
         { src: require("./Assets/plp/fam/fam3.webp") },
         { src: require("./Assets/plp/fam/fam4.webp") },
         { src: require("./Assets/plp/fam/fam5.webp") },
-        { src: require("./Assets/plp/fam/fam6.webp") },
         { src: require("./Assets/plp/fam/fam7.webp") },
         { src: require("./Assets/plp/fam/fam8.webp") },
         { src: require("./Assets/plp/fam/fam9.webp") },
+        { src: require("./Assets/plp/fam/fam10.jpg") },
+        { src: require("./Assets/gallery/danfam.webp") },
+        //require("./Assets/plp/fam/fam11.JPG")
+        { src: require("./Assets/plp/fam/fam12.JPG") },
 
         // Add more images as needed
       ],
@@ -213,7 +235,7 @@ const Data = {
       ],
       altText: "fresh coffee",
       title: "morning cup",
-      info: "I love coffee and enjoy trying new roasts and brewing methods. Right now I'm using a timemore c2 grinder and aeropress. I have a pourover set but I don't use it too often. I've also been super into making iced dirty matcha lattes.",
+      info: "I love coffee and enjoy trying new roasts and brewing methods. Right now I'm using a timemore c2 grinder and aeropress. I have a pourover set but I don't use it too often. Caffeine 90min after waking up huberman tech?",
     },
     {
       img: require("./Assets/plp/golf/dantee.webp"),
