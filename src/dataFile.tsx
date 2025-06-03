@@ -299,26 +299,27 @@ const Data = {
   ],
   aboutMeSection: {
     contact: {
-      location: "NJ, NY",
+      location: "NJ/NYC",
       email: "daniel.hangb@gmail.com",
     },
     experience: [
       {
         title: "Nestle Nespresso",
-        position: "Associate Web Developer",
+        position: "Web Developer",
         date: "June 2025 - Present",
-        description: "Making the Nespresso website fast, functional, and cool.",
+        description:
+          "Making the Nespresso website fast, functional, and user friendly.",
       },
       {
         title: "Nestle Nespresso",
-        position: "Front-End Developer Intern",
+        position: "Web Developer Intern",
         date: "June 2024 - August 2024",
         description:
-          "Worked on the redesign of the Nespresso website, creating 10 components for the new site. Developed in React using TypeScript, CSS, and HTML. Used Storybook for viewing individual components and react testing library for writing custom test cases. Implemented a component that autoplays through multiple videos, and displays different text content for each video. Also implemented a component that showcases 3 different Nespresso machines, represented by a button to route to a different product.",
+          "Worked on the redesign of the Nespresso website, creating 10 reusable components. Developed in React using TypeScript, EmotionCSS, and HTML. Used Storybook for viewing individual components and react testing library for writing custom test cases. Implemented a component that autoplays through multiple videos, and displays different text content for each video. Also implemented a component that showcases 3 different Nespresso machines, represented by a button to route to a different product.",
       },
       {
         title: "Colgate-Palmolive",
-        position: "Application & Software Developer Intern",
+        position: "Software Engineer Intern",
         date: "January 2023 - November 2023",
         description:
           "Worked on an embedded c project connecting a Bosch BME688 gas sensor with a Silicon Labs EFR32BG22 micro controller. Also worked on writing Python scripts for Salesforce Marketing cloud, and creating API endpoints for an internal Django web application. ",
