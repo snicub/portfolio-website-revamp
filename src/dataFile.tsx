@@ -219,7 +219,7 @@ const Data = {
 
         // Add more images as needed
       ],
-      altText: "sourdough  baking",
+      altText: "sourdough baking",
       title: "sourdough",
       info: "I got into sourdough baking this past summer! I love the process of making a loaf from start to finish. And no, I haven't named my starter yet.. lol. Sourdough bread making is super appealing to me and such a rewarding process. I'm trying to make homemade croissants next!!",
     },
@@ -274,7 +274,7 @@ const Data = {
       ],
       altText: "dan loves korea",
       title: "korea",
-      info: "I've traveled to Korea two times!! First being a study abroad program at Ewha womans university in Seoul, where I participated in their summer co-ed program. I worked on a personal research project, interned at a think tank, and took a Korean elective course on neoliberalism. The following summer, I went to Korea again, this time with my sister to travel. We went to Daegu, Busan, Gyeongju, Jeonju, and Jeju. We also spent quality time with our relatives in Seoul. I think it goes without saying that their food is amazing and super affordable. Really missing that!!  ",
+      info: "I've traveled to Korea two times!! First being a study abroad program at Ewha womans university in Seoul, where I participated in their summer co-ed program. I worked on a personal research project, interned at a think tank, and took a Korean elective course on neoliberalism. The following summer I went to Korea again, this time with my sister to travel. We went to Daegu, Busan, Gyeongju, Jeonju, and Jeju. We also spent quality time with our relatives in Seoul. I think it goes without saying that their food is amazing and super affordable. Really missing that!!  ",
     },
   ],
 
