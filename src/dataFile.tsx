@@ -8,9 +8,6 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/rockDesktop.png"),
     },
     {
-      src: require("./Assets/enterpage/montreal.webp"),
-    },
-    {
       src: require("./Assets/enterpage/bid.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/bidDesktop.png"),
     },
@@ -42,10 +39,6 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sheistyDanDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/waterfall.JPG"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
-    },
-    {
       src: require("./Assets/enterpage/danMomLiz.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/momChristDesktop.webp"),
     },
@@ -63,7 +56,7 @@ const Data = {
     },
     {
       src: require("./Assets/enterpage/withMom.JPG"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/withMomDesktopAndTablet.png"),
     },
   ],
 
