@@ -4,16 +4,8 @@ const Data = {
       src: require("./Assets/enterpage/danandmom.webp"),
     },
     {
-      src: require("./Assets/enterpage/DanGrad.png"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
-    },
-    {
       src: require("./Assets/enterpage/rock.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/rockDesktop.png"),
-    },
-    {
-      src: require("./Assets/enterpage/cross.JPG"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
     },
     {
       src: require("./Assets/enterpage/montreal.webp"),
@@ -32,7 +24,7 @@ const Data = {
     },
     {
       src: require("./Assets/enterpage/bookstore.JPG"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/DanGradDesktop.png"),
+      desktopSrc: require("./Assets/enterpage/desktopAndTablet/bookstoreDesktopAndTablet.png"),
     },
     {
       src: require("./Assets/enterpage/cake.webp"),
