@@ -8,24 +8,25 @@ import useDevice from "../../Hooks/useDevice";
 
 const PLP: React.FC = () => {
   useScrollToTop();
-  const [isMobile, isTablet, isDesktop] = useDevice();
-  const [fadeOut, setFadeOut] = useState(true); // Set initial state to true for fade-in on refresh
-  const [content, setContent] = useState<any>(null); // Stores content for rendering
+  const [isMobile] = useDevice();
+  const [fadeOut, setFadeOut] = useState(true);
+  const [content, setContent] = useState<any>(null);
 
   const location = useLocation();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const newContent = location.state || {};
 
-  // Handle fade-in on component mount (for initial navigation)
   useEffect(() => {
-    setContent(newContent); // Set initial content on mount
-    setFadeOut(false); // Set fadeState to false (fade-in)
+    setContent(newContent);
+    setFadeOut(false);
 
     const fadeTimeout = setTimeout(() => {
-      setFadeOut(true); // Trigger fade-in
-    }, 0); // Small delay for fade-in
+      setFadeOut(true);
+    }, 0);
 
-    return () => clearTimeout(fadeTimeout); // Clean up the timer
-  }, []); // Empty dependency ensures this runs only on mount (for page refresh)
+    return () => clearTimeout(fadeTimeout);
+    // eslint-disable-next-line
+  }, []);
 
   const preloadImage = (src: string) => {
     const img = new Image();
@@ -33,20 +34,19 @@ const PLP: React.FC = () => {
   };
 
   useEffect(() => {
-    setFadeOut(true); // Start fade-out effect
+    setFadeOut(true);
 
-    // Preload the next image
     preloadImage(newContent.imageSrc);
 
     const fadeTimeout = setTimeout(() => {
-      setContent(newContent); // Update the content after fade-out completes
-      setFadeOut(false); // Start the fade-in effect
-    }, 1000); // Adjust the timing for the fade-out effect duration
+      setContent(newContent);
+      setFadeOut(false);
+    }, 1000);
 
-    return () => clearTimeout(fadeTimeout); // Clean up the timer on unmount
+    return () => clearTimeout(fadeTimeout);
   }, [location.state, newContent]);
 
-  if (!content) return null; // Ensure content is defined before rendering
+  if (!content) return null;
 
   const { imageSrc, altText, title, index, info, plpImages } = content;
 
@@ -60,8 +60,8 @@ const PLP: React.FC = () => {
         className="entire-plp"
         style={{
           marginTop: "50px",
-          opacity: fadeOut ? 0 : 1, // Fades out before content change, then fades in
-          transition: "opacity 1s ease-in-out", // Smooth fade effect with ease-in timing
+          opacity: fadeOut ? 0 : 1,
+          transition: "opacity 1s ease-in-out",
         }}
       >
         <div
@@ -98,7 +98,7 @@ const PLP: React.FC = () => {
               }}
             >
               <img
-                loading={content === newContent ? "eager" : "lazy"} // Only eager load on first load
+                loading={content === newContent ? "eager" : "lazy"}
                 className="mainImage"
                 style={{
                   maxWidth: !isMobile ? "50%" : undefined,

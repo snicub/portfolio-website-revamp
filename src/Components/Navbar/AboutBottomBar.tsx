@@ -8,7 +8,7 @@ export default function AboutBottomBar() {
     navigate(page);
   };
 
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile, isDesktop] = useDevice();
 
   const [isHoverBack, setIsHoverBack] = useState(false);
   return (
@@ -34,11 +34,11 @@ export default function AboutBottomBar() {
           onClick={() => handleRouterClick("/home")}
           style={{
             transition: "background-color 0.3s ease",
-            cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: isDesktop && isHoverBack ? "#E6E6FA" : undefined, // Change color on hover
+            cursor: "pointer",
+            background: isDesktop && isHoverBack ? "#E6E6FA" : undefined,
           }}
-          onMouseEnter={() => setIsHoverBack(true)} // Handle hover in
-          onMouseLeave={() => setIsHoverBack(false)} // Handle hover out
+          onMouseEnter={() => setIsHoverBack(true)}
+          onMouseLeave={() => setIsHoverBack(false)}
         >
           [ Back ]
         </div>

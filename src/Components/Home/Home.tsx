@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
 import Gallery from "./Gallery";
-import Marquee from "react-fast-marquee";
 import Data from "../../dataFile";
-import ProgrammingTile from "../Programming/ProgrammingTile";
 import "../../fonts.css";
 import useDevice from "../../Hooks/useDevice";
 
 function Home() {
   const [loading, setLoading] = useState(true);
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile] = useDevice();
 
   useEffect(() => {
     const loadAssets = async () => {
       try {
-        // Example for image assets
         const imagePromises = Data.programmingSection.map(
           (tile) =>
             new Promise((resolve) => {
@@ -38,12 +35,10 @@ function Home() {
 
         await Promise.all(galleryImagesPromises);
 
-        // Additional resource loading can go here
-
-        setLoading(false); // Loading done
+        setLoading(false);
       } catch (error) {
         console.error("Error loading assets:", error);
-        setLoading(false); // Fail gracefully
+        setLoading(false);
       }
     };
 
@@ -88,7 +83,7 @@ function Home() {
           }
         `}
         </style>
-        {/* [ Please wait<span className="dots"></span> ] */}
+        {}
       </div>
     );
   }
@@ -125,6 +120,7 @@ function Home() {
         designed & developed by Daniel Han
         <br />
         made in TypeScript React
+        {/* <img src={require("../../Assets/reactGif.webp")} alt="loading..." /> */}
       </div>
     </div>
   );

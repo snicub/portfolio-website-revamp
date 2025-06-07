@@ -5,7 +5,7 @@ function NavbarLayout() {
   return (
     <>
       <Navbar2 />
-      <Outlet /> {/* Renders the child route components */}
+      <Outlet /> {/*renders the child route components */}
     </>
   );
 }

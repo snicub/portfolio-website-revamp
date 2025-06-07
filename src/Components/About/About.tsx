@@ -7,7 +7,7 @@ import ProgrammingTile from "../Programming/ProgrammingTile";
 import Marquee from "react-fast-marquee";
 
 export default function About() {
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile, isDesktop] = useDevice();
   useScrollToTop();
   return (
     <>
@@ -41,11 +41,11 @@ export default function About() {
           display: "flex",
           flexDirection: "column",
           textAlign: "center",
-          width: "80%", // Adjust width for smaller screens
-          maxWidth: "1200px", // Max width for larger screens
-          margin: "0 auto", // Center horizontally
-          padding: "40px 20px", // Add padding for better spacing
-          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)", // Add subtle shadow
+          width: "80%", //adjust width for smaller screens
+          maxWidth: "1200px", //set max width for larger screen
+          margin: "0 auto", //center horizontally
+          padding: "40px 20px",
+          boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
           fontFamily: "favorit",
           fontSize: "1rem",
           fontStyle: "normal",

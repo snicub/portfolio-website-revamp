@@ -6,12 +6,13 @@ import useDevice from "../../Hooks/useDevice";
 import useScrollToTop from "../../Hooks/useTop";
 
 interface EnterPageProps {
-  images: ImageObject[] | undefined;
-  duration?: number; // Duration for each slide (in milliseconds)
+  images: ImageObject[] | undefined; //an array of image objects
+  duration?: number;
 }
 
+//each image object has a source String and desktopString
 interface ImageObject {
-  src: string;
+  mobileSrc: string;
   desktopSrc?: string;
 }
 
@@ -20,8 +21,9 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
   const [isMobile] = useDevice();
   const navigate = useNavigate();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isPageLoaded, setIsPageLoaded] = useState(false); // State to track page load
+  const [isPageLoaded, setIsPageLoaded] = useState(false);
 
+  // change the current index every duration milliseconds
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images!.length);
@@ -31,7 +33,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [images?.length ?? 0, duration]);
 
-  // Simulate page load by using a timeout or loading images
+  //simulate page load by using a timeout or loading images
   useEffect(() => {
     const loadImages = async () => {
       const promises = images!.map(
@@ -39,13 +41,15 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           new Promise((resolve) => {
             const img = new Image();
             img.src =
-              isMobile || !image.desktopSrc ? image.src : image.desktopSrc!;
+              isMobile || !image.desktopSrc
+                ? image.mobileSrc
+                : image.desktopSrc!;
             img.onload = resolve;
-            img.onerror = resolve; // Resolve even if there is an error loading the image
+            img.onerror = resolve; //force resolve
           })
       );
       await Promise.all(promises);
-      setIsPageLoaded(true); // Set the page as loaded once all images are loaded
+      setIsPageLoaded(true); //set pages - laoded when all loaded
     };
 
     loadImages();
@@ -57,8 +61,8 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
       style={{
         position: "relative",
         height: "100vh",
-        opacity: isPageLoaded ? 1 : 0, // Control the opacity based on the loading state
-        transition: "opacity 1s ease-in-out", // Fade-in transition
+        opacity: isPageLoaded ? 1 : 0,
+        transition: "opacity 1s ease-in-out",
       }}
     >
       <Marquee
@@ -75,7 +79,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           position: "absolute",
           backgroundColor: "white",
           zIndex: 2,
-          cursor: "pointer", // Change cursor to pointer to indicate it's clickable
+          cursor: "pointer",
         }}
         autoFill={true}
       >
@@ -91,10 +95,10 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
         style={{
           position: "absolute",
           top: "50%",
-          left: "50%", // Center horizontally
-          transform: "translate(-50%, -50%)", // Center both horizontally and vertically
-          color: "rgba(0,0,0,1)", // Adjust text color for visibility
-          fontSize: "2rem", // Adjust font size as needed
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          color: "rgba(0,0,0,1)",
+          fontSize: "2rem",
           alignItems: "center",
           fontFamily:
             '"Helvetica Neue", Helvetica, sans-serif, "Helvetica Neue Regular", Icons',
@@ -103,7 +107,7 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           letterSpacing: "0.1em",
           background: "rgb(255, 255, 255, 0.3)",
           zIndex: 2,
-          cursor: "pointer", // Change cursor to pointer to indicate it's clickable
+          cursor: "pointer",
         }}
       >
         [ enter ]
@@ -114,15 +118,17 @@ function EnterPage({ images, duration = 3500 }: EnterPageProps) {
           position: "relative",
           width: "100%",
           height: "100%",
-          overflow: "hidden", // Ensures that the image doesn't overflow the wrapper
-          cursor: "pointer", // Change cursor to pointer to indicate it's clickable
+          overflow: "hidden",
+          cursor: "pointer",
         }}
       >
         {images!.map((image, index) => (
           <img
             onClick={() => navigate("/home")}
             key={index}
-            src={isMobile || !image.desktopSrc ? image.src : image.desktopSrc}
+            src={
+              isMobile || !image.desktopSrc ? image.mobileSrc : image.desktopSrc
+            }
             alt="need no alt"
             style={{
               position: "absolute",

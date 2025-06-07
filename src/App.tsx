@@ -1,6 +1,4 @@
 import EnterPage from "./Components/EnterPage/EnterPage";
-import Experience from "./Components/Experience";
-
 import PLP from "./Components/SpecificLandingPage/PLP";
 import Home from "./Components/Home/Home";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -24,7 +22,6 @@ function App() {
         <Route element={<NavbarLayout />}>
           <Route element={<TopLayout />}>
             <Route path="/home" element={<Home />} />
-            <Route path="/experience" element={<Experience />} />
           </Route>
           <Route path="/about" element={<About />} />
           <Route path="/learnmore" element={<PLP />} />

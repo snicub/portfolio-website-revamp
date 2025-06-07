@@ -29,22 +29,22 @@ function FadeInSection(props: any) {
 }
 
 const Gallery: React.FC = () => {
-  const [columns, setColumns] = useState("repeat(3, 1fr)"); // Default to 3 columns
+  const [columns, setColumns] = useState("repeat(3, 1fr)"); //defaulted to 3 cols
 
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 482) {
         //iphone 14 pro max is 481px wide
-        setColumns("1fr"); // 1 column on small screens (mobile)
+        setColumns("1fr"); // 1 col on mobile
       } else if (window.innerWidth < 1024) {
-        setColumns("repeat(2, 1fr)"); // 3 columns on tablet
+        setColumns("repeat(2, 1fr)"); //2 columns on tablet
       } else {
-        setColumns("repeat(3, 1fr)"); // 3 columns on larger screens
+        setColumns("repeat(3, 1fr)"); //3 columns on desktop screens
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);

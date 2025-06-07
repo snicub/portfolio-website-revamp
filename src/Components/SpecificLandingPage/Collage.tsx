@@ -12,7 +12,6 @@ const CollageImage: React.FC<{ src: string; index: number }> = ({
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Image load handler
   const handleImageLoad = () => {
     setIsLoaded(true);
   };
@@ -45,13 +44,13 @@ const CollageImage: React.FC<{ src: string; index: number }> = ({
           width: "100%",
           height: "100%",
           objectFit: "cover",
-          opacity: isLoaded ? 1 : 0, // Opacity transition
-          transition: "opacity 1s ease-in-out", // Smooth fade-in effect
+          opacity: isLoaded ? 1 : 0,
+          transition: "opacity 1s ease-in-out",
         }}
         src={src}
         alt={`Collage ${index}`}
-        onLoad={handleImageLoad} // Update state when the image loads
-        onError={() => setIsLoaded(true)} // Handle errors gracefully
+        onLoad={handleImageLoad}
+        onError={() => setIsLoaded(true)}
       />
     </div>
   );

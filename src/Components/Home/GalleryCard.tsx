@@ -7,8 +7,8 @@ interface GalleryCardProps {
   imageSrc: string;
   altText: string;
   title: string;
-  style?: React.CSSProperties; // Add style prop
-  index?: number; // Add index prop
+  style?: React.CSSProperties;
+  index?: number;
   info?: string;
   plpImages: { src: string }[] | undefined;
 }
@@ -25,13 +25,12 @@ function GalleryCard({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // Pass props using state
     navigate("/learnmore", {
       state: {
-        imageSrc, // Pass image source
-        altText, // Pass alt text
-        title, // Pass title
-        index, // Pass index or any other data you need
+        imageSrc,
+        altText,
+        title,
+        index,
         info,
         plpImages,
       },
@@ -50,7 +49,7 @@ function GalleryCard({
         cursor: "pointer",
         boxSizing: "border-box",
         margin: "40px 0",
-        overflow: "hidden", // Important for controlling the hover zoom
+        overflow: "hidden",
       }}
       onClick={handleClick}
     >
@@ -63,7 +62,7 @@ function GalleryCard({
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          transition: "transform 0.3s ease-in-out", // Smooth transition for zoom
+          transition: "transform 0.3s ease-in-out",
         }}
       >
         <img
@@ -75,7 +74,7 @@ function GalleryCard({
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            transition: "transform 0.3s ease-in-out", // Smooth transition for zoom
+            transition: "transform 0.3s ease-in-out",
             aspectRatio: "1/1",
           }}
         />
