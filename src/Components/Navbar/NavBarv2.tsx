@@ -1,7 +1,7 @@
 import HomeCard from "../Home/HomeCard";
 import { useNavigate } from "react-router-dom";
 import useDevice from "../../Hooks/useDevice";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 export default function Navbar2() {
   const navigate = useNavigate();
@@ -9,7 +9,7 @@ export default function Navbar2() {
     navigate(page);
   };
 
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile, isDesktop] = useDevice();
   const [isHoverAbout, setIsHoverAbout] = useState(false);
   const [isHoverExit, setIsHoverExit] = useState(false);
 
@@ -42,27 +42,27 @@ export default function Navbar2() {
         }}
       >
         <div
-          onMouseEnter={() => setIsHoverAbout(true)} // Handle hover in
-          onMouseLeave={() => setIsHoverAbout(false)} // Handle hover out
+          onMouseEnter={() => setIsHoverAbout(true)}
+          onMouseLeave={() => setIsHoverAbout(false)}
           className="education-wrapper"
           onClick={() => handleRouterClick("/about")}
           style={{
             transition: "background-color 0.3s ease",
-            cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: isDesktop && isHoverAbout ? "#E6E6FA" : undefined, // Change color on hover
+            cursor: "pointer",
+            background: isDesktop && isHoverAbout ? "#E6E6FA" : undefined,
           }}
         >
           [ About ]
         </div>
         <div
           className="exit-wrapper"
-          onMouseEnter={() => setIsHoverExit(true)} // Handle hover in
-          onMouseLeave={() => setIsHoverExit(false)} // Handle hover out
+          onMouseEnter={() => setIsHoverExit(true)}
+          onMouseLeave={() => setIsHoverExit(false)}
           onClick={() => handleRouterClick("/")}
           style={{
             transition: "background-color 0.3s ease",
-            cursor: "pointer", // Change cursor to pointer to indicate it's clickable
-            background: isDesktop && isHoverExit ? "#E6E6FA" : undefined, // Change color on hover
+            cursor: "pointer",
+            background: isDesktop && isHoverExit ? "#E6E6FA" : undefined,
             width: "fit-content",
           }}
         >

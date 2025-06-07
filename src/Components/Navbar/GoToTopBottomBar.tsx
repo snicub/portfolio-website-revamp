@@ -6,7 +6,7 @@ interface GoToTopBottomBarProps {
 }
 
 export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile, isDesktop] = useDevice();
   const [show, setShow] = useState(false);
   const [isHover, setIsHover] = useState(false);
 
@@ -55,8 +55,8 @@ export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
           }}
         >
           <div
-            onMouseEnter={() => setIsHover(true)} // Handle hover in
-            onMouseLeave={() => setIsHover(false)} // Handle hover out
+            onMouseEnter={() => setIsHover(true)}
+            onMouseLeave={() => setIsHover(false)}
             className="go-to-top-wrapper"
             onClick={handleClick}
             style={{

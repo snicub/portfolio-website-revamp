@@ -22,7 +22,7 @@ export default function Bottombar({ index }: BottombarProps) {
     });
   };
 
-  const [isMobile, isTablet, isDesktop] = useDevice();
+  const [isMobile, isDesktop] = useDevice();
   const [isHoverBack, setIsHoverBack] = useState(false);
   const [isHoverNext, setIsHoverNext] = useState(false);
   const [isHoverPrev, setIsHoverPrev] = useState(false);
@@ -51,7 +51,7 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
-            background: isDesktop && isHoverBack ? "#E6E6FA" : undefined, // Change color on hover
+            background: isDesktop && isHoverBack ? "#E6E6FA" : undefined,
           }}
           onMouseEnter={() => setIsHoverBack(true)}
           onMouseLeave={() => setIsHoverBack(false)}
@@ -83,7 +83,7 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
-            background: isDesktop && isHoverNext ? "#E6E6FA" : undefined, // Change color on hover
+            background: isDesktop && isHoverNext ? "#E6E6FA" : undefined,
             width: "fit-content",
           }}
           onMouseEnter={() => setIsHoverNext(true)}
@@ -102,7 +102,7 @@ export default function Bottombar({ index }: BottombarProps) {
           style={{
             transition: "background-color 0.3s ease",
             cursor: "pointer",
-            background: isDesktop && isHoverPrev ? "#E6E6FA" : undefined, // Change color on hover
+            background: isDesktop && isHoverPrev ? "#E6E6FA" : undefined,
           }}
           onMouseEnter={() => setIsHoverPrev(true)}
           onMouseLeave={() => setIsHoverPrev(false)}

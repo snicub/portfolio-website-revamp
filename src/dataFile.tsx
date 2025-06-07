@@ -1,61 +1,61 @@
 const Data = {
   enterPageSection: [
     {
-      src: require("./Assets/enterpage/danandmom.webp"),
+      mobileSrc: require("./Assets/enterpage/danandmom.webp"),
     },
     {
-      src: require("./Assets/enterpage/rock.webp"),
+      mobileSrc: require("./Assets/enterpage/rock.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/rockDesktop.png"),
     },
     {
-      src: require("./Assets/enterpage/bid.webp"),
+      mobileSrc: require("./Assets/enterpage/bid.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/bidDesktop.png"),
     },
     {
-      src: require("./Assets/enterpage/hand.webp"),
+      mobileSrc: require("./Assets/enterpage/hand.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/handDesktop.png"),
     },
     {
-      src: require("./Assets/enterpage/orna.webp"),
+      mobileSrc: require("./Assets/enterpage/orna.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/ornaDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/bookstore.JPG"),
+      mobileSrc: require("./Assets/enterpage/bookstore.JPG"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/bookstoreDesktopAndTablet.png"),
     },
     {
-      src: require("./Assets/enterpage/cake.webp"),
+      mobileSrc: require("./Assets/enterpage/cake.webp"),
     },
     {
-      src: require("./Assets/enterpage/jcdan.webp"),
+      mobileSrc: require("./Assets/enterpage/jcdan.webp"),
     },
     {
-      src: require("./Assets/enterpage/babydan.webp"),
+      mobileSrc: require("./Assets/enterpage/babydan.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/babyDanDesktop.webp"),
     },
 
     {
-      src: require("./Assets/enterpage/sheis.webp"),
+      mobileSrc: require("./Assets/enterpage/sheis.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sheistyDanDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/danMomLiz.webp"),
+      mobileSrc: require("./Assets/enterpage/danMomLiz.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/momChristDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/korean.webp"),
+      mobileSrc: require("./Assets/enterpage/korean.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danKoreanDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/danMomSubway.webp"),
+      mobileSrc: require("./Assets/enterpage/danMomSubway.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danTrainDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/danAsher.webp"),
+      mobileSrc: require("./Assets/enterpage/danAsher.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danAsherDesktop.webp"),
     },
     {
-      src: require("./Assets/enterpage/withMom.JPG"),
+      mobileSrc: require("./Assets/enterpage/withMom.JPG"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/withMomDesktopAndTablet.png"),
     },
   ],

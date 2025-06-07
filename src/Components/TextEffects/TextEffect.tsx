@@ -6,19 +6,18 @@ const getRandomChar = () => {
 };
 
 const TextEffect = ({ text = "" }: { text?: string }) => {
-  // Set default empty string
   const [displayedText, setDisplayedText] = useState("");
   const [isComplete, setIsComplete] = useState(false);
-  const [isInView, setIsInView] = useState(false); // To track if the component is in view
-  const textRef = useRef<HTMLSpanElement>(null); // Ref to the text element
-  const hasRun = useRef(false); // Ref to track if the effect has already run
+  const [isInView, setIsInView] = useState(false);
+  const textRef = useRef<HTMLSpanElement>(null);
+  const hasRun = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         setIsInView(entry.isIntersecting);
       },
-      { threshold: 0.1 } // Trigger when 10% of the component is visible
+      { threshold: 0.1 }
     );
 
     if (textRef.current) {
@@ -27,14 +26,14 @@ const TextEffect = ({ text = "" }: { text?: string }) => {
 
     return () => {
       if (textRef.current) {
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line
         observer.unobserve(textRef.current);
       }
     };
   }, []);
 
   useEffect(() => {
-    if (!isInView || hasRun.current) return; // Exit early if not in view or effect already run
+    if (!isInView || hasRun.current) return;
 
     let index = 0;
     const interval = setInterval(() => {
@@ -43,7 +42,7 @@ const TextEffect = ({ text = "" }: { text?: string }) => {
           const randomChars = Array.from({ length: index })
             .map(() => getRandomChar())
             .join("");
-          const updatedText = randomChars + (text[index] || ""); // Ensure no undefined character
+          const updatedText = randomChars + (text[index] || "");
           return updatedText;
         });
         index++;
@@ -51,9 +50,9 @@ const TextEffect = ({ text = "" }: { text?: string }) => {
         clearInterval(interval);
         setDisplayedText(text);
         setIsComplete(true);
-        hasRun.current = true; // Mark the effect as complete
+        hasRun.current = true;
       }
-    }, 100); // Speed of the effect
+    }, 100);
 
     return () => clearInterval(interval);
   }, [isInView, text]);
@@ -63,7 +62,7 @@ const TextEffect = ({ text = "" }: { text?: string }) => {
     fontSize: "1rem",
     whiteSpace: "nowrap",
     display: "inline-block",
-    width: `${text.length}ch`, // Adjust width to fit the text length
+    width: `${text.length}ch`,
   };
 
   const cursorStyle: React.CSSProperties = {

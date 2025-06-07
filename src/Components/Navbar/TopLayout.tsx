@@ -5,7 +5,7 @@ function TopLayout() {
   return (
     <>
       <GoToTopBottomBar showBelow={300} />
-      <Outlet /> {/* Renders the child route components */}
+      <Outlet /> {/* renders the child route components */}
     </>
   );
 }

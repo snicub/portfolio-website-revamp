@@ -1,5 +1,4 @@
 import { Outlet } from "react-router-dom";
-import Bottombar from "./Bottombar";
 
 function NavbarLayout() {
   return (

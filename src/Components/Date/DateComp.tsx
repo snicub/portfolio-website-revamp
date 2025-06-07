@@ -13,12 +13,12 @@ const DateComp: React.FC = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize(); // Initial check
+    handleResize();
 
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   const currentDate = new Date();
-  // Format the date as "day, month, year"
+  //format the date as "day, month, year"
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     month: "long",
