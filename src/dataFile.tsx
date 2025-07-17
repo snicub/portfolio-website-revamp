@@ -24,10 +24,6 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/ornaDesktop.webp"),
     },
     {
-      mobileSrc: require("./Assets/enterpage/bookstore.JPG"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/bookstoreDesktopAndTablet.png"),
-    },
-    {
       mobileSrc: require("./Assets/enterpage/cake.webp"),
     },
     {
@@ -43,10 +39,6 @@ const Data = {
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sheistyDanDesktop.webp"),
     },
     {
-      mobileSrc: require("./Assets/enterpage/danMomLiz.webp"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/momChristDesktop.webp"),
-    },
-    {
       mobileSrc: require("./Assets/enterpage/korean.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danKoreanDesktop.webp"),
     },
@@ -57,10 +49,6 @@ const Data = {
     {
       mobileSrc: require("./Assets/enterpage/danAsher.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/danAsherDesktop.webp"),
-    },
-    {
-      mobileSrc: require("./Assets/enterpage/withMom.JPG"),
-      desktopSrc: require("./Assets/enterpage/desktopAndTablet/withMomDesktopAndTablet.png"),
     },
   ],
 
