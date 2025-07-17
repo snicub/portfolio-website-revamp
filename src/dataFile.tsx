@@ -1,11 +1,11 @@
 const Data = {
   enterPageSection: [
     {
-      mobileSrc: require("./Assets/enterpage/danandmom.webp"),
-    },
-    {
       mobileSrc: require("./Assets/enterpage/sniblap.webp"),
       desktopSrc: require("./Assets/enterpage/desktopAndTablet/sniblapDAT.png"),
+    },
+    {
+      mobileSrc: require("./Assets/enterpage/danandmom.webp"),
     },
     {
       mobileSrc: require("./Assets/enterpage/rock.webp"),
