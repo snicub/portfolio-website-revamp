@@ -93,13 +93,13 @@ export default function About() {
             </a>
           </p>
           <p style={{ display: "inline" }}>
-            <a
+            {/* <a
               href="/Resume.pdf"
               style={{ margin: "5px 0", fontSize: "1rem", color: "#555" }}
               download="Resume-Daniel Han.pdf"
             >
               Resume
-            </a>
+            </a> */}
           </p>
         </div>
         <div style={{ marginBottom: "20px" }}>

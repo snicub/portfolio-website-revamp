@@ -268,17 +268,10 @@ const Data = {
     experience: [
       {
         title: "Nestle Nespresso",
-        position: "Web Developer",
-        date: "June 2025 - Present",
+        position: "Frontend Engineer",
+        date: "Present",
         description:
           "Making the Nespresso website fast, functional, and user friendly.",
-      },
-      {
-        title: "Nestle Nespresso",
-        position: "Web Developer Intern",
-        date: "June 2024 - August 2024",
-        description:
-          "Worked on the redesign of the Nespresso website, creating 10 reusable components. Developed in React using TypeScript, EmotionCSS, and HTML. Used Storybook for viewing individual components and react testing library for writing custom test cases. Implemented a component that autoplays through multiple videos, and displays different text content for each video. Also implemented a component that showcases 3 different Nespresso machines, represented by a button to route to a different product.",
       },
       {
         title: "Colgate-Palmolive",
