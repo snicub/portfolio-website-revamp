@@ -1,9 +1,11 @@
+// interface for props of the experience card
 interface ExperienceCardProps {
-  company?: string;
-  img: string;
+  company?: string; // optional company name
+  img: string; // image url
 }
 
 function ExperienceCard({ company, img }: ExperienceCardProps) {
+  // render a centered image card
   return (
     <div
       style={{
@@ -12,7 +14,6 @@ function ExperienceCard({ company, img }: ExperienceCardProps) {
         alignItems: "center",
       }}
     >
-      <div className="image-wrapper"></div>
       <img src={img} style={{ objectFit: "contain", maxWidth: "70px" }}></img>
     </div>
   );

@@ -65,9 +65,6 @@ export default function About() {
           >
             Contact:
           </h3>
-          <p style={{ margin: "5px 0", fontSize: "1rem", color: "#555" }}>
-            {Data.aboutMeSection.contact.location}
-          </p>
           <p style={{ display: "inline" }}>
             <a
               href="https://www.youtube.com/@danhantbell"
@@ -91,15 +88,6 @@ export default function About() {
             >
               {Data.aboutMeSection.contact.email}
             </a>
-          </p>
-          <p style={{ display: "inline" }}>
-            {/* <a
-              href="/Resume.pdf"
-              style={{ margin: "5px 0", fontSize: "1rem", color: "#555" }}
-              download="Resume-Daniel Han.pdf"
-            >
-              Resume
-            </a> */}
           </p>
         </div>
         <div style={{ marginBottom: "20px" }}>
@@ -146,9 +134,6 @@ export default function About() {
               <h2 style={{ margin: "5px 0", fontSize: "2rem", color: "#222" }}>
                 {edu.title}
               </h2>
-              <p style={{ margin: "5px 0", fontSize: "1rem", color: "#555" }}>
-                {edu.date}
-              </p>
               {Object.values(edu.majors).map((major, majorIndex) => (
                 <div key={majorIndex} style={{ marginBottom: "20px" }}>
                   <h3

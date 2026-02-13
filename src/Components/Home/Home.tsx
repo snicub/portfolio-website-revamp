@@ -5,12 +5,16 @@ import "../../fonts.css";
 import useDevice from "../../Hooks/useDevice";
 
 function Home() {
+  // state to track if assets are still loading
   const [loading, setLoading] = useState(true);
+  // get mobile state from custom hook
   const [isMobile] = useDevice();
 
+  // effect to preload images
   useEffect(() => {
     const loadAssets = async () => {
       try {
+        // preload programming section images
         const imagePromises = Data.programmingSection.map(
           (tile) =>
             new Promise((resolve) => {
@@ -18,11 +22,12 @@ function Home() {
               img.src = tile.img;
               img.onload = resolve;
               img.onerror = resolve;
-            })
+            }),
         );
 
         await Promise.all(imagePromises);
 
+        // preload gallery images
         const galleryImagesPromises = Data.galleryCardInfo.map(
           (tile) =>
             new Promise((resolve) => {
@@ -30,21 +35,22 @@ function Home() {
               img.src = tile.img;
               img.onload = resolve;
               img.onerror = resolve;
-            })
+            }),
         );
 
         await Promise.all(galleryImagesPromises);
 
-        setLoading(false);
+        setLoading(false); // set loading to false after all assets loaded
       } catch (error) {
         console.error("Error loading assets:", error);
-        setLoading(false);
+        setLoading(false); // stop loading even if error occurs
       }
     };
 
     loadAssets();
   }, []);
 
+  // render loading screen while assets load
   if (loading) {
     return (
       <div
@@ -88,6 +94,7 @@ function Home() {
     );
   }
 
+  // render main home content
   return (
     <div
       className="home-main-wrapper"
@@ -106,7 +113,7 @@ function Home() {
           justifyContent: "center",
         }}
       >
-        <Gallery />
+        <Gallery /> {/* render gallery component */}
       </div>
       <div
         style={{
@@ -120,7 +127,7 @@ function Home() {
         designed & developed by Daniel Han
         <br />
         made in TypeScript React
-        {/* <img src={require("../../Assets/reactGif.webp")} alt="loading..." /> */}
+        {/* placeholder for optional React GIF */}
       </div>
     </div>
   );

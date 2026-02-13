@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 
 const DateComp: React.FC = () => {
+  // state to track if screen is mobile size
   const [isMobile, setIsMobile] = useState(false);
 
+  // effect to update isMobile on window resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 480) {
@@ -13,12 +15,15 @@ const DateComp: React.FC = () => {
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize();
+    handleResize(); // initial check on component mount
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize); // cleanup
   }, []);
+
+  // get current date
   const currentDate = new Date();
-  //format the date as "day, month, year"
+
+  // options to format date as "weekday month day year"
   const options: Intl.DateTimeFormatOptions = {
     weekday: "long",
     month: "long",
@@ -26,10 +31,12 @@ const DateComp: React.FC = () => {
     year: "numeric",
   };
 
+  // format date and remove commas
   const formattedDate = currentDate
     .toLocaleDateString("en-US", options)
     .replace(/,/g, "");
 
+  // render date with smaller font if mobile
   return (
     <div style={{ fontSize: isMobile ? ".75rem" : undefined }}>
       {formattedDate}

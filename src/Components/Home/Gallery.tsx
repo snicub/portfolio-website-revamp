@@ -2,16 +2,21 @@ import React, { useState, useEffect } from "react";
 import Data from "../../dataFile";
 import GalleryCard from "./GalleryCard";
 
+// component to fade in its children when visible in viewport
 function FadeInSection(props: any) {
-  const [isVisible, setVisible] = React.useState(false);
-  const domRef = React.useRef<HTMLDivElement>(null!);
+  const [isVisible, setVisible] = React.useState(false); // state to track visibility
+  const domRef = React.useRef<HTMLDivElement>(null!); // ref to DOM element
+
+  // effect to observe intersection with viewport
   React.useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => setVisible(entry.isIntersecting));
     });
-    observer.observe(domRef.current);
-    return () => observer.disconnect();
+    observer.observe(domRef.current); // start observing
+    return () => observer.disconnect(); // cleanup
   }, []);
+
+  // render children with fade-in effect
   return (
     <div
       style={{
@@ -29,26 +34,27 @@ function FadeInSection(props: any) {
 }
 
 const Gallery: React.FC = () => {
-  const [columns, setColumns] = useState("repeat(3, 1fr)"); //defaulted to 3 cols
+  const [columns, setColumns] = useState("repeat(3, 1fr)"); // default 3 columns
 
+  // effect to adjust grid columns on window resize
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth < 482) {
-        //iphone 14 pro max is 481px wide
-        setColumns("1fr"); // 1 col on mobile
+        setColumns("1fr"); // 1 column on mobile
       } else if (window.innerWidth < 1024) {
-        setColumns("repeat(2, 1fr)"); //2 columns on tablet
+        setColumns("repeat(2, 1fr)"); // 2 columns on tablet
       } else {
-        setColumns("repeat(3, 1fr)"); //3 columns on desktop screens
+        setColumns("repeat(3, 1fr)"); // 3 columns on desktop
       }
     };
 
     window.addEventListener("resize", handleResize);
-    handleResize();
+    handleResize(); // initial check
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize); // cleanup
   }, []);
 
+  // render gallery grid
   return (
     <div className="gallery-comp">
       <div

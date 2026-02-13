@@ -262,7 +262,7 @@ const Data = {
   ],
   aboutMeSection: {
     contact: {
-      location: "NJ/NYC",
+      // location: "NJ/NYC",
       email: "daniel.hangb@gmail.com",
     },
     experience: [

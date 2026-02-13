@@ -7,9 +7,10 @@ import { useState, useEffect } from "react";
 function HomeCard() {
   const navigate = useNavigate();
   const [fontSize, setFontSize] = useState("3rem");
-  const [isHoverName, setIsHoverName] = useState(false);
+  const [isHoverName, setIsHoverName] = useState(false); // track hover state
   const [isMobile, isDesktop] = useDevice();
 
+  // effect to adjust font size based on mobile state
   useEffect(() => {
     if (isMobile) {
       setFontSize("1.25rem");
@@ -18,6 +19,7 @@ function HomeCard() {
     }
   }, [isMobile]);
 
+  // handle click to navigate to a page
   const handleExperienceClick = (page: string) => {
     navigate(page);
   };

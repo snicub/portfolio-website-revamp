@@ -12,18 +12,26 @@ import "./firebase";
 function App() {
   return (
     <BrowserRouter>
+      {/* track page views and analytics */}
       <AnalyticsTracker />
+
       <Routes>
+        {/* entry page */}
         <Route
           path="/"
           element={<EnterPage images={Data.enterPageSection} />}
         />
 
+        {/* routes that use the Navbar layout */}
         <Route element={<NavbarLayout />}>
           <Route element={<TopLayout />}>
             <Route path="/home" element={<Home />} />
           </Route>
+
+          {/* About page */}
           <Route path="/about" element={<About />} />
+
+          {/* Specific landing/product page */}
           <Route path="/learnmore" element={<PLP />} />
         </Route>
       </Routes>
