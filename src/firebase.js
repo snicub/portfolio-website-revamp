@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: "AIzaSyArWKMTuqkt4Yfj1f1G_OhoSvx6JhD5CW8",
   authDomain: "daniel-han-portfolio.firebaseapp.com",
   projectId: "daniel-han-portfolio",
   storageBucket: "daniel-han-portfolio.firebasestorage.app",
