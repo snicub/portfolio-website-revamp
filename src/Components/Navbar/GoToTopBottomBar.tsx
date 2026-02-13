@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import useDevice from "../../Hooks/useDevice";
 
 interface GoToTopBottomBarProps {
-  showBelow: number;
+  showBelow: number; // scroll position to show the bar
 }
 
 export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
   const [isMobile, isDesktop] = useDevice();
-  const [show, setShow] = useState(false);
-  const [isHover, setIsHover] = useState(false);
+  const [show, setShow] = useState(false); // track visible state of bar
+  const [isHover, setIsHover] = useState(false); // hover state
 
+  // handle scroll to show or /hide bar
   const handleScroll = () => {
     if (window.scrollY > showBelow) {
       if (!show) setShow(true);
@@ -18,6 +19,7 @@ export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
     }
   };
 
+  // attach scroll event listener
   useEffect(() => {
     if (showBelow) {
       window.addEventListener("scroll", handleScroll);
@@ -25,6 +27,7 @@ export default function GoToTopBottomBar({ showBelow }: GoToTopBottomBarProps) {
     }
   });
 
+  //smooth scroll to top
   const handleClick = () => {
     window["scrollTo"]({ top: 0, behavior: "smooth" });
   };

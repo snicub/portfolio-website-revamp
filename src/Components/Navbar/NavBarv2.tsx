@@ -5,13 +5,15 @@ import { useState } from "react";
 
 export default function Navbar2() {
   const navigate = useNavigate();
+
+  //handle navigation
   const handleRouterClick = (page: string) => {
     navigate(page);
   };
 
   const [isMobile, isDesktop] = useDevice();
-  const [isHoverAbout, setIsHoverAbout] = useState(false);
-  const [isHoverExit, setIsHoverExit] = useState(false);
+  const [isHoverAbout, setIsHoverAbout] = useState(false); //track hover on about
+  const [isHoverExit, setIsHoverExit] = useState(false); // track hover on exit
 
   return (
     <div className="entire-navbar">
@@ -23,7 +25,7 @@ export default function Navbar2() {
           zIndex: 2,
         }}
       >
-        <HomeCard />
+        <HomeCard /> {/* render home card component */}
       </div>
       <div
         className="about-wrapper"
