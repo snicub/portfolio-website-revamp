@@ -13,7 +13,7 @@ function FadeInSection(props: any) {
       entries.forEach((entry) => setVisible(entry.isIntersecting));
     });
     observer.observe(domRef.current); // start observing
-    return () => observer.disconnect(); // cleanup
+    return () => observer.disconnect();
   }, []);
 
   // render children with fade-in effect
@@ -51,10 +51,9 @@ const Gallery: React.FC = () => {
     window.addEventListener("resize", handleResize);
     handleResize(); // initial check
 
-    return () => window.removeEventListener("resize", handleResize); // cleanup
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // render gallery grid
   return (
     <div className="gallery-comp">
       <div

@@ -5,7 +5,6 @@ interface ExperienceCardProps {
 }
 
 function ExperienceCard({ company, img }: ExperienceCardProps) {
-  // render a centered image card
   return (
     <div
       style={{
