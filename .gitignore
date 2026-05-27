@@ -10,6 +10,12 @@
 
 # production
 /build
+/.next
+/out
+
+# next.js
+next-env.d.ts
+tsconfig.tsbuildinfo
 
 # misc
 .DS_Store
