@@ -3,6 +3,11 @@
 import { memo, useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import TextEffect from "./TextEffect";
+import { responsive } from "@/lib/imageManifest";
+
+// Home gallery grid is `minmax(280px, 1fr)` capped at 1400px (~280–340px cards);
+// request the thumbnail and let large/high-DPR slots upgrade to the full image.
+const GALLERY_SIZES = "(max-width: 600px) calc(100vw - 40px), 340px";
 
 interface GalleryCardProps {
   slug: string;
@@ -57,7 +62,7 @@ function GalleryCard({
         <img
           ref={imgRef}
           className="gallery-card-image"
-          src={imageSrc}
+          {...responsive(imageSrc, GALLERY_SIZES)}
           alt={altText}
           loading={index < 3 ? "eager" : "lazy"}
           decoding="async"

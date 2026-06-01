@@ -2,6 +2,11 @@
 
 import React, { memo, useState } from "react";
 import Lightbox from "./Lightbox";
+import { responsive } from "@/lib/imageManifest";
+
+// Collage cells render in a `minmax(240px, 1fr)` grid (~1 col on phones, ~240–300px
+// otherwise), so request the small thumbnail and let the browser upgrade on large/high-DPR slots.
+const COLLAGE_SIZES = "(max-width: 640px) 90vw, 280px";
 
 interface CollageProps {
   plpImages: { src: string }[] | undefined;
@@ -38,7 +43,7 @@ const CollageImage: React.FC<{
         }}
       >
         <img
-          src={src}
+          {...responsive(src, COLLAGE_SIZES)}
           alt={`Collage ${index + 1}`}
           loading={index < 4 ? "eager" : "lazy"}
           decoding="async"
