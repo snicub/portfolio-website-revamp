@@ -85,8 +85,8 @@ export default function EnterPage({ images, duration = 3500 }: EnterPageProps) {
       >
         <p>
           Daniel Han is a passionate software engineer based in New Jersey. He
-          is currently a web developer at Nespresso focusing on making the best
-          user experience &#9749; He gets it done with quality.&nbsp;
+          is currently a software engineer at Nespresso focusing on building the
+          best user experience &#9749; He gets it done with quality.&nbsp;
         </p>
       </Marquee>
 
@@ -140,7 +140,10 @@ export default function EnterPage({ images, duration = 3500 }: EnterPageProps) {
               aria-hidden={!isActive}
               loading={index === 0 ? "eager" : "lazy"}
               decoding="async"
-              {...{ fetchPriority: index === 0 ? ("high" as const) : ("low" as const) }}
+              {...{
+                fetchPriority:
+                  index === 0 ? ("high" as const) : ("low" as const),
+              }}
               onLoad={() => {
                 if (index === 0) setFirstLoaded(true);
               }}

@@ -157,7 +157,6 @@ const Data = {
         { src: "/images/plp/tacobell/tbell1.webp" },
         { src: "/images/plp/tacobell/tbell2.webp" },
         { src: "/images/plp/tacobell/tbell3.webp" },
-        { src: "/images/plp/tacobell/tbell4.webp" },
         { src: "/images/plp/tacobell/tbell5.webp" },
         { src: "/images/plp/tacobell/tbell6.webp" },
       ],

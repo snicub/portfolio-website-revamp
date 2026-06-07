@@ -86,7 +86,6 @@ export const imageManifest: Record<string, ResponsiveImage> = {
   "/images/plp/tacobell/tbell1.webp": {"w":2048,"h":1240,"thumb":"/images/plp/tacobell/tbell1-thumb.webp","thumbW":609,"thumbH":369},
   "/images/plp/tacobell/tbell2.webp": {"w":1984,"h":2048,"thumb":"/images/plp/tacobell/tbell2-thumb.webp","thumbW":744,"thumbH":768},
   "/images/plp/tacobell/tbell3.webp": {"w":2048,"h":1076,"thumb":"/images/plp/tacobell/tbell3-thumb.webp","thumbW":768,"thumbH":404},
-  "/images/plp/tacobell/tbell4.webp": {"w":1849,"h":2048,"thumb":"/images/plp/tacobell/tbell4-thumb.webp","thumbW":693,"thumbH":768},
   "/images/plp/tacobell/tbell5.webp": {"w":1536,"h":2048,"thumb":"/images/plp/tacobell/tbell5-thumb.webp","thumbW":576,"thumbH":768},
   "/images/plp/tacobell/tbell6.webp": {"w":1878,"h":2048,"thumb":"/images/plp/tacobell/tbell6-thumb.webp","thumbW":704,"thumbH":768},
 };

@@ -42,13 +42,16 @@ const thumbPath = (web) => web.slice(0, -extname(web).length) + "-thumb.webp";
 const longEdge = (m) => Math.max(m.width || 0, m.height || 0);
 
 // 1. Collect every /images/... path referenced from source/config files.
+// Skip the generated manifest itself — otherwise its own entries keep an image
+// "referenced" forever and removals from data.ts never clean up.
 const REF_RE = /\/images\/[A-Za-z0-9_\-./]+\.(?:webp|jpe?g|png|gif|avif)/gi;
+const MANIFEST_FILE = join(SRC, "lib", "imageManifest.ts");
 const referenced = new Set();
 (function walk(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, e.name);
     if (e.isDirectory()) walk(p);
-    else if (/\.(tsx?|json)$/.test(e.name)) {
+    else if (/\.(tsx?|json)$/.test(e.name) && p !== MANIFEST_FILE) {
       const txt = readFileSync(p, "utf8");
       for (const m of txt.matchAll(REF_RE)) referenced.add(m[0]);
     }
