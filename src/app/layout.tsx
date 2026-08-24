@@ -75,7 +75,7 @@ export const metadata: Metadata = {
   other: {
     "geo.region": "US-NJ",
     "geo.placename": "New Jersey",
-    "theme-color": "#FFFFFF",
+    "theme-color": "#F1F0EA",
     "color-scheme": "light",
   },
 };
@@ -89,13 +89,16 @@ const globalJsonLd = {
   ],
 };
 
+const MOTION_GATE = `(function(){try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("anime")}}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    // The motion gate writes a class onto <html> before React hydrates.
+    <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
         <link
           rel="preconnect"
@@ -116,11 +119,16 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(globalJsonLd) }}
         />
+        {/* Marks the document as animatable before first paint. Elements that
+            start hidden are hidden by CSS behind this class, so a visitor who
+            prefers reduced motion — or has JS off — gets the finished page. */}
+        <script dangerouslySetInnerHTML={{ __html: MOTION_GATE }} />
       </head>
       <body suppressHydrationWarning>
         <AnalyticsTracker />
         <CustomCursor />
         {children}
+        <div className="grain" aria-hidden="true" />
       </body>
     </html>
   );

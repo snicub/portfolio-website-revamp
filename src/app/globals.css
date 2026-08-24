@@ -1,20 +1,75 @@
+/* ==========================================================================
+   Daniel Han — design system
+   Tokens, texture, and the static half of the motion layer.
+   Anything that *moves* lives in src/lib/motion.ts (anime.js).
+   ========================================================================== */
+
 @font-face {
   font-family: "favorit";
   src: url("/fonts/favorit.ttf") format("truetype");
   font-display: swap;
 }
 
+:root {
+  /* ---- palette: warm paper, deep ink, one violet ---- */
+  --ink: #121211;
+  --ink-80: rgba(18, 18, 17, 0.8);
+  --ink-60: rgba(18, 18, 17, 0.6);
+  --ink-40: rgba(18, 18, 17, 0.4);
+  --ink-15: rgba(18, 18, 17, 0.15);
+  --paper: #f1f0ea;
+  --paper-raised: #fbfaf6;
+  --line: rgba(18, 18, 17, 0.13);
+  --accent: #4a3ecb;
+  --accent-soft: #e3e0fa;
+
+  /* ---- type ---- */
+  --mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --display: "favorit", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* ---- fluid type scale ---- */
+  --step--2: clamp(0.62rem, 0.6rem + 0.1vw, 0.68rem);
+  --step--1: clamp(0.72rem, 0.69rem + 0.15vw, 0.8rem);
+  --step-0: clamp(0.9rem, 0.86rem + 0.2vw, 1rem);
+  --step-1: clamp(1.05rem, 0.96rem + 0.45vw, 1.35rem);
+  --step-2: clamp(1.4rem, 1.1rem + 1.4vw, 2.3rem);
+  --step-3: clamp(2rem, 1.1rem + 3.8vw, 4.6rem);
+  --step-4: clamp(2.6rem, 0.6rem + 9vw, 8.5rem);
+
+  /* ---- layout ---- */
+  --gutter: clamp(16px, 4vw, 44px);
+  --z-nav: 60;
+  --z-overlay: 9000;
+  --z-grain: 9500;
+  --z-cursor: 99999;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 html {
   overflow-y: auto;
   -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
 }
 
 body {
   margin: 0;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: var(--step-0);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  background-color: #ffffff;
+  /* `clip`, not `hidden`: `overflow-x: hidden` forces overflow-y to compute to
+     `auto`, which turns <body> into a scroll container it has no business
+     being. `clip` contains horizontal overflow without that side effect. */
+  overflow-x: clip;
 }
 
 img {
@@ -22,103 +77,14 @@ img {
   display: block;
 }
 
-.gallery-card {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 600px;
-}
-
-.programming-tile {
-  content-visibility: auto;
-  contain-intrinsic-size: 1px 60px;
+::selection {
+  background: var(--accent);
+  color: var(--paper-raised);
 }
 
 :focus-visible {
-  outline: 2px solid #6c5cb7;
-  outline-offset: 2px;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
-}
-
-@keyframes shimmer-wave {
-  0%   { transform: translateX(-100%); }
-  100% { transform: translateX(100%); }
-}
-
-@keyframes shimmer-pulse {
-  0%, 100% { background-color: #ebebeb; }
-  50%      { background-color: #e0e0e0; }
-}
-
-.shimmer {
-  position: relative;
-  overflow: hidden;
-  background-color: #ebebeb;
-  animation: shimmer-pulse 2s ease-in-out infinite;
-  isolation: isolate;
-}
-
-.shimmer::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  transform: translateX(-100%);
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 25%,
-    rgba(255, 255, 255, 0.6) 50%,
-    rgba(255, 255, 255, 0.3) 75%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  animation: shimmer-wave 1.8s ease-in-out infinite;
-  will-change: transform;
-  z-index: 1;
-  pointer-events: none;
-}
-
-.shimmer.is-loaded {
-  animation: none;
-  background-color: transparent;
-}
-
-.shimmer.is-loaded::after {
-  animation: none;
-  display: none;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .gallery-card-image-container:hover .gallery-card-image {
-    transform: scale(1.05);
-  }
-
-  .hover-highlight {
-    transition: background-color 0.2s ease;
-  }
-  .hover-highlight:hover,
-  .hover-highlight:focus-visible {
-    background-color: #E6E6FA;
-    outline: none;
-  }
-}
-
-.nav-link {
-  background: transparent;
-  border: none;
-  padding: 0;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  text-decoration: none;
-}
-
-/* Custom cursor — hover scale */
-.custom-cursor.cursor--hover {
-  width: 18px !important;
-  height: 18px !important;
-  margin: -3px 0 0 -3px;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .sr-only {
@@ -133,34 +99,1318 @@ img {
   border-width: 0;
 }
 
+/* ==========================================================================
+   Texture — a fixed film grain over everything.
+
+   Deliberately NOT `mix-blend-mode: multiply`. A blended full-screen layer
+   pulls every composited layer beneath it into one backdrop group, so the
+   whole viewport is re-rasterised on any frame where anything under it
+   moves — which turns each card's zoom into a full-page repaint and tears
+   the heaviest photos. Grey noise at normal blend reads the same on paper.
+   ========================================================================== */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-grain);
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Motion primitives
+   `html.anime` is set by a blocking inline script only when the visitor has
+   NOT asked for reduced motion. Every "starts hidden" rule hangs off it, so
+   without JS — or with reduced motion — the page renders fully visible and
+   nothing needs to run to make content readable.
+   ========================================================================== */
+
+html.anime [data-reveal],
+html.anime [data-split] {
+  opacity: 0;
+}
+
+html.anime [data-stagger-child] > * {
+  opacity: 0;
+}
+
+/* ==========================================================================
+   Typography helpers
+   ========================================================================== */
+
+.mono {
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-60);
+}
+
+.display {
+  font-family: var(--display);
+  font-weight: 700;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  margin: 0;
+}
+
+.rule {
+  height: 1px;
+  width: 100%;
+  background: var(--line);
+  border: 0;
+  margin: 0;
+  transform-origin: left center;
+}
+
+/* ==========================================================================
+   Interactive text — the bracket links this site has always used
+   ========================================================================== */
+
+.nav-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+.hover-highlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.hover-highlight::before {
+  content: "";
+  position: absolute;
+  inset: -0.15em -0.3em;
+  background: var(--accent-soft);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.36s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .hover-highlight:hover::before,
+  .hover-highlight:focus-visible::before {
+    transform: scaleX(1);
+  }
+}
+
+/* ==========================================================================
+   Media frames — every image on the site sits in one of these.
+   The frame clips; the <img> inside is oversized so anime.js can scrub it.
+   ========================================================================== */
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  background-color: #e7e5de;
+  isolation: isolate;
+  /* The clip has to live on the same layer as the thing it clips. Without
+     this the scaled <img> animates on the compositor while its clip is
+     recomputed on the main thread, and the seam between the two is the
+     flicker that shows up mid-zoom.
+
+     On the gallery grid this same layer is what carries the scroll-posed
+     rotateX/translateZ, so the promotion is paid for twice over. Left
+     `flat` on purpose: the frame's children flatten into its plane and get
+     clipped in 2D before projection, which is the path iOS handles well —
+     `preserve-3d` here would break `overflow: hidden` outright. */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.frame > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+/* Oversized so a ±6% scrub never exposes an edge. */
+.frame--parallax > img {
+  height: 118%;
+  top: -9%;
+  will-change: transform;
+  /* Pins the raster to one backing surface for the life of the zoom, so
+     scaling re-uses the texture instead of re-rastering every frame. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* The panel that wipes off a freshly revealed image. */
+.frame__curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--paper);
+  pointer-events: none;
+  opacity: 0;
+}
+
+html.anime .frame__curtain {
+  opacity: 1;
+}
+
+.programming-tile {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 60px;
+}
+
+/* ==========================================================================
+   Loading shimmer (kept — it covers the gap before decode)
+   ========================================================================== */
+
+@keyframes shimmer-wave {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+.shimmer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer-wave 1.8s ease-in-out infinite;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.shimmer.is-loaded::after {
+  animation: none;
+  display: none;
+}
+
+/* ==========================================================================
+   Chrome — scroll progress, cursor
+   ========================================================================== */
+
+/* ---- Navigation bar --------------------------------------------------- */
+
+/* Static and zero-height: exists only so route changes have a non-fixed
+   element at the top of the document to scroll back to. */
+.chrome-anchor {
+  position: static;
+}
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  background-color: rgba(241, 240, 234, 0);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  will-change: transform, background-color;
+}
+
+html.anime .nav {
+  opacity: 0;
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 13px var(--gutter);
+}
+
+.nav__brand {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-1);
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.nav__meta {
+  margin: 0;
+  display: flex;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.nav__clock {
+  font-variant-numeric: tabular-nums;
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 20px);
+  white-space: nowrap;
+}
+
+/* The scroll percentage, in the same colour as the hairline that reports it. */
+.nav__pct {
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Scroll progress. anime.js seeks this scaleX straight from scroll position. */
+.nav__progress {
+  display: block;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+/* ---- odometer -----------------------------------------------------------
+   The scroll readout, set on turning drums rather than as type. Each digit
+   is a ten-sided prism: ten faces one tenth of a turn apart, each standing
+   off the axis by the polygon's apothem. Nothing here moves except the
+   ring's rotation, and the nav's own scroll observer is what turns it —
+   see Odometer.tsx.
+
+   Inert without the motion gate. The two rules at the foot of this block
+   are the only thing that lifts the faces off the flat, so an ungated page
+   simply prints the digits the way it always did.                         */
+
+.odo {
+  --odo-k: 1.5388; /* 1 / (2·tan(π/10)) — apothem of a regular decagon */
+  --odo-h: 1.5em; /* the face, and so the side of the prism */
+  --odo-r: calc(var(--odo-h) * var(--odo-k));
+  display: inline-flex;
+  align-items: center;
+  gap: 0.06em;
+  line-height: 1;
+  /* Tracking would push each digit off the centre of its own face; the gap
+     above puts the air back between the columns instead. */
+  letter-spacing: normal;
+  font-variant-numeric: tabular-nums;
+}
+
+.odo__col {
+  position: relative;
+  width: 1ch;
+  height: var(--odo-h);
+  /* Its own vanishing point, for the same reason each gallery card has one:
+     one origin shared across the row would look down on the left digit from
+     an angle it does not look down on the right one from. */
+  perspective: 220px;
+  perspective-origin: 50% 50%;
+}
+
+.odo__ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+.odo__face {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ungated, the drum is one digit deep. */
+.odo__face:first-child {
+  display: flex;
+}
+
+/* Space reserved permanently so the bar never resizes, inked only at the
+   top of the range — a ten-faced drum has no blank face to show the rest of
+   the time, so the carry is plain type. */
+.odo__carry {
+  width: 1ch;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 220ms linear;
+}
+
+.odo.is-carrying .odo__carry {
+  opacity: 1;
+}
+
+.odo__unit {
+  padding-left: 0.12em;
+}
+
+html.anime .odo__col {
+  overflow: hidden;
+  /* The slot the drum turns in. Faces rolling up out of the box and down
+     into it are what read as a cylinder rather than a card flip. */
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 20%,
+    #000 80%,
+    transparent 100%
+  );
+}
+
+html.anime .odo__face {
+  display: flex;
+  transform: rotateX(calc(var(--i) * -36deg)) translateZ(var(--odo-r));
+  /* The far side of the drum faces away; without this its digits read
+     through the near side backwards. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+@media (max-width: 720px) {
+  .nav__meta {
+    display: none;
+  }
+}
+
+/* Chrome steps aside for a full-screen viewer. `visibility` rather than
+   `opacity`, because anime.js owns the bar's inline opacity. */
+html[data-modal="open"] .nav,
+html[data-modal="open"] .utility-bar,
+html[data-modal="open"] .grain {
+  visibility: hidden;
+}
+
+/* The root is a zero-logic transform carrier: anime.js owns its x/y. The ring
+   inside is a fixed 44px box scaled down at rest, so scaling never shifts the
+   centre and no margin has to be re-animated alongside it. */
+/* ---- Pointer -----------------------------------------------------------
+   The dot is the pointer and never lags; the ring trails it. Both use
+   `difference` blending so they stay visible on paper and on photographs
+   alike, which a single ink-coloured ring did not.                        */
+
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  opacity: 0;
+  z-index: var(--z-cursor);
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+.cursor-ring {
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  border-radius: 50%;
+  border: 1.5px solid #fff;
+  background-color: rgba(255, 255, 255, 0);
+  transform: scale(0.66);
+  display: grid;
+  place-items: center;
+}
+
+/* Black text over a white disc under `difference` resolves to the page's own
+   colour on an inverted disc — legible over anything. */
+.cursor-ring__label {
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #000;
+  opacity: 0;
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Only hide the system cursor once ours is actually running. */
+html.has-custom-cursor,
+html.has-custom-cursor * {
+  cursor: none !important;
+}
+
+/* No pointer to replace, and blending a full-screen layer costs real frames. */
+@media (hover: none), (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
+
+@supports not (mix-blend-mode: difference) {
+  .cursor-dot { background: var(--ink); }
+  .cursor-ring { border-color: var(--ink); }
+}
+
+/* ==========================================================================
+   View transitions between routes
+   ========================================================================== */
+
 ::view-transition-old(root) {
-  animation: 300ms ease-out both fade-out;
+  animation: 260ms cubic-bezier(0.4, 0, 1, 1) both fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: 300ms ease-in both fade-in;
+  animation: 320ms cubic-bezier(0, 0, 0.2, 1) both fade-in;
 }
 
 @keyframes fade-out {
   from { opacity: 1; }
-  to   { opacity: 0; }
+  to { opacity: 0; }
 }
 
 @keyframes fade-in {
   from { opacity: 0; }
-  to   { opacity: 1; }
+  to { opacity: 1; }
 }
 
+/* ==========================================================================
+   Reduced motion — `html.anime` is never set, so nothing above hides
+   content. This just neutralises the CSS-only transitions.
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
   }
   .shimmer::after { display: none; }
+  .grain { display: none; }
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation: none !important;
+  }
+}
+
+/* ==========================================================================
+   Enter page — full-bleed photo, ink ground, paper ticker
+   ========================================================================== */
+
+.enter {
+  position: relative;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background-color: var(--ink);
+}
+
+/* Inset past the edges so pointer parallax never exposes a seam. */
+.enter__stack {
+  position: absolute;
+  inset: -3%;
+  will-change: transform;
+}
+
+.enter__slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.enter__vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    linear-gradient(to bottom, rgba(10, 10, 9, 0.5) 0%, rgba(10, 10, 9, 0) 26%),
+    linear-gradient(to top, rgba(10, 10, 9, 0.55) 0%, rgba(10, 10, 9, 0) 34%),
+    radial-gradient(120% 90% at 50% 45%, rgba(10, 10, 9, 0) 42%, rgba(10, 10, 9, 0.5) 100%);
+}
+
+/* Ink curtain covering the first paint; anime.js lifts it once the hero
+   photo has decoded. Invisible unless motion is on. */
+.enter__veil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--ink);
+  opacity: 0;
+  pointer-events: none;
+}
+
+html.anime .enter__veil {
+  opacity: 1;
+}
+
+.enter__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: grid;
+  /* Explicit single column: every row spans the full width. */
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  will-change: transform;
+}
+
+.enter__topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: max(var(--gutter), env(safe-area-inset-top)) var(--gutter) 0;
+}
+
+.enter__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.enter__meta p,
+.enter__counter {
+  margin: 0;
+  color: rgba(251, 250, 246, 0.82);
+}
+
+.enter__counter {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.enter__cta {
+  place-self: center;
+  background: none;
+  border: 0;
+  padding: 0.2em 0.4em;
+  cursor: pointer;
+  color: var(--paper-raised);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: var(--step-3);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-shadow: 0 2px 40px rgba(10, 10, 9, 0.45);
+}
+
+.enter__ticker {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.02em;
+  padding: 10px 0;
+  border-top: 1px solid var(--line);
+}
+
+/* Paper panel that wipes up over the photo on the way to /home. It lands on
+   the same colour /home paints, so the two pages share one seamless frame. */
+.enter__curtain {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--paper);
+  transform: translateY(101%);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Page shell + masthead
+   ========================================================================== */
+
+.page {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(110px, 16vh, 190px) var(--gutter) clamp(120px, 14vw, 180px);
+}
+
+/* The box the masthead is tipped inside. It exists so the perspective does
+   not have to sit on `.page`: a perspective there would become the
+   containing block for every `position: fixed` descendant, and the utility
+   bars are rendered inside the page. */
+.masthead-stage {
+  perspective: 1400px;
+  margin-bottom: clamp(48px, 8vw, 120px);
+}
+
+.masthead {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  /* Tipped around its own foot, so it lies down rather than falls over. */
+  transform-origin: 50% 100%;
+}
+
+.masthead__eyebrow {
+  margin: 0;
+}
+
+.masthead__title {
+  font-size: var(--step-3);
+  max-width: 16ch;
+}
+
+.masthead__lede {
+  margin: 0;
+  max-width: 44ch;
+  font-family: var(--sans);
+  font-size: var(--step-1);
+  line-height: 1.45;
+  color: var(--ink-60);
+}
+
+.masthead__rule {
+  margin-top: clamp(14px, 3vw, 30px);
+}
+
+html.anime .masthead__rule {
+  transform: scaleX(0);
+}
+
+/* ==========================================================================
+   Gallery grid — a staggered middle column gives the page its rhythm
+   ========================================================================== */
+
+.gallery-grid {
+  /* The vanishing point every card below reads its origin from, as a
+     percentage of card height. One scrubbed animation moves it down the
+     page and the whole grid answers — see `pov()` in lib/motion. */
+  --pov: 50;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr));
+  gap: clamp(40px, 6vw, 88px) clamp(18px, 3vw, 40px);
+}
+
+.gallery-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+
+  /* Each card is its own perspective box, so a photograph turns around its
+     own centre wherever it lands in the grid. One shared vanishing point on
+     the grid instead would skew the outer columns differently from the
+     middle one, and differently again at every breakpoint; this reads the
+     same in one column or three. Only the frame inside is posed — see
+     `tilt()` in lib/motion. Inert without JS: an unposed frame at
+     translateZ(0) is simply flat. */
+  perspective: 1100px;
+  perspective-origin: 50% calc(var(--pov) * 1%);
+}
+
+@media (max-width: 600px) {
+  /* Full-bleed cards on a phone want a nearer camera, or the same angle
+     flattens out into a slight skew instead of reading as a turn. */
+  .gallery-card {
+    perspective: 780px;
+  }
+}
+
+/* Only the pointer drift moves the card, so only promote it under a
+   pointer. Eight permanently promoted cards is GPU memory spent on
+   nothing — and it is memory the photo layers want during the reveal. */
+@media (hover: hover) and (pointer: fine) {
+  .gallery-card:hover {
+    will-change: transform;
+  }
+}
+
+.gallery-card__frame {
+  aspect-ratio: 4 / 5;
+}
+
+.gallery-card__meta {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding-top: 14px;
+}
+
+.gallery-card__index {
+  color: var(--ink-40);
+  font-variant-numeric: tabular-nums;
+}
+
+.text-effect {
+  font-family: var(--mono);
+  font-size: var(--step-0);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+@media (min-width: 900px) {
+  .gallery-card:nth-child(3n + 2) {
+    margin-top: clamp(24px, 6vw, 96px);
+  }
+}
+
+.site-footer {
+  margin-top: clamp(72px, 11vw, 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-40);
+}
+
+/* Three columns on desktop so the offset middle column reads as a rhythm
+   rather than an accident of how many cards happened to fit. */
+@media (min-width: 900px) {
+  .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ==========================================================================
+   Entry page (PLP)
+   ========================================================================== */
+
+.plp__head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: clamp(28px, 5vw, 60px);
+}
+
+.plp__index {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.plp__title {
+  font-size: var(--step-3);
+}
+
+.plp__lead {
+  display: grid;
+  gap: clamp(24px, 4vw, 48px);
+  margin-bottom: clamp(48px, 8vw, 110px);
+}
+
+@media (min-width: 860px) {
+  .plp__lead {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: start;
+    gap: clamp(32px, 5vw, 80px);
+  }
+}
+
+.plp__hero {
+  aspect-ratio: 3 / 4;
+}
+
+.plp__info {
+  margin: 0;
+  max-width: 46ch;
+  font-family: var(--sans);
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: var(--ink-80);
+}
+
+/* Holds its place beside the tall hero instead of leaving a column of air. */
+@media (min-width: 860px) {
+  .plp__info {
+    position: sticky;
+    top: clamp(110px, 15vh, 170px);
+  }
+}
+
+/* ==========================================================================
+   Collage
+   ========================================================================== */
+
+.collage {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(230px, 100%), 1fr));
+  gap: clamp(10px, 1.6vw, 20px);
+}
+
+.collage__item {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.collage__item .frame {
+  aspect-ratio: 1 / 1;
+}
+
+/* ==========================================================================
+   Lightbox
+   ========================================================================== */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-overlay);
+  background: #0b0b0a;
+  display: grid;
+  place-items: center;
+}
+
+html.anime .lightbox {
+  opacity: 0;
+}
+
+.lightbox__figure {
+  margin: 0;
+  display: flex;
+  max-width: min(1200px, calc(100vw - 140px));
+}
+
+.lightbox__figure img {
+  max-width: 100%;
+  max-height: calc(100svh - 140px);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  user-select: none;
+}
+
+.lightbox__btn {
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: var(--paper-raised);
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 12px 16px;
+}
+
+.lightbox__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+/* Full-height hit areas rather than a translate, so anime.js owns the
+   transform on these elements outright. */
+.lightbox__arrow {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.4rem;
+  width: clamp(48px, 7vw, 88px);
+}
+
+.lightbox__arrow--prev { left: 0; }
+.lightbox__arrow--next { right: 0; }
+
+.lightbox__counter {
+  position: absolute;
+  bottom: 18px;
+  left: 0;
+  right: 0;
+  margin: 0;
+  text-align: center;
+  color: rgba(251, 250, 246, 0.75);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Fixed utility bars (back / next / prev / go to top)
+   ========================================================================== */
+
+.utility-bar {
+  position: fixed;
+  bottom: 0;
+  z-index: 50;
+  /* env() is 0 where there is no hardware inset, so this is safe everywhere. */
+  padding: var(--gutter) max(var(--gutter), env(safe-area-inset-right))
+    max(var(--gutter), env(safe-area-inset-bottom))
+    max(var(--gutter), env(safe-area-inset-left));
+  display: flex;
+  gap: 14px;
+  font-family: var(--mono);
+  font-size: var(--step--1);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* These float over photographs and body copy, so each label carries its own
+   opaque paper chip and reads as a control rather than stray text. */
+.utility-bar .nav-link {
+  background: var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+  padding: 12px 14px;
+}
+
+.utility-bar--left { left: 0; }
+
+.utility-bar--right {
+  right: 0;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 6px;
+}
+
+/* On a phone, three separately-chipped controls floating over the photographs
+   read as clutter. Both bars become one full-width band pinned to the bottom
+   instead — they overlap exactly, so the pair paints as a single toolbar. */
+@media (max-width: 720px) {
+  .utility-bar {
+    left: 0;
+    right: 0;
+    align-items: center;
+    padding: 8px max(var(--gutter), env(safe-area-inset-right))
+      max(8px, env(safe-area-inset-bottom))
+      max(var(--gutter), env(safe-area-inset-left));
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+  }
+
+  .utility-bar--right {
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+
+  /* The band is the background now, so the chips lose theirs — but keep the
+     padding, which is what makes them a 44px thumb target. */
+  .utility-bar .nav-link {
+    background: none;
+    box-shadow: none;
+    padding: 15px 10px;
+  }
+}
+
+/* Two up, rather than sixteen full-width squares in a single column. */
+@media (max-width: 720px) {
+  .collage {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+}
+
+/* Hidden until you have scrolled — but only when motion is on, so a
+   reduced-motion visitor keeps a working "go to top" control. */
+html.anime .go-top {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   About
+   ========================================================================== */
+
+html.anime [data-reveal-scroll],
+html.anime .timeline__row {
+  opacity: 0;
+}
+
+.about__block {
+  margin-bottom: clamp(56px, 9vw, 130px);
+}
+
+.about__h {
+  margin: 0 0 clamp(18px, 3vw, 32px);
+  color: var(--ink-40);
+}
+
+.about__contact {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-family: var(--display);
+  font-size: var(--step-2);
+  letter-spacing: -0.02em;
+}
+
+/* ---- scroll-driven logo drum ---------------------------------------------
+   The logos stand on the faces of a cylinder. CSS sets each face off the
+   axis by the polygon's apothem; anime.js turns the ring exactly once as the
+   band crosses the screen. One animated number for the whole band, and no
+   duplicated logo set — a cylinder is already a loop.
+
+   The face count and the radius arrive as custom properties from the data,
+   so adding a logo re-cuts the cylinder instead of breaking it.            */
+
+.drum {
+  /* The face is what sets the cylinder's girth — radius is the apothem of a
+     ten-sided polygon with this as its side, so the band is roughly twice
+     this wide across its front. Sized to fill a full-bleed strip rather
+     than to fit the logo, which is a much smaller thing sitting on it. */
+  --drum-w: clamp(150px, 24vw, 330px);
+  --drum-r: calc(var(--drum-w) * var(--drum-k));
+  position: relative;
+  height: clamp(132px, 20vw, 190px);
+  margin: 0 calc(var(--gutter) * -1) clamp(56px, 9vw, 130px);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  /* Far enough back that a cylinder this wide still foreshortens rather
+     than fisheyes — the front logo is only ever about a third larger than
+     the ones beside it, which keeps every raster close to its natural size. */
+  perspective: 1900px;
+  perspective-origin: 50% 50%;
+}
+
+.drum__ring {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.drum__face {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--drum-w);
+  height: 60px;
+  margin-left: calc(var(--drum-w) / -2);
+  margin-top: -30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(calc(var(--i) * (360deg / var(--drum-n))))
+    translateZ(var(--drum-r));
+  /* The far half of the cylinder is turned away from you; without this its
+     logos read backwards through the near half. */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.drum__face img {
+  height: clamp(30px, 3.2vw, 42px);
+  width: auto;
+  object-fit: contain;
+}
+
+/* Ungated there is no cylinder to turn, so the faces lie back down in a row
+   and the band is the plain strip of logos it reads as on paper. */
+html:not(.anime) .drum {
+  height: auto;
+  padding: 22px 0;
+  perspective: none;
+}
+
+html:not(.anime) .drum__ring {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 14px clamp(20px, 3vw, 44px);
+  transform-style: flat;
+}
+
+html:not(.anime) .drum__face {
+  position: static;
+  width: auto;
+  height: auto;
+  margin: 0;
+  transform: none;
+}
+
+/* ---- timeline ---- */
+
+.timeline {
+  position: relative;
+  padding-left: clamp(22px, 3vw, 40px);
+}
+
+/* The rail is drawn top-down in step with the scroll. */
+.timeline__rail {
+  position: absolute;
+  left: 3px;
+  top: 6px;
+  bottom: 6px;
+  width: 1px;
+  background: var(--ink-40);
+  transform-origin: top center;
+  display: block;
+}
+
+html.anime .timeline__rail {
+  transform: scaleY(0);
+}
+
+.timeline__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(32px, 5vw, 56px);
+}
+
+.timeline__row {
+  position: relative;
+  /* Each row is its own perspective box, hinged on the edge that meets the
+     rail. Same reasoning as the gallery cards: one vanishing point shared
+     down a long column would swing the top row on a different axis from the
+     bottom one. */
+  perspective: 1000px;
+  perspective-origin: 0 50%;
+}
+
+/* The hinged half of a row. The dot stays outside it, flat on the rail. */
+.timeline__leaf {
+  transform-origin: 0 50%;
+}
+
+.timeline__dot {
+  position: absolute;
+  left: calc(clamp(22px, 3vw, 40px) * -1);
+  top: 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  transform: translateX(-0.5px);
+}
+
+.timeline__title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: var(--step-1);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.timeline__org {
+  margin: 4px 0 0;
+  color: var(--ink-80);
+}
+
+.timeline__date {
+  margin: 6px 0 0;
+  color: var(--ink-40);
+}
+
+.timeline__body {
+  margin: 12px 0 0;
+  max-width: 62ch;
+  line-height: 1.65;
+  color: var(--ink-60);
+}
+
+.timeline__major {
+  margin-top: 22px;
+}
+
+.timeline__major-title {
+  margin: 0;
+  font-size: var(--step-0);
+  font-weight: 700;
+}
+
+.timeline__label {
+  margin: 10px 0 0;
+  color: var(--ink-40);
+}
+
+/* ==========================================================================
+   Touch + iOS
+   Phones get a different budget, not just a narrower one: no pointer to
+   parallax, less GPU to spend on full-screen blending, and hardware insets
+   that fixed elements have to respect.
+   ========================================================================== */
+
+/* Kill the 300ms grey flash on tap without removing focus styles. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+/* Home indicator + notch. `env()` resolves to 0 where there is no inset,
+   so these are safe everywhere. */
+.enter__ticker {
+  padding-bottom: max(10px, env(safe-area-inset-bottom));
+}
+
+.lightbox__close {
+  top: max(8px, env(safe-area-inset-top));
+  right: max(8px, env(safe-area-inset-right));
+}
+
+.lightbox__counter {
+  bottom: max(18px, env(safe-area-inset-bottom));
+}
+
+@media (max-width: 720px) {
+  .nav__inner {
+    padding-top: max(13px, env(safe-area-inset-top));
+    padding-left: max(var(--gutter), env(safe-area-inset-left));
+    padding-right: max(var(--gutter), env(safe-area-inset-right));
+  }
+
+  /* 14px of text is not a tap target. Pad the hit area out to ~44px and pull
+     the extra height back with margin so the visual layout is unchanged. */
+  .nav__links .nav-link,
+  .nav__brand {
+    padding-block: 14px;
+    margin-block: -14px;
+  }
+
+  .about__contact .nav-link {
+    padding-block: 10px;
+    margin-block: -4px;
+  }
+}
+
+@media (hover: none), (pointer: coarse) {
+  /* A full-screen multiply layer is re-blended on every composited scroll
+     frame — the single most expensive thing on the page for a phone. */
+  .grain {
+    display: none;
+  }
+
+  /* Backdrop blur is the second most expensive; a solid bar reads the same. */
+  .nav {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  /* One compositor layer per photograph is real memory on a phone, and the
+     transform promotes itself while it is actually animating anyway. */
+  .frame--parallax > img,
+  .enter__slide,
+  .enter__stack,
+  .enter__overlay,
+  .drum__ring {
+    will-change: auto;
+  }
+
+  /* Shallower overhang to match the shallower scrub below. */
+  .frame--parallax > img {
+    height: 112%;
+    top: -6%;
   }
 }

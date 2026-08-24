@@ -1,12 +1,12 @@
 "use client";
 
 import React, { memo, useState } from "react";
+import { animate, createTimeline, onScroll, utils } from "animejs";
 import Lightbox from "./Lightbox";
 import { responsive } from "@/lib/imageManifest";
+import { DUR, EASE, drift, enterView, passThrough, useAnimeScope } from "@/lib/motion";
 
-// Collage cells render in a `minmax(240px, 1fr)` grid (~1 col on phones, ~240–300px
-// otherwise), so request the small thumbnail and let the browser upgrade on large/high-DPR slots.
-const COLLAGE_SIZES = "(max-width: 640px) 90vw, 280px";
+const COLLAGE_SIZES = "(max-width: 640px) 90vw, 300px";
 
 interface CollageProps {
   plpImages: { src: string }[] | undefined;
@@ -22,26 +22,12 @@ const CollageImage: React.FC<{
   return (
     <button
       type="button"
+      className="collage__item"
       onClick={onClick}
+      data-cursor="open"
       aria-label={`View collage image ${index + 1}`}
-      style={{
-        display: "block",
-        width: "100%",
-        padding: 0,
-        border: "none",
-        background: "none",
-        cursor: "pointer",
-      }}
     >
-      <div
-        className={`shimmer${isLoaded ? " is-loaded" : ""}`}
-        style={{
-          width: "100%",
-          aspectRatio: "1 / 1",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
+      <div className={`frame frame--parallax shimmer${isLoaded ? " is-loaded" : ""}`}>
         <img
           {...responsive(src, COLLAGE_SIZES)}
           alt={`Collage ${index + 1}`}
@@ -49,17 +35,8 @@ const CollageImage: React.FC<{
           decoding="async"
           onLoad={() => setIsLoaded(true)}
           onError={() => setIsLoaded(true)}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: isLoaded ? 1 : 0,
-            transition: "opacity 0.5s ease-in-out",
-            zIndex: 2,
-          }}
         />
+        <div className="frame__curtain" aria-hidden="true" />
       </div>
     </button>
   );
@@ -70,17 +47,40 @@ CollageImage.displayName = "CollageImage";
 const Collage: React.FC<CollageProps> = ({ plpImages }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  // Same two-observer pattern as the home grid, so the whole site reveals
+  // photographs the same way: a curtain wipes, then the frame keeps drifting.
+  const { root } = useAnimeScope<HTMLDivElement>(
+    (self) => {
+      const items = utils.$(".collage__item") as HTMLElement[];
+      const motion = drift(!!self.matches.touch);
+
+      items.forEach((item, i) => {
+        const img = item.querySelector("img") as HTMLElement | null;
+        const curtain = item.querySelector(".frame__curtain") as HTMLElement | null;
+        if (!img || !curtain) return;
+
+        // A per-column offset keeps rows from landing in lockstep.
+        const lag = (i % 3) * 90;
+
+        createTimeline({ autoplay: onScroll(enterView(item)) })
+          .add(curtain, { y: ["0%", "-101%"], duration: DUR.base, ease: EASE.expo }, lag)
+          .add(img, { scale: [1.2, 1], duration: 1200, ease: EASE.expo }, lag);
+
+        animate(img, {
+          y: motion.range,
+          ease: EASE.scrub,
+          autoplay: onScroll(passThrough(item, motion.sync)),
+        });
+      });
+    },
+    [plpImages],
+  );
+
   if (!plpImages?.length) return null;
+
   return (
     <>
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))",
-          gap: "10px",
-          width: "100%",
-        }}
-      >
+      <div className="collage" ref={root}>
         {plpImages.map((image, index) => (
           <CollageImage
             key={image.src}

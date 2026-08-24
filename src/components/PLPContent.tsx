@@ -1,105 +1,130 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { animate, createTimeline, onScroll, stagger, utils } from "animejs";
 import Collage from "./Collage";
 import Bottombar from "./Bottombar";
-import useDevice from "@/hooks/useDevice";
-import type { GalleryItem } from "@/lib/data";
+import Data, { type GalleryItem } from "@/lib/data";
+import {
+  DUR,
+  EASE,
+  enterView,
+  drift,
+  passThrough,
+  revealLines,
+  useAnimeScope,
+} from "@/lib/motion";
 
 interface PLPContentProps {
   item: GalleryItem;
 }
 
 export default function PLPContent({ item }: PLPContentProps) {
-  const [isMobile] = useDevice();
   const [imageLoaded, setImageLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+
+  const position = Data.galleryCardInfo.findIndex((g) => g.slug === item.slug);
+  const total = Data.galleryCardInfo.length;
+
+  useEffect(() => {
+    if (!imageLoaded && imgRef.current?.complete) setImageLoaded(true);
+  }, [imageLoaded]);
+
+  const { root } = useAnimeScope<HTMLElement>(
+    (self) => {
+      const motion = drift(!!self.matches.touch);
+      const [index] = utils.$(".plp__index") as HTMLElement[];
+      const [title] = utils.$(".plp__title") as HTMLElement[];
+      const [info] = utils.$(".plp__info") as HTMLElement[];
+      const [hero] = utils.$(".plp__hero") as HTMLElement[];
+      if (!title || !hero) return;
+
+      const heroImg = hero.querySelector("img") as HTMLElement | null;
+      const heroCurtain = hero.querySelector(".frame__curtain") as HTMLElement | null;
+
+      /* ---- arrival ---- */
+      revealLines(title, (lines) =>
+        animate(lines, {
+          y: ["105%", "0%"],
+          duration: DUR.slow,
+          ease: EASE.expo,
+          delay: stagger(80, { start: 100 }),
+        }),
+      );
+
+      const intro = createTimeline({ defaults: { ease: EASE.out } });
+      if (index) {
+        intro.add(index, { opacity: [0, 1], y: [10, 0], duration: DUR.base }, 0);
+      }
+      if (heroCurtain) {
+        intro.add(heroCurtain, { y: ["0%", "-101%"], duration: DUR.slow, ease: EASE.expo }, 200);
+      }
+      if (heroImg) {
+        intro.add(heroImg, { scale: [1.18, 1], duration: 1600, ease: EASE.expo }, 200);
+      }
+
+      /* ---- scroll-linked: the hero photo drifts inside its frame ---- */
+      if (heroImg) {
+        animate(heroImg, {
+          y: motion.range,
+          ease: EASE.scrub,
+          autoplay: onScroll(passThrough(hero, motion.sync)),
+        });
+      }
+
+      /* ---- the blurb reveals a line at a time on the way in ---- */
+      if (info) {
+        revealLines(info, (lines) =>
+          animate(lines, {
+            y: ["110%", "0%"],
+            opacity: [0, 1],
+            duration: DUR.base,
+            ease: EASE.out,
+            delay: stagger(55),
+            autoplay: onScroll(enterView(info)),
+          }),
+        );
+      }
+    },
+    [item.slug],
+  );
 
   return (
-    <main>
-      <div className="bottom-navbar-wrapper">
-        <Bottombar slug={item.slug} />
+    <main className="page plp" ref={root}>
+      <header className="plp__head">
+        <p className="mono plp__index" data-reveal>
+          {String(position + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </p>
+        <h1 className="display plp__title" data-split>
+          {item.title}
+        </h1>
+      </header>
+
+      <div className="plp__lead">
+        <div
+          className={`frame frame--parallax plp__hero shimmer${imageLoaded ? " is-loaded" : ""}`}
+        >
+          <img
+            ref={imgRef}
+            className="mainImage"
+            src={item.img}
+            alt={item.altText}
+            loading="eager"
+            decoding="async"
+            onLoad={() => setImageLoaded(true)}
+            onError={() => setImageLoaded(true)}
+          />
+          <div className="frame__curtain" aria-hidden="true" />
+        </div>
+        <p className="plp__info" data-split>
+          {item.info}
+        </p>
       </div>
 
-      <article className="entire-plp" style={{ marginTop: "50px" }}>
-        <div
-          className="info-card"
-          style={{
-            display: "flex",
-            gap: "40px",
-            flexDirection: "column",
-            padding: "30px",
-          }}
-        >
-          <h1
-            className="title-wrapper"
-            style={{
-              justifyContent: "center",
-              display: "flex",
-              fontFamily: "favorit",
-              fontSize: "2rem",
-              fontStyle: "normal",
-              fontWeight: "bold",
-              textAlign: "center",
-              margin: 0,
-            }}
-          >
-            {item.title}
-          </h1>
-          <div className="content-wrapper">
-            <div
-              className="image-and-info-wrapper"
-              style={{
-                display: "flex",
-                flexDirection: isMobile ? "column" : "row",
-                alignItems: "center",
-                gap: "20px",
-              }}
-            >
-              <div
-                className={`shimmer${imageLoaded ? " is-loaded" : ""}`}
-                style={{
-                  width: isMobile ? "100%" : "50%",
-                  aspectRatio: "1 / 1",
-                  position: "relative",
-                  overflow: "hidden",
-                }}
-              >
-                <img
-                  className="mainImage"
-                  src={item.img}
-                  alt={item.altText}
-                  loading="eager"
-                  decoding="async"
-                  onLoad={() => setImageLoaded(true)}
-                  onError={() => setImageLoaded(true)}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    opacity: imageLoaded ? 1 : 0,
-                    transition: "opacity 0.5s ease-in-out",
-                    zIndex: 2,
-                  }}
-                />
-              </div>
-              <div
-                className="info-wrapper"
-                style={{
-                  fontFamily: "favorit",
-                  fontSize: "1rem",
-                  fontStyle: "normal",
-                  flex: 1,
-                }}
-              >
-                {item.info}
-              </div>
-            </div>
-          </div>
-          <Collage plpImages={item.plpImages} />
-        </div>
-      </article>
+      <Collage plpImages={item.plpImages} />
+
+      {/* Fixed chrome last, so it is never the segment's first element. */}
+      <Bottombar slug={item.slug} />
     </main>
   );
 }

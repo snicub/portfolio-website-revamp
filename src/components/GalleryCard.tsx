@@ -1,13 +1,13 @@
 "use client";
 
-import { memo, useState, useEffect, useRef } from "react";
+import { memo, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import TextEffect from "./TextEffect";
 import { responsive } from "@/lib/imageManifest";
 
-// Home gallery grid is `minmax(280px, 1fr)` capped at 1400px (~280–340px cards);
-// request the thumbnail and let large/high-DPR slots upgrade to the full image.
-const GALLERY_SIZES = "(max-width: 600px) calc(100vw - 40px), 340px";
+// The grid is `minmax(300px, 1fr)` capped at 1440px, so ask for the thumbnail
+// and let large / high-DPR slots upgrade to the full image.
+const GALLERY_SIZES = "(max-width: 600px) calc(100vw - 32px), 380px";
 
 interface GalleryCardProps {
   slug: string;
@@ -17,6 +17,10 @@ interface GalleryCardProps {
   index?: number;
 }
 
+/**
+ * Pure markup. Every card's motion is orchestrated from the Gallery scope so
+ * there is one anime.js Scope for the whole grid instead of one per card.
+ */
 function GalleryCard({
   slug,
   imageSrc,
@@ -28,59 +32,29 @@ function GalleryCard({
   const imgRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
-    if (!loaded && imgRef.current?.complete) {
-      setLoaded(true);
-    }
+    if (!loaded && imgRef.current?.complete) setLoaded(true);
   }, [loaded]);
 
   return (
-    <Link
-      href={`/gallery/${slug}`}
-      className="gallery-card"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        width: "100%",
-        cursor: "pointer",
-        boxSizing: "border-box",
-        margin: "40px 0",
-        overflow: "hidden",
-        textDecoration: "none",
-        color: "inherit",
-      }}
-    >
+    <Link href={`/gallery/${slug}`} className="gallery-card" data-cursor="view">
       <div
-        className={`gallery-card-image-container shimmer${loaded ? " is-loaded" : ""}`}
-        style={{
-          width: "100%",
-          aspectRatio: "1 / 1",
-          overflow: "hidden",
-          position: "relative",
-        }}
+        className={`frame frame--parallax gallery-card__frame shimmer${loaded ? " is-loaded" : ""}`}
       >
         <img
           ref={imgRef}
-          className="gallery-card-image"
           {...responsive(imageSrc, GALLERY_SIZES)}
           alt={altText}
           loading={index < 3 ? "eager" : "lazy"}
           decoding="async"
           onLoad={() => setLoaded(true)}
           onError={() => setLoaded(true)}
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            opacity: loaded ? 1 : 0,
-            transition: "opacity 0.4s ease-out, transform 0.3s ease-in-out",
-            display: "block",
-            position: "relative",
-            zIndex: 2,
-          }}
         />
+        <div className="frame__curtain" aria-hidden="true" />
       </div>
-      <div style={{ paddingTop: "10px", width: "100%" }}>
+      <div className="gallery-card__meta">
+        <span className="gallery-card__index mono" aria-hidden="true">
+          {String(index + 1).padStart(2, "0")}
+        </span>
         <TextEffect text={title} />
       </div>
     </Link>

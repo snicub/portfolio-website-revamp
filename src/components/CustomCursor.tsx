@@ -1,114 +1,124 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { animate, createAnimatable, spring } from "animejs";
+import { useEffect, useRef } from "react";
+import { DUR, EASE, SPRING, motionEnabled } from "@/lib/motion";
 
-const CURSOR_SIZE = 12;
-const LERP_FACTOR = 0.15;
-const INTERACTIVE_SELECTOR = "a, button, [role='button']";
+const HOVER_SELECTOR = "a, button, [role='button'], [data-cursor]";
+const FINE_POINTER = "(hover: hover) and (pointer: fine)";
 
+/**
+ * Two parts, because one element can't do both jobs well:
+ *
+ *   • the dot is the actual pointer — written straight to `style.transform` on
+ *     every mousemove so it never lags behind where you are pointing;
+ *   • the ring is the flourish — an anime.js Animatable, so it eases in behind
+ *     the dot and the engine owns the frame loop.
+ *
+ * Both blend with `difference`, so a white cursor reads black on paper and
+ * white over a dark photograph. An ink-coloured cursor disappears over half
+ * the images on this site.
+ */
 export default function CustomCursor() {
-  const cursorRef = useRef<HTMLDivElement>(null);
-  const position = useRef({ x: -100, y: -100 });
-  const target = useRef({ x: -100, y: -100 });
-  const animationFrame = useRef<number>(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
+  const labelRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    // Only activate on devices with a fine pointer (mouse)
-    const pointerQuery = window.matchMedia("(pointer: fine)");
-    if (!pointerQuery.matches) return;
+    const dot = dotRef.current;
+    const ring = ringRef.current;
+    const label = labelRef.current;
+    if (!dot || !ring || !label) return;
 
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
+    // Never take the native cursor away from someone who asked for reduced
+    // motion, or from a device that has no pointer to replace.
+    if (!motionEnabled()) return;
+    if (!window.matchMedia(FINE_POINTER).matches) return;
 
-    // Hide the default cursor
-    document.documentElement.style.cursor = "none";
+    document.documentElement.classList.add("has-custom-cursor");
 
-    const handleMouseMove = (e: MouseEvent) => {
-      target.current = { x: e.clientX, y: e.clientY };
-      setIsVisible(true);
+    const trail = createAnimatable(ring, {
+      x: { duration: 300, ease: EASE.out },
+      y: { duration: 300, ease: EASE.out },
+    });
 
-      if (reducedMotion) {
-        // Snap directly — no animation lag
-        position.current = { x: e.clientX, y: e.clientY };
-        applyPosition();
+    let shown = false;
+    let hovering = false;
+
+    const onMove = (e: MouseEvent) => {
+      dot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+      trail.x(e.clientX);
+      trail.y(e.clientY);
+      if (!shown) {
+        shown = true;
+        animate([dot, ring], { opacity: 1, duration: DUR.micro, ease: EASE.out });
       }
     };
 
-    const handleMouseLeave = () => setIsVisible(false);
-    const handleMouseEnter = () => setIsVisible(true);
-
-    const handleMouseOver = (e: MouseEvent) => {
-      const el = e.target as HTMLElement;
-      if (el.closest(INTERACTIVE_SELECTOR)) {
-        cursorRef.current?.classList.add("cursor--hover");
-      }
+    const setHover = (on: boolean, text: string) => {
+      if (hovering === on && label.textContent === text) return;
+      hovering = on;
+      label.textContent = text;
+      animate(ring, { scale: on ? 1 : 0.66, ease: spring(SPRING.snappy) });
+      animate(ring, {
+        backgroundColor: on ? "rgba(255,255,255,1)" : "rgba(255,255,255,0)",
+        duration: DUR.fast,
+        ease: EASE.out,
+      });
+      animate(dot, { scale: on ? 0 : 1, ease: spring(SPRING.snappy) });
+      animate(label, {
+        opacity: on && text ? 1 : 0,
+        duration: DUR.fast,
+        ease: EASE.out,
+      });
     };
 
-    const handleMouseOut = (e: MouseEvent) => {
-      const el = e.target as HTMLElement;
-      if (el.closest(INTERACTIVE_SELECTOR)) {
-        cursorRef.current?.classList.remove("cursor--hover");
-      }
+    const onOver = (e: MouseEvent) => {
+      const hit = (e.target as HTMLElement)?.closest?.(HOVER_SELECTOR);
+      if (!hit) return;
+      setHover(true, hit.getAttribute("data-cursor") ?? "");
     };
 
-    function applyPosition() {
-      if (!cursorRef.current) return;
-      cursorRef.current.style.transform = `translate3d(${position.current.x - CURSOR_SIZE / 2}px, ${position.current.y - CURSOR_SIZE / 2}px, 0)`;
-    }
+    const onOut = (e: MouseEvent) => {
+      if (!(e.target as HTMLElement)?.closest?.(HOVER_SELECTOR)) return;
+      setHover(false, "");
+    };
 
-    function animate() {
-      if (!reducedMotion) {
-        position.current.x +=
-          (target.current.x - position.current.x) * LERP_FACTOR;
-        position.current.y +=
-          (target.current.y - position.current.y) * LERP_FACTOR;
-        applyPosition();
-      }
-      animationFrame.current = requestAnimationFrame(animate);
-    }
+    const onDown = () =>
+      animate(ring, { scale: hovering ? 0.88 : 0.5, duration: DUR.micro, ease: EASE.out });
+    const onUp = () =>
+      animate(ring, { scale: hovering ? 1 : 0.66, ease: spring(SPRING.snappy) });
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseleave", handleMouseLeave);
-    document.addEventListener("mouseenter", handleMouseEnter);
-    document.addEventListener("mouseover", handleMouseOver);
-    document.addEventListener("mouseout", handleMouseOut);
+    const onLeaveWindow = () => {
+      shown = false;
+      animate([dot, ring], { opacity: 0, duration: DUR.micro, ease: EASE.out });
+    };
 
-    animationFrame.current = requestAnimationFrame(animate);
+    document.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseover", onOver, { passive: true });
+    document.addEventListener("mouseout", onOut, { passive: true });
+    document.addEventListener("mousedown", onDown, { passive: true });
+    document.addEventListener("mouseup", onUp, { passive: true });
+    document.addEventListener("mouseleave", onLeaveWindow);
 
     return () => {
-      document.documentElement.style.cursor = "";
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseleave", handleMouseLeave);
-      document.removeEventListener("mouseenter", handleMouseEnter);
-      document.removeEventListener("mouseover", handleMouseOver);
-      document.removeEventListener("mouseout", handleMouseOut);
-      cancelAnimationFrame(animationFrame.current);
+      document.documentElement.classList.remove("has-custom-cursor");
+      document.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseover", onOver);
+      document.removeEventListener("mouseout", onOut);
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("mouseup", onUp);
+      document.removeEventListener("mouseleave", onLeaveWindow);
+      trail.revert();
     };
   }, []);
 
   return (
-    <div
-      ref={cursorRef}
-      aria-hidden="true"
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        width: CURSOR_SIZE,
-        height: CURSOR_SIZE,
-        borderRadius: "50%",
-        border: "1px solid #000",
-        backgroundColor: "transparent",
-        pointerEvents: "none",
-        zIndex: 99999,
-        opacity: isVisible ? 1 : 0,
-        transition:
-          "opacity 0.2s ease, width 0.2s ease, height 0.2s ease, margin 0.2s ease",
-        willChange: "transform",
-      }}
-      className="custom-cursor"
-    />
+    <>
+      <div ref={ringRef} className="cursor-ring" aria-hidden="true">
+        <span ref={labelRef} className="cursor-ring__label" />
+      </div>
+      <div ref={dotRef} className="cursor-dot" aria-hidden="true" />
+    </>
   );
 }

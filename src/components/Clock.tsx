@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import useDevice from "@/hooks/useDevice";
 
 const formatTime = (d: Date) =>
   d.toLocaleTimeString("en-US", {
@@ -12,7 +11,6 @@ const formatTime = (d: Date) =>
   });
 
 export default function Clock() {
-  const [isMobile] = useDevice();
   const [ctime, setTime] = useState("");
 
   useEffect(() => {
@@ -40,8 +38,5 @@ export default function Clock() {
   }, []);
 
   if (!ctime) return null;
-
-  return (
-    <div style={{ fontSize: isMobile ? ".75rem" : undefined }}>{ctime}</div>
-  );
+  return <span className="nav__clock">{ctime}</span>;
 }

@@ -1,6 +1,9 @@
 "use client";
 
-import React, { useEffect, useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
+import { animate, createTimeline, spring, stagger, utils } from "animejs";
+import { DUR, EASE, SPRING, motionEnabled, useAnimeScope } from "@/lib/motion";
 
 interface LightboxProps {
   images: { src: string }[];
@@ -8,199 +11,170 @@ interface LightboxProps {
   onClose: () => void;
 }
 
-const Lightbox: React.FC<LightboxProps> = ({
-  images,
-  initialIndex,
-  onClose,
-}) => {
+const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
-  const [visible, setVisible] = useState(false);
-  const overlayRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const closingRef = useRef(false);
+  const directionRef = useRef(1);
 
   const total = images.length;
 
+  const { root, scope } = useAnimeScope<HTMLDivElement>((self) => {
+    const overlay = self.root as HTMLElement;
+    const [figure] = utils.$(".lightbox__figure") as HTMLElement[];
+
+    createTimeline()
+      .add(overlay, { opacity: [0, 1], duration: DUR.fast, ease: EASE.out }, 0)
+      .add(figure, { opacity: [0, 1], scale: [0.94, 1], ease: spring(SPRING.pop) }, 60)
+      .add(
+        ".lightbox__chrome",
+        { opacity: [0, 1], y: [10, 0], duration: DUR.fast, ease: EASE.out },
+        stagger(50, { start: 140 }),
+      );
+
+    // Called with the travel direction when the index changes: the incoming
+    // photo enters from the side you asked for.
+    self.add("swap", (dir: number) => {
+      animate(figure, {
+        opacity: [0, 1],
+        x: [dir * 44, 0],
+        duration: DUR.base,
+        ease: EASE.expo,
+      });
+    });
+
+    self.add("dismiss", (done: () => void) => {
+      createTimeline({ defaults: { ease: EASE.out } })
+        .add(figure, { opacity: 0, scale: 0.96, duration: DUR.fast }, 0)
+        .add(".lightbox__chrome", { opacity: 0, duration: DUR.micro }, 0)
+        .add(overlay, { opacity: 0, duration: DUR.fast, onComplete: done }, 80);
+    });
+  });
+
+  const requestClose = useCallback(() => {
+    if (closingRef.current) return;
+    const dismiss = scope.current?.methods.dismiss;
+    if (!motionEnabled() || !dismiss) {
+      onClose();
+      return;
+    }
+    closingRef.current = true;
+    dismiss(onClose);
+  }, [onClose, scope]);
+
   const goNext = useCallback(() => {
+    directionRef.current = 1;
     setCurrentIndex((prev) => (prev + 1) % total);
   }, [total]);
 
   const goPrev = useCallback(() => {
+    directionRef.current = -1;
     setCurrentIndex((prev) => (prev - 1 + total) % total);
   }, [total]);
 
-  // Fade in on mount
+  // Animate the swap after React has already put the new src in place.
+  const isFirstRender = useRef(true);
   useEffect(() => {
-    const frame = requestAnimationFrame(() => setVisible(true));
-    return () => cancelAnimationFrame(frame);
-  }, []);
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+    scope.current?.methods.swap?.(directionRef.current);
+  }, [currentIndex, scope]);
 
-  // Lock body scroll
   useEffect(() => {
     const prev = document.body.style.overflow;
     document.body.style.overflow = "hidden";
+    // Lets the CSS stand the page chrome down while a viewer is open, so a
+    // fixed, backdrop-filtered nav can't compete with a full-screen photo.
+    document.documentElement.dataset.modal = "open";
+    closeButtonRef.current?.focus();
     return () => {
       document.body.style.overflow = prev;
+      delete document.documentElement.dataset.modal;
     };
   }, []);
 
-  // Focus the close button on mount for focus trapping
-  useEffect(() => {
-    closeButtonRef.current?.focus();
-  }, []);
-
-  // Keyboard handling
   useEffect(() => {
     const handleKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        onClose();
-      } else if (e.key === "ArrowRight") {
-        goNext();
-      } else if (e.key === "ArrowLeft") {
-        goPrev();
-      }
+      if (e.key === "Escape") requestClose();
+      else if (e.key === "ArrowRight") goNext();
+      else if (e.key === "ArrowLeft") goPrev();
     };
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [onClose, goNext, goPrev]);
+  }, [requestClose, goNext, goPrev]);
 
-  // Focus trap
+  // Focus trap: anything that escapes the overlay is pulled back to close.
   useEffect(() => {
-    const overlay = overlayRef.current;
+    const overlay = root.current;
     if (!overlay) return;
-
     const handleFocusTrap = (e: FocusEvent) => {
       if (!overlay.contains(e.target as Node)) {
         e.stopPropagation();
         closeButtonRef.current?.focus();
       }
     };
-
     document.addEventListener("focus", handleFocusTrap, true);
     return () => document.removeEventListener("focus", handleFocusTrap, true);
-  }, []);
+  }, [root]);
 
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-
-  const buttonBase: React.CSSProperties = {
-    background: "none",
-    border: "none",
-    color: "#ffffff",
-    fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-    fontSize: "0.85rem",
-    cursor: "pointer",
-    padding: "8px 12px",
-    letterSpacing: "0.03em",
-  };
-
-  return (
+  // Rendered into <body> so the viewer never inherits a stacking or overflow
+  // context from whatever page opened it.
+  return createPortal(
     <div
-      ref={overlayRef}
+      ref={root}
+      className="lightbox"
       role="dialog"
       aria-modal="true"
       aria-label="Image lightbox"
-      onClick={handleBackdropClick}
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 9999,
-        background: "rgba(0, 0, 0, 0.9)",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        opacity: visible ? 1 : 0,
-        transition: "opacity 0.25s ease-in",
-      }}
+      data-cursor="close"
+      onClick={(e) => e.target === e.currentTarget && requestClose()}
     >
-      {/* Close button */}
       <button
         ref={closeButtonRef}
-        onClick={onClose}
+        onClick={requestClose}
+        className="lightbox__chrome lightbox__btn lightbox__close"
         aria-label="Close lightbox"
-        style={{
-          ...buttonBase,
-          position: "absolute",
-          top: "16px",
-          right: "16px",
-          zIndex: 10001,
-        }}
       >
         [ close ]
       </button>
 
-      {/* Previous arrow */}
       {total > 1 && (
         <button
           onClick={goPrev}
+          className="lightbox__chrome lightbox__btn lightbox__arrow lightbox__arrow--prev"
           aria-label="Previous image"
-          style={{
-            ...buttonBase,
-            position: "absolute",
-            left: "16px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "1.5rem",
-            zIndex: 10001,
-          }}
         >
           &#8592;
         </button>
       )}
 
-      {/* Image */}
-      <img
-        src={images[currentIndex].src}
-        alt={`Image ${currentIndex + 1} of ${total}`}
-        style={{
-          maxWidth: "calc(100vw - 120px)",
-          maxHeight: "calc(100vh - 120px)",
-          objectFit: "contain",
-          userSelect: "none",
-          pointerEvents: "none",
-        }}
-      />
+      <figure className="lightbox__figure">
+        <img
+          src={images[currentIndex].src}
+          alt={`Image ${currentIndex + 1} of ${total}`}
+          decoding="async"
+        />
+      </figure>
 
-      {/* Next arrow */}
       {total > 1 && (
         <button
           onClick={goNext}
+          className="lightbox__chrome lightbox__btn lightbox__arrow lightbox__arrow--next"
           aria-label="Next image"
-          style={{
-            ...buttonBase,
-            position: "absolute",
-            right: "16px",
-            top: "50%",
-            transform: "translateY(-50%)",
-            fontSize: "1.5rem",
-            zIndex: 10001,
-          }}
         >
           &#8594;
         </button>
       )}
 
-      {/* Image counter */}
       {total > 1 && (
-        <div
-          style={{
-            position: "absolute",
-            bottom: "20px",
-            left: "50%",
-            transform: "translateX(-50%)",
-            color: "#ffffff",
-            fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-            fontSize: "0.8rem",
-            letterSpacing: "0.05em",
-            userSelect: "none",
-          }}
-        >
-          {currentIndex + 1} / {total}
-        </div>
+        <p className="lightbox__chrome lightbox__counter mono">
+          {String(currentIndex + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </p>
       )}
-    </div>
+    </div>,
+    document.body,
   );
 };
 
