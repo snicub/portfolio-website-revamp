@@ -17,8 +17,6 @@ const CollageImage: React.FC<{
   index: number;
   onClick: () => void;
 }> = memo(({ src, index, onClick }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
   return (
     <button
       type="button"
@@ -27,14 +25,13 @@ const CollageImage: React.FC<{
       data-cursor="open"
       aria-label={`View collage image ${index + 1}`}
     >
-      <div className={`frame frame--parallax shimmer${isLoaded ? " is-loaded" : ""}`}>
+      {/* Curtain only — see the note on the hero in PLPContent. */}
+      <div className="frame frame--parallax">
         <img
           {...responsive(src, COLLAGE_SIZES)}
           alt={`Collage ${index + 1}`}
           loading={index < 4 ? "eager" : "lazy"}
           decoding="async"
-          onLoad={() => setIsLoaded(true)}
-          onError={() => setIsLoaded(true)}
         />
         <div className="frame__curtain" aria-hidden="true" />
       </div>

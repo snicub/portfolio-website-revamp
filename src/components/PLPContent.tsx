@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { animate, createTimeline, onScroll, stagger, utils } from "animejs";
 import Collage from "./Collage";
 import Bottombar from "./Bottombar";
@@ -20,15 +19,8 @@ interface PLPContentProps {
 }
 
 export default function PLPContent({ item }: PLPContentProps) {
-  const [imageLoaded, setImageLoaded] = useState(false);
-  const imgRef = useRef<HTMLImageElement>(null);
-
   const position = Data.galleryCardInfo.findIndex((g) => g.slug === item.slug);
   const total = Data.galleryCardInfo.length;
-
-  useEffect(() => {
-    if (!imageLoaded && imgRef.current?.complete) setImageLoaded(true);
-  }, [imageLoaded]);
 
   const { root } = useAnimeScope<HTMLElement>(
     (self) => {
@@ -101,18 +93,16 @@ export default function PLPContent({ item }: PLPContentProps) {
       </header>
 
       <div className="plp__lead">
-        <div
-          className={`frame frame--parallax plp__hero shimmer${imageLoaded ? " is-loaded" : ""}`}
-        >
+        {/* No loading shimmer here: the paper curtain below is already the
+            reveal, and a highlight sweeping under it read as a second,
+            competing animation on the same photograph. */}
+        <div className="frame frame--parallax plp__hero">
           <img
-            ref={imgRef}
             className="mainImage"
             src={item.img}
             alt={item.altText}
             loading="eager"
             decoding="async"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(true)}
           />
           <div className="frame__curtain" aria-hidden="true" />
         </div>

@@ -8,7 +8,7 @@ import { DUR, EASE, recede, revealLines, useAnimeScope } from "@/lib/motion";
 import { breadcrumb, collectionPage, imageGallery, SITE_URL } from "@/lib/seo";
 
 const LEDE =
-  "Ultimate frisbee, cooking, sourdough, family, friends, and the road from a Taco Bell line to shipping Nespresso.com.";
+  "ultimate frisbee, cooking, sourdough, family, friends, and the road from a Taco Bell line to shipping Nespresso.com.";
 
 export default function HomeContent() {
   const jsonLd = [
@@ -95,7 +95,7 @@ export default function HomeContent() {
               entries
             </p>
             <h1 className="display masthead__title" data-split>
-              Portfolio Gallery
+              gallery
             </h1>
             <p className="masthead__lede" data-reveal>
               {LEDE}

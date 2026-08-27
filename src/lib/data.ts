@@ -15,6 +15,13 @@ export interface GalleryItem {
 const Data = {
   enterPageSection: [
     {
+      mobileSrc: "/images/enterpage/missions.webp",
+      desktopSrc: "/images/enterpage/desktopAndTablet/missions-dp.webp",
+    },
+    {
+      mobileSrc: "/images/enterpage/roots.webp",
+    },
+    {
       mobileSrc: "/images/enterpage/sniblap.webp",
       desktopSrc: "/images/enterpage/desktopAndTablet/sniblapDAT.webp",
     },
@@ -33,10 +40,7 @@ const Data = {
       mobileSrc: "/images/enterpage/hand.webp",
       desktopSrc: "/images/enterpage/desktopAndTablet/handDesktop.webp",
     },
-    {
-      mobileSrc: "/images/enterpage/orna.webp",
-      desktopSrc: "/images/enterpage/desktopAndTablet/ornaDesktop.webp",
-    },
+
     {
       mobileSrc: "/images/enterpage/cake.webp",
     },
@@ -89,7 +93,7 @@ const Data = {
     },
     {
       slug: "in-the-lab",
-      img: "/images/gallery/cooking.webp",
+      img: "/images/gallery/steak.webp",
       plpImages: [
         { src: "/images/plp/cooking/noodle.webp" },
         { src: "/images/plp/cooking/soup.webp" },
@@ -103,11 +107,11 @@ const Data = {
       ],
       altText: "dan han cooking",
       title: "in the lab",
-      info: "In my free time, I enjoy cooking different recipes and learning new techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to provide that for those around me.",
+      info: "In my free time, I enjoy cooking different recipes and learning new techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to do that for others.",
     },
     {
       slug: "big-family-guy",
-      img: "/images/plp/fam/aurassert.webp",
+      img: "/images/plp/fam/yankees.webp",
       plpImages: [
         { src: "/images/plp/fam/lucas.webp" },
         { src: "/images/plp/fam/lucas2.webp" },
@@ -119,8 +123,6 @@ const Data = {
         { src: "/images/plp/fam/fam7.webp" },
         { src: "/images/plp/fam/fam8.webp" },
         { src: "/images/plp/fam/fam9.webp" },
-        { src: "/images/plp/fam/fam10.webp" },
-        { src: "/images/gallery/danfam.webp" },
         { src: "/images/plp/fam/fam12.webp" },
       ],
       altText: "family values",
@@ -145,6 +147,7 @@ const Data = {
         { src: "/images/plp/friends/montreal4.webp" },
         { src: "/images/plp/friends/phili_friends.webp" },
         { src: "/images/plp/friends/bid.webp" },
+        { src: "/images/plp/friends/hyrox.webp" },
       ],
       altText: "hanging out with friends ",
       title: "kickback",
@@ -162,7 +165,7 @@ const Data = {
       ],
       altText: "working at tbell",
       title: "humble beginnings",
-      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation has funded my college education. Don't forget to live mas.",
+      info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation funded my college education. Don't forget to live mas.",
     },
     {
       slug: "sourdough",
