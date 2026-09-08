@@ -1,7 +1,7 @@
 {
   "short_name": "Daniel Han",
   "name": "Daniel Han — Software Engineer",
-  "description": "Daniel Han's personal portfolio.",
+  "description": "Portfolio of Daniel Han, a software engineer based in New Jersey currently building Nespresso.com.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -11,16 +11,28 @@
     {
       "src": "logo192.png",
       "type": "image/png",
-      "sizes": "192x192"
+      "sizes": "192x192",
+      "purpose": "any maskable"
     },
     {
       "src": "logo512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff"
+  "theme_color": "#F1F0EA",
+  "background_color": "#F1F0EA",
+  "id": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "scope": "/",
+  "orientation": "portrait-primary",
+  "categories": [
+    "portfolio",
+    "personal",
+    "technology"
+  ]
 }

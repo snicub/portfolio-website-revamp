@@ -7,7 +7,12 @@ export interface GalleryItem {
   slug: string;
   img: string;
   plpImages: { src: string }[];
+  /** Alt text for the card / hero image. */
   altText: string;
+  /** Base phrase for the collage photos, numbered per image at render time.
+   *  Generic-but-true beats invented detail: it is what the photo shows, and
+   *  it is the only description a search engine or a screen reader gets. */
+  imageAlt: string;
   title: string;
   info: string;
 }
@@ -87,7 +92,8 @@ const Data = {
         { src: "/images/plp/frisbee/frisbee13.webp" },
         { src: "/images/plp/frisbee/frisbee14.webp" },
       ],
-      altText: "frisbee",
+      altText: "Daniel Han playing ultimate frisbee for the Rutgers club team",
+      imageAlt: "Daniel Han playing ultimate frisbee",
       title: "ultimate frisbee",
       info: "In college, I played ultimate frisbee for the Rutgers club team as a handler and it was super fun. I've played since high school and on club teams. I guess all those backhands at the family cookout paid off.",
     },
@@ -105,7 +111,8 @@ const Data = {
         { src: "/images/plp/cooking/bowl2.webp" },
         { src: "/images/plp/cooking/bowl3.webp" },
       ],
-      altText: "dan han cooking",
+      altText: "A steak dinner cooked by Daniel Han",
+      imageAlt: "A dish cooked by Daniel Han",
       title: "in the lab",
       info: "In my free time, I enjoy cooking different recipes and learning new techniques. I also love feeding my friends and family. Some of my best memories come from breaking bread with others and I want to be able to do that for others.",
     },
@@ -125,7 +132,8 @@ const Data = {
         { src: "/images/plp/fam/fam9.webp" },
         { src: "/images/plp/fam/fam12.webp" },
       ],
-      altText: "family values",
+      altText: "Daniel Han with his family",
+      imageAlt: "Daniel Han with his family",
       title: "big family guy",
       info: "I love spending quality time with my family, whether it's going on trips, celebrating holidays, or just hanging out at home. Yes, I'm the youngest, the favorite, and have two older sisters!",
     },
@@ -149,7 +157,8 @@ const Data = {
         { src: "/images/plp/friends/bid.webp" },
         { src: "/images/plp/friends/hyrox.webp" },
       ],
-      altText: "hanging out with friends ",
+      altText: "Daniel Han hanging out with friends",
+      imageAlt: "Daniel Han with friends",
       title: "kickback",
       info: "Never forget your roots.",
     },
@@ -163,7 +172,8 @@ const Data = {
         { src: "/images/plp/tacobell/tbell5.webp" },
         { src: "/images/plp/tacobell/tbell6.webp" },
       ],
-      altText: "working at tbell",
+      altText: "Daniel Han working the line at Taco Bell",
+      imageAlt: "Daniel Han working at Taco Bell",
       title: "humble beginnings",
       info: "My first job was working at Taco Bell as a steamer on the line. It holds a special place as the Taco Bell Foundation funded my college education. Don't forget to live mas.",
     },
@@ -188,7 +198,8 @@ const Data = {
         { src: "/images/plp/sourdough/sour15.webp" },
         { src: "/images/plp/sourdough/sour16.webp" },
       ],
-      altText: "sourdough baking",
+      altText: "A sourdough loaf baked by Daniel Han",
+      imageAlt: "Sourdough baking by Daniel Han",
       title: "sourdough",
       info: "I got into sourdough baking this past summer! I love the process of making a loaf from start to finish. And no, I haven't named my starter yet.. lol. Sourdough bread making is super appealing to me and such a rewarding process. I'm trying to make homemade croissants next!!",
     },

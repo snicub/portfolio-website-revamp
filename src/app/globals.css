@@ -507,6 +507,15 @@ html[data-modal="open"] .grain {
   opacity: 0;
   z-index: var(--z-cursor);
   mix-blend-mode: difference;
+}
+
+/* The dot is positioned with `translate` and scaled with `transform`, on
+   purpose — see the note in CustomCursor.tsx. Both are promoted here. */
+.cursor-dot {
+  will-change: translate, transform;
+}
+
+.cursor-ring {
   will-change: transform;
 }
 
@@ -525,9 +534,11 @@ html[data-modal="open"] .grain {
   border-radius: 50%;
   border: 1.5px solid #fff;
   background-color: rgba(255, 255, 255, 0);
-  transform: scale(0.66);
   display: grid;
   place-items: center;
+  /* Resting scale is seeded from JS, not here: anime.js rebuilds this
+     element's whole `transform` from its own cache, and would drop a
+     stylesheet-only scale() the first time the ring moves. */
 }
 
 /* Black text over a white disc under `difference` resolves to the page's own

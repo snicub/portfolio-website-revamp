@@ -5,33 +5,11 @@ import Gallery from "@/components/Gallery";
 import GoToTopBottomBar from "@/components/GoToTopBottomBar";
 import Data from "@/lib/data";
 import { DUR, EASE, recede, revealLines, useAnimeScope } from "@/lib/motion";
-import { breadcrumb, collectionPage, imageGallery, SITE_URL } from "@/lib/seo";
 
 const LEDE =
   "ultimate frisbee, cooking, sourdough, family, friends, and the road from a Taco Bell line to shipping Nespresso.com.";
 
 export default function HomeContent() {
-  const jsonLd = [
-    breadcrumb([
-      { name: "Home", path: "/" },
-      { name: "Gallery", path: "/home" },
-    ]),
-    collectionPage({
-      items: Data.galleryCardInfo.map((item) => ({
-        title: item.title,
-        image: item.img,
-        url: `${SITE_URL}/gallery/${item.slug}`,
-        description: item.info,
-      })),
-    }),
-    imageGallery(
-      Data.galleryCardInfo.map((item) => ({
-        title: item.title,
-        image: item.img,
-      })),
-    ),
-  ];
-
   const { root } = useAnimeScope<HTMLElement>((self) => {
     const [masthead] = utils.$(".masthead") as HTMLElement[];
     const [title] = utils.$(".masthead__title") as HTMLElement[];
@@ -83,10 +61,6 @@ export default function HomeContent() {
 
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <main className="page" ref={root}>
         <div className="masthead-stage">
           <header className="masthead">

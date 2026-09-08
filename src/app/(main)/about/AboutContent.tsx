@@ -16,13 +16,6 @@ import {
   revealLines,
   useAnimeScope,
 } from "@/lib/motion";
-import {
-  breadcrumb,
-  aboutPageSchema,
-  faqSchema,
-  skillsList,
-  PERSON,
-} from "@/lib/seo";
 
 const LEDE =
   "Software engineer in New Jersey, currently building Nespresso.com. Rutgers, Computer Science and Korean. Before that, the line at Taco Bell.";
@@ -37,42 +30,6 @@ const DRUM_FACES = Data.programmingSection.length;
 const DRUM_RADIUS = 1 / (2 * Math.tan(Math.PI / DRUM_FACES));
 
 export default function AboutContent() {
-  const jsonLd = [
-    breadcrumb([
-      { name: "Home", path: "/" },
-      { name: "About", path: "/about" },
-    ]),
-    aboutPageSchema(),
-    skillsList(PERSON.knowsAbout),
-    faqSchema([
-      {
-        question: "Who is Daniel Han?",
-        answer:
-          "Daniel Han is a software engineer based in New Jersey. He currently works at Nestle Nespresso building Nespresso.com. He graduated from Rutgers University with degrees in Computer Science and Korean.",
-      },
-      {
-        question: "Where does Daniel Han work?",
-        answer:
-          "Daniel Han works at Nestle Nespresso as a Software Engineer, making the Nespresso website fast, functional, and user friendly.",
-      },
-      {
-        question: "What programming languages does Daniel Han know?",
-        answer:
-          "Daniel Han is proficient in Java, Python, SQL, TypeScript, HTML, CSS, JavaScript, Swift, React, and Salesforce Marketing Cloud.",
-      },
-      {
-        question: "Where did Daniel Han go to college?",
-        answer:
-          "Daniel Han attended Rutgers University from September 2021 to May 2025, double-majoring in Computer Science and Korean.",
-      },
-      {
-        question: "How can I contact Daniel Han?",
-        answer:
-          "You can reach Daniel Han via email at daniel.hangb@gmail.com or through his YouTube channel @danhantbell.",
-      },
-    ]),
-  ];
-
   const { root } = useAnimeScope<HTMLElement>((self) => {
     const motion = drift(!!self.matches.touch);
     /* ---- masthead ---- */
@@ -195,10 +152,6 @@ export default function AboutContent() {
   return (
     <main className="page about" ref={root}>
       <h1 className="sr-only">About Daniel Han</h1>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
       <div className="masthead-stage">
         <header className="masthead">
           <p className="mono masthead__eyebrow" data-reveal>

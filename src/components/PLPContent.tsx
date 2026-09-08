@@ -111,7 +111,7 @@ export default function PLPContent({ item }: PLPContentProps) {
         </p>
       </div>
 
-      <Collage plpImages={item.plpImages} />
+      <Collage plpImages={item.plpImages} imageAlt={item.imageAlt} />
 
       {/* Fixed chrome last, so it is never the segment's first element. */}
       <Bottombar slug={item.slug} />

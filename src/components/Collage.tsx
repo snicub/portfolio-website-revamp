@@ -10,26 +10,31 @@ const COLLAGE_SIZES = "(max-width: 640px) 90vw, 300px";
 
 interface CollageProps {
   plpImages: { src: string }[] | undefined;
+  /** What these photographs are of, numbered per image. Feeds both the alt
+   *  text and the button label — "Collage 3" tells a search engine and a
+   *  screen-reader user exactly nothing. */
+  imageAlt: string;
 }
 
 const CollageImage: React.FC<{
   src: string;
   index: number;
+  alt: string;
   onClick: () => void;
-}> = memo(({ src, index, onClick }) => {
+}> = memo(({ src, index, alt, onClick }) => {
   return (
     <button
       type="button"
       className="collage__item"
       onClick={onClick}
       data-cursor="open"
-      aria-label={`View collage image ${index + 1}`}
+      aria-label={`Open ${alt} full screen`}
     >
       {/* Curtain only — see the note on the hero in PLPContent. */}
       <div className="frame frame--parallax">
         <img
           {...responsive(src, COLLAGE_SIZES)}
-          alt={`Collage ${index + 1}`}
+          alt={alt}
           loading={index < 4 ? "eager" : "lazy"}
           decoding="async"
         />
@@ -41,7 +46,7 @@ const CollageImage: React.FC<{
 
 CollageImage.displayName = "CollageImage";
 
-const Collage: React.FC<CollageProps> = ({ plpImages }) => {
+const Collage: React.FC<CollageProps> = ({ plpImages, imageAlt }) => {
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   // Same two-observer pattern as the home grid, so the whole site reveals
@@ -83,6 +88,7 @@ const Collage: React.FC<CollageProps> = ({ plpImages }) => {
             key={image.src}
             src={image.src}
             index={index}
+            alt={`${imageAlt} — photo ${index + 1} of ${plpImages.length}`}
             onClick={() => setSelectedIndex(index)}
           />
         ))}
@@ -91,6 +97,7 @@ const Collage: React.FC<CollageProps> = ({ plpImages }) => {
         <Lightbox
           images={plpImages}
           initialIndex={selectedIndex}
+          imageAlt={imageAlt}
           onClose={() => setSelectedIndex(null)}
         />
       )}

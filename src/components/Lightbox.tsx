@@ -8,10 +8,17 @@ import { DUR, EASE, SPRING, motionEnabled, useAnimeScope } from "@/lib/motion";
 interface LightboxProps {
   images: { src: string }[];
   initialIndex: number;
+  /** What these photographs are of; numbered per image for the alt text. */
+  imageAlt: string;
   onClose: () => void;
 }
 
-const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) => {
+const Lightbox: React.FC<LightboxProps> = ({
+  images,
+  initialIndex,
+  imageAlt,
+  onClose,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const closingRef = useRef(false);
@@ -153,7 +160,7 @@ const Lightbox: React.FC<LightboxProps> = ({ images, initialIndex, onClose }) =>
       <figure className="lightbox__figure">
         <img
           src={images[currentIndex].src}
-          alt={`Image ${currentIndex + 1} of ${total}`}
+          alt={`${imageAlt} — photo ${currentIndex + 1} of ${total}`}
           decoding="async"
         />
       </figure>
