@@ -672,6 +672,12 @@ html.anime .enter__veil {
   opacity: 1;
 }
 
+/* The overlay sits above the veil, so its fading copy must start hidden too
+   or it paints, snaps to 0 when the intro timeline starts, then fades in. */
+html.anime .enter__fade {
+  opacity: 0;
+}
+
 .enter__overlay {
   position: absolute;
   inset: 0;

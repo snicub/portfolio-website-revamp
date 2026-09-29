@@ -222,10 +222,7 @@ export default function EnterPage({ images, duration = 3800 }: EnterPageProps) {
         <div className="enter__ticker enter__fade">
           <Marquee autoFill speed={38}>
             <span>
-              Daniel Han is a passionate software engineer based in New Jersey. He
-              is currently a software engineer at Nespresso focusing on building
-              the best user experience &#9749; He gets it done with quality.
-              &nbsp;&nbsp;—&nbsp;&nbsp;
+              Software engineer&nbsp;&nbsp;·&nbsp;&nbsp;New Jersey&nbsp;&nbsp;·&nbsp;&nbsp;Crafting great user experiences&nbsp;&nbsp;·&nbsp;&nbsp;Gets it done with quality&nbsp;&nbsp;·&nbsp;&nbsp;
             </span>
           </Marquee>
         </div>
