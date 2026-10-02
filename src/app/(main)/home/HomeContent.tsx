@@ -7,7 +7,7 @@ import Data from "@/lib/data";
 import { DUR, EASE, recede, revealLines, useAnimeScope } from "@/lib/motion";
 
 const LEDE =
-  "ultimate frisbee, cooking, sourdough, family, friends, and the road from a Taco Bell line to shipping Nespresso.com.";
+  "ultimate frisbee, cooking, sourdough, family, friends, and the road from a Taco Bell line to software engineering.";
 
 export default function HomeContent() {
   const { root } = useAnimeScope<HTMLElement>((self) => {
