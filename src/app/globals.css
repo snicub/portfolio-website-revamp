@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: "favorit";
-  src: url("/fonts/favorit.ttf") format("truetype");
+  src: url("/fonts/favorit.woff2") format("woff2");
   font-display: swap;
 }
 

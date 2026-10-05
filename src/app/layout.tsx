@@ -101,6 +101,16 @@ export default function RootLayout({
     // The motion gate writes a class onto <html> before React hydrates.
     <html lang="en" data-scroll-behavior="smooth" suppressHydrationWarning>
       <head>
+        {/* The display face sets every headline. Without this the browser only
+            discovers it after parsing the stylesheet, and the headings paint in
+            the fallback first and then reflow. */}
+        <link
+          rel="preload"
+          href="/fonts/favorit.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <link
           rel="preconnect"
           href="https://www.googletagmanager.com"

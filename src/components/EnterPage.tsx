@@ -2,6 +2,7 @@
 
 import Marquee from "react-fast-marquee";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { preload } from "react-dom";
 import { useRouter } from "next/navigation";
 import {
   animate,
@@ -11,7 +12,6 @@ import {
   stagger,
   utils,
 } from "animejs";
-import useDevice from "@/hooks/useDevice";
 import { DUR, EASE, motionEnabled, revealChars, useAnimeScope } from "@/lib/motion";
 import type { ImageObject } from "@/lib/data";
 
@@ -21,16 +21,32 @@ interface EnterPageProps {
   duration?: number;
 }
 
+/** Matches useDevice: anything 768px and up gets the desktop/tablet crop. */
+const MEDIA_DESKTOP = "(min-width: 768px)";
+const MEDIA_MOBILE = "(max-width: 767px)";
+
 const pad = (n: number) => String(n).padStart(2, "0");
 
 export default function EnterPage({ images, duration = 3800 }: EnterPageProps) {
-  const [isMobile] = useDevice();
   const router = useRouter();
   const [ready, setReady] = useState(false);
   const firstImgRef = useRef<HTMLImageElement | null>(null);
   const leavingRef = useRef(false);
 
   const safeImages = images ?? [];
+
+  // The first frame is the LCP element. Preload only the variant this viewport
+  // will actually show, so a phone never spends its first bytes on the desktop
+  // crop. MEDIA_DESKTOP must agree with the <source> below.
+  const first = safeImages[0];
+  if (first) {
+    if (first.desktopSrc) {
+      preload(first.desktopSrc, { as: "image", fetchPriority: "high", media: MEDIA_DESKTOP });
+      preload(first.mobileSrc, { as: "image", fetchPriority: "high", media: MEDIA_MOBILE });
+    } else {
+      preload(first.mobileSrc, { as: "image", fetchPriority: "high" });
+    }
+  }
   const goHome = useCallback(() => router.push("/home"), [router]);
 
   // Cached images fire `load` before React attaches the handler.
@@ -165,15 +181,18 @@ export default function EnterPage({ images, duration = 3800 }: EnterPageProps) {
   return (
     <div className="enter" ref={root}>
       <div className="enter__stack">
-        {safeImages.map((image, index) => {
-          const src =
-            isMobile || !image.desktopSrc ? image.mobileSrc : image.desktopSrc;
-          return (
+        {/* <picture> lets the browser pick the crop from the HTML alone. Choosing
+            it in JS meant the server always shipped the desktop file, and phones
+            downloaded it, then re-mounted every slide with the mobile one. */}
+        {safeImages.map((image, index) => (
+          <picture key={image.mobileSrc}>
+            {image.desktopSrc && (
+              <source media={MEDIA_DESKTOP} srcSet={image.desktopSrc} />
+            )}
             <img
               ref={index === 0 ? firstImgRef : undefined}
-              key={src}
               className="enter__slide"
-              src={src}
+              src={image.mobileSrc}
               alt=""
               aria-hidden="true"
               loading={index === 0 ? "eager" : "lazy"}
@@ -182,8 +201,8 @@ export default function EnterPage({ images, duration = 3800 }: EnterPageProps) {
               onLoad={() => index === 0 && setReady(true)}
               onError={() => index === 0 && setReady(true)}
             />
-          );
-        })}
+          </picture>
+        ))}
       </div>
 
       <div className="enter__vignette" aria-hidden="true" />
