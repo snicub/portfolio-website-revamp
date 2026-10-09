@@ -8,7 +8,7 @@ export const SITE_URL = "https://snicub.com";
 export const SITE_NAME = "Daniel Han";
 export const DEFAULT_TITLE = "Daniel Han — Software Engineer";
 export const DEFAULT_DESCRIPTION =
-  "Daniel Han is a software engineer based in New Jersey, currently building Nespresso.com. Portfolio of work, projects, and personal life.";
+  "Daniel Han is a software engineer based in New Jersey, currently at The New York Times. Portfolio of work, projects, and personal life.";
 export const OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 export const OG_IMAGE_ALT =
   "Daniel Han — software engineer based in New Jersey";
@@ -61,7 +61,7 @@ export const PERSON = {
   name: "Daniel Han",
   alternateName: "Dan Han",
   jobTitle: "Software Engineer",
-  worksFor: "Nestle Nespresso",
+  worksFor: "The New York Times",
   alumniOf: "Rutgers University",
   location: "New Jersey, United States",
   email: "daniel.hangb@gmail.com",
@@ -135,9 +135,9 @@ export function personEntity() {
     url: SITE_URL,
     jobTitle: PERSON.jobTitle,
     description:
-      "Software engineer based in New Jersey, currently building Nespresso.com.",
+      "Software engineer based in New Jersey, currently at The New York Times.",
     disambiguatingDescription:
-      "Software engineer at Nestle Nespresso; Rutgers University graduate in Computer Science and Korean; based in New Jersey.",
+      "Software engineer at The New York Times, previously Nestle Nespresso; Rutgers University graduate in Computer Science and Korean; based in New Jersey.",
     email: `mailto:${PERSON.email}`,
     image: {
       "@type": "ImageObject",
@@ -150,9 +150,9 @@ export function personEntity() {
     },
     worksFor: {
       "@type": "Organization",
-      name: "Nestle Nespresso",
-      url: "https://www.nespresso.com/",
-      sameAs: "https://en.wikipedia.org/wiki/Nespresso",
+      name: "The New York Times",
+      url: "https://www.nytimes.com/",
+      sameAs: "https://en.wikipedia.org/wiki/The_New_York_Times",
     },
     alumniOf: {
       "@type": "CollegeOrUniversity",
@@ -185,7 +185,7 @@ export function personEntity() {
         "@type": "Occupation",
         name: "Software Engineer",
         description:
-          "Making the Nespresso website fast, functional, and user friendly.",
+          "Building New York Times Games.",
         occupationLocation: {
           "@type": "State",
           name: "New Jersey",
@@ -437,7 +437,7 @@ export function aboutGraph(args: {
       path: "/about",
       name: "About Daniel Han",
       description:
-        "Daniel Han is a software engineer at Nespresso, Rutgers CS + Korean alum, with experience at Colgate-Palmolive. Contact, experience, and education.",
+        "Daniel Han is a software engineer at The New York Times, Rutgers CS + Korean alum, previously at Nestle Nespresso and Colgate-Palmolive. Contact, experience, and education.",
       crumbs,
       speakableSelectors: [
         ".masthead__lede",

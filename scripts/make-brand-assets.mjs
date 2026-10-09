@@ -197,7 +197,7 @@ async function main() {
       { text: "Daniel Han", size: 76, gap: 22 },
       { text: "Software Engineer", size: 34, gap: 30 },
       {
-        text: "New Jersey. Currently building Nespresso.com.",
+        text: "New Jersey. Currently at The New York Times.",
         size: 25,
         color: "#5c5c58",
         width: COLUMN,

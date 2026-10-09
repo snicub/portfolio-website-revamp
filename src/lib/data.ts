@@ -209,7 +209,7 @@ const Data = {
     card1: {
       title: "About Me",
       content:
-        "Hi! I'm Dan, a software engineer based in New Jersey. Currently building Nespresso.com. I have a passion for creating platforms and services that make people's lives easier. ",
+        "Hi! I'm Dan, a software engineer based in New Jersey. Currently at The New York Times. I have a passion for creating platforms and services that make people's lives easier. ",
     },
   },
 
@@ -232,11 +232,17 @@ const Data = {
     },
     experience: [
       {
-        title: "Nestle Nespresso",
+        title: "The New York Times",
         position: "Software Engineer",
         date: "Present",
+        description: "Building New York Times Games.",
+      },
+      {
+        title: "Nestle Nespresso",
+        position: "Software Engineer",
+        date: "June 2025 - September 2026",
         description:
-          "Making the Nespresso website fast, functional, and user friendly.",
+          "Made the Nespresso website fast, functional, and user friendly.",
       },
       {
         title: "Colgate-Palmolive",

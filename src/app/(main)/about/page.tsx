@@ -4,7 +4,7 @@ import Data from "@/lib/data";
 import { aboutGraph, jsonLd, pageMetadata, PERSON } from "@/lib/seo";
 
 const DESCRIPTION =
-  "Daniel Han is a software engineer at Nespresso, Rutgers CS + Korean alum, with experience at Colgate-Palmolive. Contact, experience, and education.";
+  "Daniel Han is a software engineer at The New York Times, Rutgers CS + Korean alum, previously at Nestle Nespresso and Colgate-Palmolive. Contact, experience, and education.";
 
 export const metadata: Metadata = pageMetadata({
   path: "/about",

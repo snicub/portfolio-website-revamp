@@ -31,9 +31,9 @@ function build(): string {
 
   return `# Daniel Han
 
-> Software engineer based in New Jersey, currently building Nespresso.com at
-> Nestle Nespresso. Rutgers University graduate with degrees in Computer
-> Science and Korean. This site is his personal portfolio: a photo gallery of
+> Software engineer based in New Jersey, currently working on Games at The New
+> York Times, previously at Nestle Nespresso. Rutgers University graduate with
+> degrees in Computer Science and Korean. This site is his personal portfolio: a photo gallery of
 > his work and life, and an about page with his experience and education.
 
 Also known as: Dan Han, snicub.

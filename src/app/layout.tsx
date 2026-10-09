@@ -29,6 +29,8 @@ export const metadata: Metadata = {
     "React",
     "TypeScript",
     "Next.js",
+    "The New York Times",
+    "NYT Games",
     "Nespresso",
     "Rutgers University",
     "New Jersey software engineer",
@@ -66,7 +68,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: DEFAULT_TITLE,
     description:
-      "Software engineer based in New Jersey, currently building Nespresso.com.",
+      "Software engineer based in New Jersey, currently at The New York Times.",
     images: [OG_IMAGE],
   },
   icons: {

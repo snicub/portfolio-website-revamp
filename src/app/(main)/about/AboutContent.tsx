@@ -18,7 +18,7 @@ import {
 } from "@/lib/motion";
 
 const LEDE =
-  "Software engineer in New Jersey, currently building Nespresso.com. Rutgers, Computer Science and Korean. Before that, the line at Taco Bell.";
+  "Software engineer in New Jersey, currently at The New York Times. Rutgers, Computer Science and Korean. Before that, the line at Taco Bell.";
 
 // The logos stand on the faces of a drum, so the set never has to be
 // repeated to keep the band full — a cylinder is already a loop.
