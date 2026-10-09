@@ -187,8 +187,9 @@ export function personEntity() {
         description:
           "Building New York Times Games.",
         occupationLocation: {
-          "@type": "State",
-          name: "New Jersey",
+          "@type": "City",
+          name: "New York City",
+          sameAs: "https://en.wikipedia.org/wiki/New_York_City",
         },
         skills: [...PERSON.knowsAbout],
       },
@@ -205,7 +206,8 @@ export function personEntity() {
       "@type": "Place",
       address: {
         "@type": "PostalAddress",
-        addressRegion: "NJ",
+        addressLocality: "New York",
+        addressRegion: "NY",
         addressCountry: "US",
       },
     },
