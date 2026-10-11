@@ -103,6 +103,7 @@ export default function PLPContent({ item }: PLPContentProps) {
             alt={item.altText}
             loading="eager"
             decoding="async"
+            {...{ fetchPriority: "high" as const }}
           />
           <div className="frame__curtain" aria-hidden="true" />
         </div>

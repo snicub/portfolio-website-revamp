@@ -399,6 +399,11 @@ html.anime .nav {
   font-variant-numeric: tabular-nums;
 }
 
+/* Glyphs come from the attribute, not the DOM — see Odometer.tsx. */
+.odo [data-glyph]::before {
+  content: attr(data-glyph);
+}
+
 .odo__col {
   position: relative;
   width: 1ch;

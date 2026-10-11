@@ -27,6 +27,10 @@ interface OdometerProps {
  * Without the motion gate the whole drum collapses: `globals.css` shows only
  * the first face and leaves it unrotated, so the readout degrades to the
  * plain digits it was before.
+ *
+ * Every glyph is painted from `data-glyph` by CSS rather than set as text.
+ * As text, the nav's thirty-odd drum faces were the first words in every
+ * page's document — what a crawler read before the page's own heading.
  */
 function Odometer({ places = 2, unit, className }: OdometerProps) {
   return (
@@ -35,7 +39,7 @@ function Odometer({ places = 2, unit, className }: OdometerProps) {
           only ever appears at the very top of the range is plain type held
           in permanently reserved space — it fades in rather than pushing the
           rest of the bar sideways at 100%. */}
-      <span className="odo__carry">1</span>
+      <span className="odo__carry" data-glyph="1" />
 
       {Array.from({ length: places }, (_, place) => (
         <span className="odo__col" key={place}>
@@ -44,16 +48,15 @@ function Odometer({ places = 2, unit, className }: OdometerProps) {
               <span
                 className="odo__face"
                 key={digit}
+                data-glyph={digit}
                 style={{ "--i": digit } as CSSProperties}
-              >
-                {digit}
-              </span>
+              />
             ))}
           </span>
         </span>
       ))}
 
-      {unit ? <span className="odo__unit">{unit}</span> : null}
+      {unit ? <span className="odo__unit" data-glyph={unit} /> : null}
     </span>
   );
 }

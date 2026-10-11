@@ -18,10 +18,9 @@ interface CollageProps {
 
 const CollageImage: React.FC<{
   src: string;
-  index: number;
   alt: string;
   onClick: () => void;
-}> = memo(({ src, index, alt, onClick }) => {
+}> = memo(({ src, alt, onClick }) => {
   return (
     <button
       type="button"
@@ -35,7 +34,9 @@ const CollageImage: React.FC<{
         <img
           {...responsive(src, COLLAGE_SIZES)}
           alt={alt}
-          loading={index < 4 ? "eager" : "lazy"}
+          // Lazy, all of them: the hero above is the page's LCP, and eager
+          // collage frames only competed with it for the first bytes.
+          loading="lazy"
           decoding="async"
         />
         <div className="frame__curtain" aria-hidden="true" />
@@ -87,7 +88,6 @@ const Collage: React.FC<CollageProps> = ({ plpImages, imageAlt }) => {
           <CollageImage
             key={image.src}
             src={image.src}
-            index={index}
             alt={`${imageAlt} — photo ${index + 1} of ${plpImages.length}`}
             onClick={() => setSelectedIndex(index)}
           />
